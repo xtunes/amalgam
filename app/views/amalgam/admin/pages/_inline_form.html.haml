@@ -1,0 +1,6 @@
+= form_for([:admin,@page],:remote => true) do |f|
+  = render :partial => 'fields', :locals => {:af => f}
+  = f.hidden_field :parent_id
+  %hr
+  = f.submit :class => 'btn btn-primary'
+  = link_to t("amalgam.admin.actions.cancel"), '#' ,:class => 'btn btn-cancel'

@@ -1,0 +1,19 @@
+.login{
+  .box {
+    margin-top:100px;
+    background-color: #fff;
+    padding:10px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    h2.title {
+      font-size: 12px;
+      margin:0 -10px; padding:0 10px; margin-bottom:8px;
+      color:#999; line-height:100%;
+      border-bottom:1px solid #ddd; padding-bottom:8px;
+    }
+  }
+}

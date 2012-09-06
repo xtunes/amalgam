@@ -9,6 +9,9 @@ gem 'nested_set', "~> 1.7.0"
 #Dependencies for the dummy app
 gem 'jquery-rails'
 gem 'sqlite3'
+gem 'modernizr-rails'
+gem 'jquery-ui-rails'
+gem "remotipart", '~> 1.0'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -1,0 +1,9 @@
+= form_for([:admin,@page],:html => {:class => 'basic'}) do |f|
+  %legend=title
+  = render :partial => 'fields', :locals => {:af => f}
+  = f.label :parent_id
+  = f.select :parent_id, nested_set_options(Page, @page) {|i, level| "#{'-' * level} #{i.title}" },{ :include_blank => true }
+  %hr
+  %p
+    = f.submit :class => 'btn btn-primary'
+    = link_to t("amalgam.admin.a.back"), admin_pages_path ,:class => 'btn'

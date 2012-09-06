@@ -1,0 +1,58 @@
+@mixin box-shadow($h:0,$v:0,$blur:3px,$color: #AAA){
+	-moz-box-shadow: $h $v $blur $color;
+	-webkit-box-shadow: $h $v $blur $color;
+	box-shadow: $h $v $blur $color;
+}
+
+@mixin border-radius($value:3px){
+	-moz-border-radius: $value;
+	border-radius: $value;
+}
+
+@mixin rounded-top($radius){
+	-moz-border-radius-topleft: $radius;
+	-webkit-border-top-left-radius: $radius;
+	-moz-border-radius-topright: $radius;
+	-webkit-border-top-right-radius: $radius;
+	border-top-left-radius: $radius $radius;
+	border-top-right-radius: $radius $radius;
+}
+
+@mixin rounded-bottom($radius){
+	-moz-border-radius-bottomleft: $radius;
+	-webkit-border-bottom-left-radius: $radius;
+	-moz-border-radius-bottomright: $radius;
+	-webkit-border-bottom-right-radius: $radius;
+	border-bottom-left-radius: $radius $radius;
+	border-bottom-right-radius: $radius $radius;
+}
+
+@mixin border-box{
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+@mixin vbox{
+	-webkit-box-orient: vertical;
+	-moz-box-orient: vertical;
+	box-orient: vertical;
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+}
+
+@mixin hbox{
+	-webkit-box-orient: horizontal;
+	-moz-box-orient: horizontal;
+	box-orient: horizontal;
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+}
+
+@mixin box-flex($value:1){
+	-webkit-box-flex:$value;
+	-moz-box-flex:$value;
+	box-flex:$value;
+}

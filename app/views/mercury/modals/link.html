@@ -1,0 +1,86 @@
+<form id="mercury_link" class="form-horizontal custom-mercury-form" style="width: 700px;">
+  <div class="mercury-display-pane-container">
+    <div class="mercury-display-pane">
+
+      <fieldset id="link_text_container">
+        <div class="control-group">
+          <label class="control-label" for="link_text">Link Content</label>
+          <div class="controls">
+            <input type="text" id="link_text" name="link[text]" class="span5">
+            <p class="help-block">The text that appears inside the link.</p>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Standard Links</legend>
+        <div class="control-group" id="link_external_url_input">
+          <label class="control-label" for="link_external_url">
+            <input name="link_type" type="radio" value="external_url" checked="checked">
+            URL
+          </label>
+          <div class="controls">
+            <input class="selectable span5" id="link_external_url" name="link[external_url]" type="text">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Index / Bookmark Links</legend>
+        <div class="control-group" id="link_existing_bookmark_input">
+          <label class="control-label" for="link_existing_bookmark">
+            <input name="link_type" type="radio" value="existing_bookmark"/>
+            Existing Links
+          </label>
+          <div class="controls">
+            <select class="selectable span5" id="link_existing_bookmark" name="link[existing_bookmark]"></select>
+          </div>
+        </div>
+        <div class="control-group" id="link_new_bookmark_input">
+          <label class="control-label" for="link_new_bookmark">
+            <input name="link_type" type="radio" value="new_bookmark">
+            Bookmark
+          </label>
+          <div class="controls">
+            <input class="selectable span5" id="link_new_bookmark" name="link[new_bookmark]" type="text">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Options</legend>
+        <div class="control-group" id="link_target_input">
+            <label class="control-label" for="link_target">Link Target</label>
+            <div class="controls">
+              <select class="span5" id="link_target" name="link[target]">
+                <option value="">Self (the same window or tab)</option>
+                <option value="_blank">Blank (a new window or tab)</option>
+                <option value="_top">Top (removes any frames)</option>
+                <option value="popup">Popup Window (javascript new window popup)</option>
+              </select>
+            </div>
+        </div>
+        <div id="popup_options" class="link-target-options" style="display:none">
+          <div class="control-group" id="link_popup_width_input">
+            <label class="control-label" for="link_popup_width">Popup Width</label>
+            <div class="controls">
+              <input class="span2" id="link_popup_width" name="link[popup_width]" type="text">
+            </div>
+          </div>
+          <div class="control-group" id="link_popup_height_input">
+            <label class="control-label" for="link_popup_height">Popup Height</label>
+            <div class="controls">
+              <input class="span2" id="link_popup_height" name="link[popup_height]" type="text">
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+    </div>
+  </div>
+
+  <div class="mercury-display-controls">
+    <input class="btn btn-primary" name="commit" type="submit" value="Insert Link">
+  </div>
+
+</form>

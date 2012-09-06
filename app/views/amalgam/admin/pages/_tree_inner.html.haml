@@ -1,0 +1,24 @@
+.btn.inner
+  %span.left
+    =link_to [:admin,node], :confirm => t('amalgam.admin.confirmation.delete_child', :model => Page.model_name.human), :method => :delete, :title => t('amalgam.admin.actions.destroy'),:remote => true, :class => 'hover',:rel => 'tooltip' do
+      %i.icon-remove
+  %span= node.title
+  %span.right
+    %b.caret
+= form_for([:admin,node],:remote => true,:html => {:data => {:loading => t('amalgam.admin.message.loading'), :done => t('amalgam.admin.message.done'), :error => t('amalgam.admin.message.error')},:class => 'basic'}) do |f|
+  = f.label :path
+  %pre
+    = link_to node.path , main_app.page_path(node.path) ,:target => '_blank'
+  = render :partial => 'fields', :locals => {:af => f}
+
+  %p
+    = f.submit :class => 'btn btn-primary'
+    = link_to new_admin_page_path(:parent_id => node.id), :class => 'btn btn-info btn-add', :data => {:toggle => 'button'} ,:title => "#{t('amalgam.admin.actions.new')}#{Page.model_name.human}" do
+      %i.icon-plus.icon-white
+      =t('amalgam.admin.actions.new_child')
+    = link_to main_app.page_path(node.path,:anchor => 'edit'), :class => 'btn btn-success' do
+      %i.icon-edit.icon-white
+      =t('amalgam.admin.actions.edit_content')
+    = link_to admin_page_path(node) , :class => 'btn btn-danger' ,:method => 'delete',:confirm => t('amalgam.admin.confirmation.delete_child', :model => Page.model_name.human), :remote => true do
+      %i.icon-trash.icon-white
+      = t('amalgam.admin.actions.destroy')

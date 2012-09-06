@@ -1,0 +1,49 @@
+zh-CN:
+  helpers:
+    submit:
+      page:
+        create: "添加%{model}"
+        update: "更新%{model}"
+    label:
+      page:
+        slug: '路径:'
+        path: '完整路径:'
+        parent_id: '父页面:'
+  activerecord:
+    models:
+      page: "页面"
+    attributes:
+      page:
+        slug: '路径'
+        path: '完整路径'
+        parent_id: '父页面'
+  amalgam:
+    admin:
+      actions:
+        edit: '编辑'
+        update: '更新'
+        apply: '应用'
+        cancel: '取消'
+        index: '列表'
+        new: '添加'
+        show: "显示"
+        destroy: '删除'
+        preview: '预览'
+        new_child: '添加子级'
+        edit_content: '编辑内容'
+      a:
+        back: "返回"
+        show: "查看"
+      confirmation:
+        delete_child: '将删除此%{model}以及所有子级%{model}, 您确定要删除该%{model}?'
+      tree:
+        moved: "移动成功"
+        move_error: "移动错误"
+      message:
+        create_successfully: '创建成功'
+        update_successfully: '更新成功'
+        destroy_successfully: '删除成功'
+        destroy_failed: '删除失败'
+        error: "加载错误!"
+        loading: "加载中..."
+        done: "完成!"

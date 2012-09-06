@@ -1,0 +1,257 @@
+@import 'mixins';
+
+$tree-line-color: #c2c2c2;
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+.scroll_fixed {
+  position: fixed;
+  top: 40px;
+  z-index: 999;
+}
+
+html[xmlns] .clearfix {
+  display: block;
+}
+
+* html .clearfix {
+  height: 1%;
+}
+
+
+body{
+  background:image-url('amalgam/admin/bg.png');
+}
+
+form.basic{
+  .boxsizing &{
+    input[type='text'],textarea,select{
+      @include border-box;
+      width: 100%;
+      height: 28px;
+    }
+    input[type='text']{
+      height: 28px;
+    }
+  }
+  label.checkbox,label.radio{
+    float:left;
+    margin-right:10px;
+  }
+}
+
+span.right{
+  float: right;
+}
+
+article{
+  @include border-radius(4px);
+  @include box-shadow;
+  padding: 20px;
+  background: #fff;
+  form{
+    input{
+      width:400px;
+    }
+    select{
+      width:410px;
+    }
+    p{
+      margin: 0;
+    }
+    .error input{
+      margin-bottom: 0;
+    }
+    margin-bottom: 10px;
+  }
+
+  table {
+    th.name {
+      width: 750px;
+    }
+    th.title {
+      width: 500px;
+    }
+    th.min{
+      width: 10px;
+    }
+    td.right {
+      text-align: right;
+    }
+  }
+  table.table-bordered{
+    td,th{
+      border-left:none;
+    }
+    border-left:1px solid #DDD;
+  }
+}
+
+.footer{
+  height:100px;
+}
+
+.popover h3{
+  font-size: 14px;
+}
+
+.login-box {
+  background: #fff;
+  border: 1px solid #c2c2c2;
+  @include border-radius(4px);
+  width: 300px;
+  margin: 150px auto 0;
+
+  .top{
+    background: #f8f8f8;
+    height: 50px;
+    border:none;
+    @include rounded-top(4px);
+    border-bottom: 1px solid #e4e6e8;
+    h1{
+      font-size: 14px;
+      line-height: 50px;
+      color: #525252;
+    }
+    padding: 0 27px 0;
+  }
+
+  form{
+    margin-top: 15px;
+    padding:0 27px;
+  }
+  .controls{
+    margin-bottom: 10px;
+    input{
+      height:25px;
+      display: inline;
+    }
+    .add-on{
+      height:21px;
+      width:21px;
+      padding-top:8px;
+    }
+    .input-append input{
+      width:204px;
+    }
+  }
+  .actions{
+    float:right;
+  }
+}
+
+.main{
+  padding-top:80px;
+}
+
+
+ol.tree{
+  margin: 0;
+  li{
+    position: relative;
+    list-style: none;
+    display: block;
+    padding-left: 30px;
+    border-left: 1px $tree-line-color solid;
+    background: image-url('amalgam/admin/tree-node-bg.gif') repeat-x;
+    .inner{
+      padding: 8px 20px 8px 29px;
+      display: block;
+      cursor: default;
+      text-align: left;
+      clear: both;
+      margin-bottom:5px;
+      .badge{
+        cursor: pointer;
+      }
+    }
+    .right{
+      float:right;
+    }
+    .left{
+      position: absolute;
+      left: 40px;
+    }
+  }
+  .hover{
+    visibility: hidden;
+  }
+  ol{
+    margin-left: 30px;
+  }
+  a:hover{
+    text-decoration: none;
+  }
+  .inner:hover{
+    .hover{
+      visibility: visible;
+    }
+  }
+  li:last-child{
+    border-left:none;
+    margin-bottom: 0;
+    background: image-url('amalgam/admin/tree-last-node-bg.gif') no-repeat 0 -5px;
+  }
+  li:first-child{
+    margin-top: -5px;
+    padding-top: 5px;
+    background-position: 0 5px;
+  }
+  li:only-child{
+    background-position: 0 0;
+  }
+  form {
+    display:none;
+    @include border-radius(4px);
+    @include box-shadow;
+    padding: 10px 20px;
+    background: #fff;
+    margin: 0 0 5px 0;
+    fieldset{
+      margin-bottom:9px;
+    }
+  }
+  li.placeholder{
+    height:36px;
+    border: 1px #c2c2c2 dashed;
+    background: none;
+  }
+  li.ui-sortable-helper{
+    background: none;
+  }
+}
+
+.index_amalgam-admin-pages, .index_admin-product_catalogs{
+  header{
+    padding-left: 30px;
+    a{
+      margin-left: -100%;
+      padding-bottom: 1px;
+    }
+  }
+}
+
+#ajax-loader {
+  z-index: 99;
+  position: fixed;
+  left: 50%;
+  top: 60px;
+  margin-left: -40px;
+  width: 80px;
+  text-align: center;
+
+  .label.important {
+    cursor: pointer;
+  }
+}

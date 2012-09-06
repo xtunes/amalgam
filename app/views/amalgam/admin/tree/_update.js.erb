@@ -1,0 +1,11 @@
+(function($){
+	var $el = $('.tree [data-id=<%= node.id %>]');
+<% if node.errors.empty? -%>
+	var state = $el.find('form').is(':visible');
+	$el.html($('<%=j render(:partial => 'amalgam/admin/tree/node', :locals => {:node => node, :collection => node.self_and_descendants}) %>').html());
+	if(state)
+		$('.tree [data-id=<%= node.id %>] > form').show();
+<% else -%>
+	 $('<div class="alert alert-error"><%=j(node.errors.full_messages.join(',')) %><a href="#" data-dismiss="alert" class="close">×</a></div>').hide().prependTo($el.children('form')).fadeIn();
+<% end -%>
+})(window.jQuery)

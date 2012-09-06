@@ -1,0 +1,11 @@
+zh-CN:
+  helpers:
+    label:
+      page:
+        title: '标题'
+  activerecord:
+    models:
+      page: "页面"
+    attributes:
+      page:
+        title: '标题'

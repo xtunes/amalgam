@@ -1,0 +1,51 @@
+en:
+  helpers:
+    submit:
+      page:
+        create: "ada %{model}"
+        update: "update %{model}"
+    label:
+      page:
+        slug: 'slug:'
+        path: 'path:'
+        parent_id: 'parent page:'
+  activerecord:
+    models:
+      page: "page"
+    attributes:
+      page:
+        slug: 'slug'
+        path: 'path'
+        parent_id: 'parent page'
+  amalgam:
+    admin:
+      actions:
+        edit: 'edit'
+        update: 'update'
+        apply: 'apply'
+        sign_in: 'sign in'
+        sign_out: 'sign out'
+        cancel: 'cancel'
+        index: 'index'
+        new: 'new'
+        show: "show"
+        destroy: 'destroy'
+        preview: 'preview'
+        new_child: 'new child'
+        edit_content: 'edit content'
+      a:
+        back: "back"
+        show: "show"
+      confirmation:
+        delete_child: 'delete this %{model} and all its children %{model}, are you sure to remove this %{model}?'
+      tree:
+        moved: "moved successfully"
+        move_error: "move error"
+      message:
+        create_successfully: 'created successfully'
+        update_successfully: 'updated successfully'
+        destroy_successfully: 'destroyed successfully'
+        destroy_failed: 'destroy failed'
+        error: "load error!"
+        loading: "loading..."
+        done: "done!"

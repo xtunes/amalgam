@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
   s.add_dependency "rails", "~> 3.2.8"
+  s.add_dependency "haml-rails"
   s.add_dependency "mercury-rails", "~> 0.8.0"
   s.add_dependency "modernizr-rails"
   s.add_dependency "remotipart", '~> 1.0'

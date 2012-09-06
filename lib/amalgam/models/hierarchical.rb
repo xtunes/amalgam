@@ -26,10 +26,10 @@ module Amalgam
         # TODO: When hierarchy changed , all field changed state will lost.
         #       So moving or data updating can't be done at same time.
         if prev_id.present?
-          self.move_to_right_of(target = Page.find(prev_id))
+          self.move_to_right_of(target = self.class.find(prev_id))
           @move_to_new_parent_id = false
         elsif next_id.present?
-          self.move_to_left_of(target = Page.find(next_id))
+          self.move_to_left_of(target = self.class.find(next_id))
           @move_to_new_parent_id = false
         end
         update_path if old_parent_id != parent_id

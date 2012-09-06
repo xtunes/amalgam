@@ -1,0 +1,19 @@
+(function($){
+<% if node.errors.empty? -%>
+		<%- if selector = node.parent_id.present? -%>
+			var $el = $('.tree li[data-id=<%= node.parent_id %>]');
+			var	$ol = $el.children('ol')
+			if(!$ol.length)$ol = $('<ol/>').appendTo($el);
+		<%- else -%>
+			var	$ol = $('div > .tree');
+		<%- end -%>
+		var node = $('<%=j render(:partial => 'amalgam/admin/tree/node', :locals => {:node => node, :collection => node.self_and_descendants}) %>').appendTo($ol);
+		node.scrollintoview({
+			duration:500,
+		}).hide();
+		setTimeout(function(){node.slideDown()},0)
+<% else -%>
+		setTimeout(function(){App.error('<%=j(node.errors.full_messages.join(',')) %>')},1600);
+		console.log(<%= node.errors.full_messages.inspect %>)
+<% end -%>
+})(window.jQuery)

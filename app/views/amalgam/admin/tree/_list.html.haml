@@ -1,0 +1,5 @@
+- nodes = collection.select{|item| item.parent_id == parent_id}.sort_by{|u| u.lft}
+- if nodes.present?
+  %ol.tree{:data => local_assigns[:data]}
+    - nodes.each do |node|
+      =render :partial => "amalgam/admin/tree/node", :locals =>{ :node => node, :collection => collection }

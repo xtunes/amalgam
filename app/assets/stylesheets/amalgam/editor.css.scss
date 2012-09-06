@@ -1,0 +1,49 @@
+/*!
+ * Mercury Editor is a Coffeescript and jQuery based WYSIWYG editor.  Documentation and other useful information can be
+ * found at https://github.com/jejacks0n/mercury
+ *
+ * This file is intended to provide a standard way to override the CSS that comes default with Mercury Editor, and
+ * includes an example button style, should you ever need to add new ones yourself.  Read the toolbar configuration in
+ * mercury.js for more on how to add your own buttons to the toolbar.
+ */
+ /*
+ *= require bootstrap
+ *= require responsive
+ *= require mercury
+ */
+/* Disable text sizing in webkit (ipad/iphone etc -- should apply to mercury only) */
+
+html { -webkit-text-size-adjust: none; }
+#properties_frame{display: none;}
+.mercury-panel-pane form{padding-right: 15px}
+.mercury-toolbar-container{z-index: 40;}
+
+/* Button example */
+.mercury-primary-toolbar .mercury-editproperties-button em,
+.mercury-editproperties-button[data-button="properties"] em {
+  background-image: url(/assets/mercury/toolbar/primary/inspectorpanel.png);
+}
+
+.mercury-panel{
+	h1{
+		line-height: inherit;
+	}
+}
+
+.attachment_description{
+	width:180px;
+}
+
+#ajax-loader {
+  z-index: 99;
+  position: fixed;
+  left: 50%;
+  top: 160px;
+  margin-left: -40px;
+  width: 80px;
+  text-align: center;
+
+  .label.important {
+    cursor: pointer;
+  }
+}
