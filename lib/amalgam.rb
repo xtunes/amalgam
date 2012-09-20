@@ -6,14 +6,13 @@ module Amalgam
     yield self
   end
 
-  mattr_accessor :type_whitelist, :routes, :controllers, :authority_keys, :authorities, :scope, :attachment_class_name
+  mattr_accessor :type_whitelist, :routes, :controllers, :authority_keys, :authorities, :attachment_class_name
   @@parent_controller = "ApplicationController"
   @@type_whitelist = []
   @@routes = []
   @@controllers = []
   @@authority_keys = [:email]
   @@authorities = {}
-  @@scope = '/amalgam'
   @@attachment_class_name = 'Attachment'
 
   def self.resources(*args,&block)
@@ -32,6 +31,7 @@ module Amalgam
 
   protected
   def self.require_all!
+    require 'page_routes'
     require 'amalgam/validators/slug'
     require 'amalgam/content_persistence'
     require 'amalgam/models/hierarchical'

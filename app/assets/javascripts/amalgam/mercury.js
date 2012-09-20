@@ -25,6 +25,14 @@
  * Require any files you want to use that either extend, or change the default Mercury behavior.
  * require mercury_overrides
  */
+var mercury_prefix = function() {
+  if (typeof MERCURY_PREFIX !== "undefined" && MERCURY_PREFIX !== null) {
+    return MERCURY_PREFIX;
+  } else {
+    return "";
+  }
+};
+
 window.Mercury = {
 
   // # Mercury Configuration
@@ -269,7 +277,7 @@ window.Mercury = {
       allowedMimeTypes: ['image/jpeg', 'image/gif', 'image/png'],
       maxFileSize: 1235242880,
       inputName: 'image[file]',
-      url: '/amalgam/admin/editor/upload_image',
+      url: mercury_prefix()+'/admin/editor/upload_image',
       handler: false
       },
 

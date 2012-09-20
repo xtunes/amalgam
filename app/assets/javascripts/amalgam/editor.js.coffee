@@ -32,7 +32,7 @@ attachments_count = 0
 $ ->
   @nav = $('.nav')
   topMargin = @nav.height()
-  @editor = new Mercury.PageEditor "/amalgam/admin/editor",
+  @editor = new Mercury.PageEditor mercury_prefix()+"/admin/editor",
                                     saveStyle:  "form"
                                     saveMethod: "PUT"
                                     visible:    false
