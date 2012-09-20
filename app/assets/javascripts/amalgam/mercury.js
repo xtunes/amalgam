@@ -269,7 +269,7 @@ window.Mercury = {
       allowedMimeTypes: ['image/jpeg', 'image/gif', 'image/png'],
       maxFileSize: 1235242880,
       inputName: 'image[file]',
-      url: '/admin/editor/upload_image',
+      url: '/amalgam/admin/editor/upload_image',
       handler: false
       },
 

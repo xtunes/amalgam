@@ -6,6 +6,10 @@ module Amalgam
     initializer 'Amalgam.action_controller' do |app|
       ActiveSupport.on_load :action_controller do
         helper Amalgam::Admin::LayoutHelper
+        helper Amalgam::Editor::EditorHelper
+        helper Amalgam::Editor::PropertiesBuilderHelper
+        helper Amalgam::AttachmentsHelper
+        helper Amalgam::PagesHelper
       end
     end
   end

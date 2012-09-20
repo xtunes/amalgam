@@ -11,7 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120824071117) do
+ActiveRecord::Schema.define(:version => 20120920033135) do
+
+  create_table "admin_users", :force => true do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "attachments", :force => true do |t|
+    t.integer  "attachable_id"
+    t.string   "attachable_type",   :default => "Page"
+    t.string   "name"
+    t.string   "file"
+    t.string   "content_type"
+    t.string   "original_filename"
+    t.string   "description"
+    t.string   "secure_token"
+    t.integer  "file_size"
+    t.integer  "position"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
 
   create_table "pages", :force => true do |t|
     t.string   "title",      :null => false
@@ -21,6 +44,12 @@ ActiveRecord::Schema.define(:version => 20120824071117) do
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "parent_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "posts", :force => true do |t|
+    t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

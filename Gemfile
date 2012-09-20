@@ -7,11 +7,14 @@ gem 'mercury-rails', '~> 0.8.0'
 gem 'nested_set', "~> 1.7.0"
 
 #Dependencies for the dummy app
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 2.0.2'
 gem 'sqlite3'
 gem 'modernizr-rails'
 gem 'jquery-ui-rails'
 gem "remotipart", '~> 1.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'carrierwave', "~> 0.6.2"
+gem 'mini_magick'
 
 # Gems used only for assets and not required
 # in production environments by default.

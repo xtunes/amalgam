@@ -5,11 +5,16 @@
         %h3.brand
           = 'Amalgam'
         %ul.nav
-          = drop_down(Page.model_name.human,'#', :controller => 'amalgam/admin/pages') do
-            = dropdown_item(t('amalgam.admin.actions.index'), amalgam.admin_pages_path)
-            = dropdown_item(t('amalgam.admin.actions.new'), amalgam.new_admin_page_path)
           = controller_links
         %ul.nav.pull-right
           - if editor
             %li.edit
               %a{:href => '#'}= t('admin.actions.edit')
+          %li.divider-vertical
+          - if admin_signed_in?
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown"}
+                = current_admin.username
+                %b.caret
+              %ul.dropdown-menu
+                %li= link_to(t('amalgam.sessions.actions.sign_out'), amalgam.signout_path("admin_user"), :method => 'delete')

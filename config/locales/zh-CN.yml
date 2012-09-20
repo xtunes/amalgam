@@ -18,6 +18,18 @@ zh-CN:
         path: '完整路径'
         parent_id: '父页面'
   amalgam:
+    sessions:
+      actions:
+        sign_in: '登陆'
+        sign_out: '退出'
+      success:
+        sign_in: '登陆成功'
+        sign_out: '退出成功'
+      fail:
+        invalid_name_or_password: '错误的用户名或者密码'
+        need_to_be_admin: '你需要管理员的权限才能访问,请登陆'
+        need_to_be_user: '你需要用户的权限才能访问,请登陆'
+        not_enough_authority: '权限不够，请登陆或更换账户登陆'
     admin:
       actions:
         edit: '编辑'

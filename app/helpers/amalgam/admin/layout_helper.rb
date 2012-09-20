@@ -32,7 +32,7 @@ module Amalgam
     def controller_links
       links = ""
       Amalgam.controllers.each do |controller|
-        links += drop_down controller.classify.constantize.model_name.human,'#', :controller => "admin/#{controller}" do
+        links += drop_down controller.classify.constantize.model_name.human,'#', :controller => "amalgam/admin/#{controller}" do
           dropdown_item(I18n.t('amalgam.admin.actions.index'), eval("amalgam.admin_#{controller}_path")) + dropdown_item(I18n.t('amalgam.admin.actions.new'), eval("amalgam.new_admin_#{controller.singularize}_path"))
         end
       end

@@ -1,0 +1,25 @@
+- if flash[:alert]
+  .alert
+    %a.close{ :data => { :dismiss => "alert"}, :href => "#"}
+      &times;
+    = flash[:alert]
+.login-box
+  .top
+    %h1= "#{t('amalgam.sessions.actions.sign_in')}"
+  = form_for @resource, :url => admin_user_signin_path do |f|
+    %fieldset
+      .control-groups
+        .controls
+          .input-append
+            =f.text_field :login, :required => true, :autofocus => true
+            %span.add-on>
+              %i.icon-user
+      .control-groups
+        .controls
+          .input-append
+            =f.password_field :password, :required => true, :autofocus => true
+            %span.add-on>
+              %i.icon-lock
+      .control-groups.actions
+        .controls
+          =f.button t('amalgam.sessions.actions.sign_in'), :class => 'btn-primary btn'
