@@ -5,7 +5,7 @@ module Amalgam
       return unless can_edit?
       defaults = {
         :builder => PropertyFormBuilder,
-        :url => admin_editor_path,
+        :url => amalgam.admin_editor_path,
         :method => :put,
         :remote => true
       }
@@ -53,7 +53,7 @@ module Amalgam
         end
 
         link = @template.link_to('#', :class => 'new_attachment', :name => name, :data => {"page-id" => object.id}) do
-          "<i class=\"icon-plus\"></i>#{I18n.t('actions.new')}".html_safe
+          "<i class=\"icon-plus\"></i>#{I18n.t('admin.actions.new')}".html_safe
         end
         @buffer.concat link
       end
@@ -99,7 +99,7 @@ module Amalgam
       def destroy_field(attachment,options={})
         name = name_for_attribute('attachments_attributes') + "[#{@index}][_destroy]"
         buffer = @template.check_box_tag name
-        buffer.concat I18n.t('actions.destroy')
+        buffer.concat I18n.t('admin.actions.destroy')
         buffer
       end
 
