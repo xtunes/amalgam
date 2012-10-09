@@ -18,10 +18,17 @@ zh-CN:
         path: '完整路径'
         parent_id: '父页面'
   amalgam:
+    registrations:
+      currentpassword: '输入当前密码以确认修改'
+      leaveblank: '如果不打算修改密码，请留空'
+      fail:
+        password_confirmation_not_match: "密码和密码确认不一致"
+        current_password_not_match: "当前密码错误"
     sessions:
       actions:
         sign_in: '登陆'
         sign_out: '退出'
+        edit_info: '编辑用户'
       success:
         sign_in: '登陆成功'
         sign_out: '退出成功'

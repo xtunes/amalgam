@@ -50,6 +50,26 @@ module Amalgam
             helper_method "current_#{as}", "#{as}_signed_in?" if options[:as] && options[:as].to_s != mapping
           end
         end
+
+        protected
+
+        def after_sign_in_path_for(resource)
+
+        end
+
+        def after_sign_out_path_for(resource)
+        end
+
+        def sign_out_and_redirect_to(resource)
+        end
+
+        def after_sign_up_path_for(resource)
+          main_app.root_path
+        end
+
+        def after_update_path_for(resource)
+          amalgam.admin_root_path
+        end
       end
     end
   end

@@ -1,8 +1,8 @@
 require 'page_routes'
 Rails.application.routes.draw do
 
-  hierarchical_for :pages
+  hierarchical_resource :pages
   resources :posts, :only => [:show]
-  mount Amalgam::Engine => Amalgam.scope
+  mount Amalgam::Engine => '/'
   root :to => 'pages#show' , :defaults => {:path => 'home'}
 end

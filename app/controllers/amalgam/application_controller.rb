@@ -3,6 +3,8 @@ module Amalgam
     include Amalgam::Authorities::Controllers::Helpers
     protect_from_forgery
 
+    helper_method :resource_name
+
     protected
 
     def redirect_back_or_default(default)
@@ -18,11 +20,11 @@ module Amalgam
       session[:return_to] = request.fullpath
     end
 
-    def build_resource(params)
+    def build_resource(params, classify = true)
       Amalgam.authorities.each do |auth_name,type|
         if params[auth_name]
           self.resource_name = auth_name
-          return auth_name.to_s.classify.constantize.new
+          return auth_name.to_s.classify.constantize.new if classify
         end
       end
     end

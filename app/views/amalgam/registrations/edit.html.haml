@@ -1,0 +1,28 @@
+%article.registration
+  = form_for(@resource, :url => amalgam.send("#{params['resource'] || resource_name}_edit_info_path")) do |f|
+    %legend="#{t('amalgam.admin.actions.edit')}#{(params['resource'] || resource_name).to_s.classify.safe_constantize.model_name.human}"
+
+    .input
+      = f.label :username
+      = f.text_field :username, :autofocus => true
+
+    .input
+      = f.label :email
+      = f.email_field :email
+
+    .input
+      = f.label :password
+      = f.password_field :password, :autocomplete => "off", :placeholder => t("amalgam.registrations.leaveblank")
+
+    .input
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation
+
+    .input
+      = f.label :current_password
+      = f.password_field :current_password, :placeholder => t("amalgam.registrations.currentpassword")
+
+    %hr
+    %p
+      = f.submit t('amalgam.admin.actions.update'), :class => "btn btn-primary"
+      = link_to t('amalgam.admin.a.back'), :back, :class => "btn"

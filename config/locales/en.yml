@@ -18,13 +18,30 @@ en:
         path: 'path'
         parent_id: 'parent page'
   amalgam:
+    registrations:
+      currentpassword: 'we need your current password to confirm your changes'
+      leaveblank: "leave it blank if you don't want to change it"
+      fail:
+        password_confirmation_not_match: "password and password_confirmation are not match"
+        current_password_not_match: "current_password not match"
+    sessions:
+      actions:
+        sign_in: 'sign in'
+        sign_out: 'sign out'
+        edit_info: 'edit info'
+      success:
+        sign_in: 'sign in successfully'
+        sign_out: 'sign out successfully'
+      fail:
+        invalid_name_or_password: 'invalid username or password'
+        need_to_be_admin: 'you need to be an admin,please sign in as a admin'
+        need_to_be_user: 'you need to be an user,please sign in as a user'
+        not_enough_authority: 'you do not have enough authority,please sign in'
     admin:
       actions:
         edit: 'edit'
         update: 'update'
         apply: 'apply'
-        sign_in: 'sign in'
-        sign_out: 'sign out'
         cancel: 'cancel'
         index: 'index'
         new: 'new'
