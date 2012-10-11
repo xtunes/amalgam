@@ -48,9 +48,10 @@ $ ->
   $('.new_attachment').live 'click', (event) ->
     event.preventDefault
     target = $(event.target)
-    $('.attachment_list_' + target.attr('name')).append("<div><input id='page_attachment.description' name='[content][pages/" + target.data().pageId + ".attachments_attributes][value][" + attachments_count + "][description]' size='30' type='text'>
-<input id='page_attachment.file' name='[content][pages/" + target.data().pageId + ".attachments_attributes][value][" + attachments_count + "][file]' type='file'>
-<input id='page_attachment.name' name='[content][pages/"+ target.data().pageId + ".attachments_attributes][value][" + attachments_count + "][name]' type='hidden' value='" + $(event.target).attr('name') + "'></div>")
+    type = target.data().type
+    $('.attachment_list_' + target.attr('name')).append("<div><input id='"+type+"_attachment.description' name='[content]["+type+"s/" + target.data().modelId + ".attachments_attributes][value][" + attachments_count + "][description]' size='30' type='text'>
+<input id='"+type+"_attachment.file' name='[content]["+type+"s/" + target.data().modelId + ".attachments_attributes][value][" + attachments_count + "][file]' type='file'>
+<input id='"+type+"_attachment.name' name='[content]["+type+"s/"+ target.data().modelId + ".attachments_attributes][value][" + attachments_count + "][name]' type='hidden' value='" + $(event.target).attr('name') + "'></div>")
     attachments_count++
     return false
 

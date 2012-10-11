@@ -52,8 +52,8 @@ module Amalgam
           buffer
         end
 
-        link = @template.link_to('#', :class => 'new_attachment', :name => name, :data => {"page-id" => object.id}) do
-          "<i class=\"icon-plus\"></i>#{I18n.t('admin.actions.new')}".html_safe
+        link = @template.link_to('#', :class => 'new_attachment', :name => name, :data => {"model-id" => object.id, "type" => object.class.to_s.underscore}) do
+          "<i class=\"icon-plus\"></i>#{I18n.t('amalgam.admin.actions.new')}".html_safe
         end
         @buffer.concat link
       end
@@ -99,7 +99,7 @@ module Amalgam
       def destroy_field(attachment,options={})
         name = name_for_attribute('attachments_attributes') + "[#{@index}][_destroy]"
         buffer = @template.check_box_tag name
-        buffer.concat I18n.t('admin.actions.destroy')
+        buffer.concat I18n.t('amalgam.admin.actions.destroy')
         buffer
       end
 
