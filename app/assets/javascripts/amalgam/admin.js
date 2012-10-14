@@ -11,6 +11,7 @@
 //= require bootstrap-alert
 //= require bootstrap-tooltip
 //= require bootstrap-button
+//= require amalgam/extra
 //= require_tree ./admin
 
 Modernizr.addTest("boxsizing",function(){
