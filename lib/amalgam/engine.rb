@@ -6,6 +6,10 @@ module Amalgam
       Rails.application.config.assets.precompile += %w( amalgam/admin.js amalgam/admin.css amalgam/editor.css amalgam/editor.js )
     end
 
+    initializer "amalgam.params.filter" do |app|
+      app.config.filter_parameters += [:password, :password_confirmation, :current_password]
+    end
+
     #http://stackoverflow.com/questions/8797690/rails-3-1-better-way-to-expose-an-engines-helper-within-the-client-app
     initializer 'Amalgam.action_controller' do |app|
       ActiveSupport.on_load :action_controller do
