@@ -4,6 +4,7 @@ module Amalgam
     protect_from_forgery
 
     helper_method :resource_name
+    helper_method :can_edit?
 
     protected
 
@@ -35,6 +36,10 @@ module Amalgam
 
     def resource_name=(name)
       @resource_name = name
+    end
+
+    def can_edit?
+      admin_signed_in?
     end
   end
 end
