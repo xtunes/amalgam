@@ -27,6 +27,7 @@ module Amalgam
   def self.resources(*args,&block)
     self.routes << {:args => args, :block => block}
     self.controllers << args.first.to_s
+    Amalgam::TemplateFinder::Rule.load(Rails.root,args.first.to_s)
   end
 
   def self.authority_model(model,options = {})
@@ -45,6 +46,7 @@ module Amalgam
     require 'amalgam/content_persistence'
     require 'amalgam/models/hierarchical'
     require 'amalgam/models/attachable'
+    require 'amalgam/models/templatable'
     require 'amalgam/models/page'
     require 'amalgam/template_finder'
     require 'amalgam/editable'

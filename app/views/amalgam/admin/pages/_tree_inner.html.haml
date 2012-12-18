@@ -8,7 +8,7 @@
 = form_for([:admin,node],:remote => true,:html => {:data => {:loading => t('amalgam.admin.message.loading'), :done => t('amalgam.admin.message.done'), :error => t('amalgam.admin.message.error')},:class => 'basic'}) do |f|
   = f.label :path
   %pre
-    = link_to node.path , main_app.page_path(node.path) ,:target => '_blank'
+    = link_to node.slug , main_app.page_path(node.slug) ,:target => '_blank'
   = render :partial => 'fields', :locals => {:af => f}
 
   %p

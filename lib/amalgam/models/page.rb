@@ -5,6 +5,7 @@ module Amalgam
 		  included do
 		    include Amalgam::Models::Hierachical
         include Amalgam::Models::Attachable
+        include Amalgam::Models::Templatable
 		    store :body
 		  end
 		end

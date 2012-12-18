@@ -3,8 +3,8 @@ class PagesController < ApplicationController
   include Amalgam::Editable
 
   def show
-    @page = Page.where(:path => params[:path]).first
-    raise ActiveRecord::RecordNotFound , "Couldn't find page with PATH=#{params[:path]}" if @page.blank?
-    render :action => template_for(@page.path)
+    @page = Page.where(:slug => params[:slug]).first
+    raise ActiveRecord::RecordNotFound , "Couldn't find page with PATH=#{params[:slug]}" if @page.blank?
+    render template_for(@page)
   end
 end
