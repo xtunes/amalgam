@@ -2,7 +2,10 @@ en:
   helpers:
     submit:
       page:
-        create: "ada %{model}"
+        create: "add %{model}"
+        update: "update %{model}"
+      group:
+        create: "add %{model}"
         update: "update %{model}"
     label:
       page:
@@ -10,13 +13,20 @@ en:
         path: 'path:'
         parent_id: 'parent page:'
   activerecord:
+    errors:
+      models:
+        amalgam/models/group:
+          taken: "%{attribute} has been taken"
+          blank: "%{attribute} can not be blank"
     models:
       page: "page"
+      amalgam/models/group: 'group'
     attributes:
       page:
         slug: 'slug'
         path: 'path'
         parent_id: 'parent page'
+        group_ids: "groups"
   amalgam:
     registrations:
       currentpassword: 'we need your current password to confirm your changes'

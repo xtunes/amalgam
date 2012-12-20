@@ -37,6 +37,7 @@ module Amalgam
     end
 
     def create
+      params[:page][:group_ids] ||= []
       @page = Page.new(params[:page])
       respond_to do |format|
         if @page.save
@@ -49,6 +50,7 @@ module Amalgam
     end
 
     def update
+      params[:page][:group_ids] ||= []
       @page = Page.find(params[:id])
       respond_to do |format|
         if @page.update_attributes(params[:page])

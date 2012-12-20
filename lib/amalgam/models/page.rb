@@ -6,6 +6,7 @@ module Amalgam
 		    include Amalgam::Models::Hierachical
         include Amalgam::Models::Attachable
         include Amalgam::Models::Templatable
+        include Amalgam::Models::Groupable
 		    store :body
 		  end
 		end

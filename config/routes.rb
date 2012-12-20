@@ -21,6 +21,7 @@ Amalgam::Engine.routes.draw do
 		Amalgam.routes.each do |controller|
       resources *controller[:args], &controller[:block]
     end
+    resources :groups
     root :to => 'pages#index'
     post 'editor/upload_image' => 'editor#upload_image'
     put 'editor' => 'editor#update' , :as => 'editor'

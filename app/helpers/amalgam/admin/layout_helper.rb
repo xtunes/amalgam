@@ -33,17 +33,17 @@ module Amalgam
       links = ""
       Amalgam.controllers.each do |controller|
         links += drop_down controller.classify.constantize.model_name.human,'#', :controller => "amalgam/admin/#{controller}" do
-          dropdown_item(I18n.t('amalgam.admin.actions.index'), eval("amalgam.admin_#{controller}_path")) + dropdown_item(I18n.t('amalgam.admin.actions.new'), eval("amalgam.new_admin_#{controller.singularize}_path"))
+          dropdown_item(I18n.t('amalgam.admin.actions.index'), amalgam.send("admin_#{controller}_path")) + dropdown_item(I18n.t('amalgam.admin.actions.new'), amalgam.send("new_admin_#{controller.singularize}_path"))
         end
       end
       links.html_safe
     end
 
+
     private
 
     def is_active?(path,options)
        controllers = options[:controller].is_a?(Array) ? options[:controller] : [options[:controller]].compact
-       Rails.logger.info(controllers)
       "active" if current_page?(path) || controller && controllers.include?(params[:controller])
     end
 

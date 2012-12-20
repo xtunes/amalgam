@@ -1,0 +1,19 @@
+%article
+  %h3
+    = Amalgam::Models::Group.model_name.human
+
+  %table.table.table-striped
+    %tr
+      %th=Amalgam::Models::Group.human_attribute_name("name")
+      %th
+      %th
+
+    - @groups.each do |group|
+      %tr
+        %td= group.name
+        %td= link_to t('amalgam.admin.actions.edit'), edit_admin_group_path(group)
+        %td= link_to t('amalgam.admin.actions.destroy'), admin_group_path(group), :confirm => t('amalgam.admin.confirmation.delete', :model => Amalgam::Models::Group.model_name.human), :method => :delete
+
+  %br
+
+  = link_to "#{t('amalgam.admin.actions.new')}#{Amalgam::Models::Group.model_name.human}", new_admin_group_path

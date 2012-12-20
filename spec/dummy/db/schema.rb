@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121210074921) do
+ActiveRecord::Schema.define(:version => 20121219062901) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "username"
@@ -19,6 +19,20 @@ ActiveRecord::Schema.define(:version => 20121210074921) do
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "amalgam_base_groups", :force => true do |t|
+    t.integer  "group_id"
+    t.string   "groupable_type"
+    t.integer  "groupable_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "amalgam_groups", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "attachments", :force => true do |t|
@@ -36,28 +50,16 @@ ActiveRecord::Schema.define(:version => 20121210074921) do
     t.datetime "updated_at",                            :null => false
   end
 
-  create_table "groups", :force => true do |t|
-    t.string   "name",       :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "groups_pages", :id => false, :force => true do |t|
-    t.integer "group_id"
-    t.integer "page_id"
-  end
-
   create_table "pages", :force => true do |t|
-    t.string   "title",                     :null => false
+    t.string   "title",      :null => false
     t.text     "body"
-    t.integer  "locked",     :default => 0
     t.string   "path"
-    t.string   "slug",                      :null => false
+    t.string   "slug",       :null => false
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "parent_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "posts", :force => true do |t|

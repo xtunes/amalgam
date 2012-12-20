@@ -4,19 +4,31 @@ zh-CN:
       page:
         create: "添加%{model}"
         update: "更新%{model}"
+      group:
+        create: "添加%{model}"
+        update: "更新%{model}"
     label:
       page:
         slug: '路径:'
         path: '完整路径:'
         parent_id: '父页面:'
   activerecord:
+    errors:
+      models:
+        amalgam/models/group:
+          taken: "%{attribute}已经被占用"
+          blank: "%{attribute}不能为空"
     models:
       page: "页面"
+      amalgam/models/group: '组'
     attributes:
+      amalgam/models/group:
+        name: "名称"
       page:
         slug: '路径'
         path: '完整路径'
         parent_id: '父页面'
+        group_ids: "分组"
   amalgam:
     registrations:
       currentpassword: '输入当前密码以确认修改'
@@ -53,7 +65,9 @@ zh-CN:
       a:
         back: "返回"
         show: "查看"
+      blank: '空'
       confirmation:
+        delete: '您确定要删除该%{model}?'
         delete_child: '将删除此%{model}以及所有子级%{model}, 您确定要删除该%{model}?'
       tree:
         moved: "移动成功"

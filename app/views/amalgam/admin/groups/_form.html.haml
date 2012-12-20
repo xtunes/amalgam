@@ -1,0 +1,9 @@
+%article
+  = form_for @group, :as => :group, :url => (method=='post' ? admin_groups_path : admin_group_path(@group)) do |f|
+    %legend="#{t('amalgam.admin.actions.'+type)}#{Amalgam::Models::Group.model_name.human}"
+    = f.label :name
+    = f.text_field :name, :required => true, :autofocus => true
+    %hr
+    %p
+      = f.submit :class => "btn-primary btn"
+      = link_to t("amalgam.admin.a.back"), admin_groups_path, :class => "btn"
