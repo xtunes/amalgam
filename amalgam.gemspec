@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["amalgam team"]
   s.email       = ["andrew@xtunes.cn"]
   s.homepage    = "http://github.com/amalgam/amalgam"
-  s.summary     = "TODO: Summary of Amalgam."
-  s.description = "TODO: Description of Amalgam."
+  s.summary     = "Amalgam is a gem for cms building"
+  s.description = "Amalgam is a WYSIWYG gem for CMS"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
