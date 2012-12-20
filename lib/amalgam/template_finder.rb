@@ -111,7 +111,7 @@ module Amalgam
     protected
 
     def template_for(page)
-      rule = Amalgam::TemplateFinder::Rule.look_up(page.ancestors.reverse.unshift(page))
+      rule = Amalgam::TemplateFinder::Rule.look_up(page.ancestors.reverse.unshift(page)).first
       page.class.model_name.tableize+'/'+rule.join('/')
     end
   end
