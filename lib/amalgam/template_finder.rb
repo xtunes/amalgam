@@ -39,7 +39,7 @@ module Amalgam
         @@rules[pages.first.class.model_name.tableize].clone.each{|rule| list << rule.look_up_single(pages.clone)}
         result1 = list.max{|x,y| x[1] <=> y[1]}
         result2 = list.select{|x| x[0].first != 'default' && x[0].first != 'show'}.max{|x,y| x[1] <=> y[1]}
-        return result1 unless result2
+        return result1[0] unless result2
         result = result1[1]>result2[1] ? result1[0] : result2[0]
       end
 
@@ -111,7 +111,7 @@ module Amalgam
     protected
 
     def template_for(page)
-      rule = Amalgam::TemplateFinder::Rule.look_up(page.ancestors.reverse.unshift(page)).first
+      rule = Amalgam::TemplateFinder::Rule.look_up(page.ancestors.reverse.unshift(page))
       page.class.model_name.tableize+'/'+rule.join('/')
     end
   end
