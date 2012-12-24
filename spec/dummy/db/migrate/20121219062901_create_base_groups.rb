@@ -1,6 +1,6 @@
-class CreateAmalgamBaseGroups < ActiveRecord::Migration
+class CreateBaseGroups < ActiveRecord::Migration
   def change
-    create_table :amalgam_base_groups do |t|
+    create_table :base_groups do |t|
 
       t.integer :group_id
       t.string :groupable_type

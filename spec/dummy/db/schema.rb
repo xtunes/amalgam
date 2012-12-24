@@ -21,20 +21,6 @@ ActiveRecord::Schema.define(:version => 20121219062901) do
     t.datetime "updated_at",      :null => false
   end
 
-  create_table "amalgam_base_groups", :force => true do |t|
-    t.integer  "group_id"
-    t.string   "groupable_type"
-    t.integer  "groupable_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  create_table "amalgam_groups", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
     t.string   "attachable_type",   :default => "Page"
@@ -48,6 +34,20 @@ ActiveRecord::Schema.define(:version => 20121219062901) do
     t.integer  "position"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
+  end
+
+  create_table "base_groups", :force => true do |t|
+    t.integer  "group_id"
+    t.string   "groupable_type"
+    t.integer  "groupable_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "pages", :force => true do |t|

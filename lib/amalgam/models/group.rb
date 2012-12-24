@@ -1,6 +1,7 @@
 module Amalgam
   module Models
     class Group < ::ActiveRecord::Base
+      set_table_name "groups"
 
       attr_accessible :name
 

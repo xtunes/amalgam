@@ -1,6 +1,7 @@
 module Amalgam
   module Models
     class BaseGroup < ::ActiveRecord::Base
+      set_table_name "base_groups"
 
       attr_accessible :group_id,:groupable_type,:groupable_id
 
