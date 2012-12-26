@@ -24,7 +24,6 @@ module Amalgam
     end
 
     def destroy
-      Rails.logger.info session
       session["#{params[:resource].to_s}_id".to_sym] = nil if params[:resource]
       redirect_to main_app.root_url, :notice => I18n.t('amalgam.sessions.success.sign_out')
     end

@@ -7,7 +7,6 @@ module Amalgam
         include Amalgam::Models::Attachable
         include Amalgam::Models::Templatable
         include Amalgam::Models::Groupable
-		    store :body
 		  end
 		end
 	end

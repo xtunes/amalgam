@@ -28,6 +28,9 @@ en:
         parent_id: 'parent page'
         group_ids: "groups"
   amalgam:
+    locales:
+      zh-CN: 'simplified Chinese'
+      en: 'English'
     registrations:
       currentpassword: 'we need your current password to confirm your changes'
       leaveblank: "leave it blank if you don't want to change it"

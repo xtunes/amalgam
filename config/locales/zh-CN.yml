@@ -30,6 +30,9 @@ zh-CN:
         parent_id: '父页面'
         group_ids: "分组"
   amalgam:
+    locales:
+      zh-CN: '中文(简体)'
+      en: '英文'
     registrations:
       currentpassword: '输入当前密码以确认修改'
       leaveblank: '如果不打算修改密码，请留空'

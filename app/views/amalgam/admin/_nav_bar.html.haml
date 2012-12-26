@@ -9,6 +9,9 @@
           = drop_down Amalgam::Models::Group.model_name.human,'#', :controller => "amalgam/admin/groups" do
             = dropdown_item(t('amalgam.admin.actions.index'), amalgam.admin_groups_path)
             = dropdown_item(t('amalgam.admin.actions.new'), amalgam.new_admin_group_path)
+          = drop_down t("amalgam.locales.#{I18n.locale.to_s}"), '#' do
+            - I18n::available_locales.each do |locale|
+              = dropdown_item(t("amalgam.locales.#{locale.to_s}"), locale_url(locale))
         %ul.nav.pull-right
           - if editor
             %li.edit

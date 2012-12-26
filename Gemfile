@@ -15,6 +15,7 @@ gem "remotipart", '~> 1.0'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'carrierwave', "~> 0.6.2"
 gem 'mini_magick'
+gem 'globalize3'
 
 # Gems used only for assets and not required
 # in production environments by default.

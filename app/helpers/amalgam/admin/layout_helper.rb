@@ -6,9 +6,9 @@ module Amalgam
       end
     end
 
-    def dropdown_item(title, path="#")
+    def dropdown_item(title, path="#", options={})
       content_tag(:li) do
-        link_to(title, path)
+        link_to(title, path,options)
       end
     end
 

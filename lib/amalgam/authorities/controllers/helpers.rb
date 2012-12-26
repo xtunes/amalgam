@@ -4,6 +4,11 @@ module Amalgam
       module Helpers
         extend ActiveSupport::Concern
 
+        included do
+          helper_method :resource_name
+          helper_method :can_edit?
+        end
+
         def self.amalgam_define_helpers(mapping,options = {}) #:nodoc:
 
           as = options[:as].to_s if options[:as]
@@ -69,6 +74,40 @@ module Amalgam
 
         def after_update_path_for(resource)
           amalgam.admin_root_path
+        end
+
+        def redirect_back_or_default(default)
+          if default || session[:return_to]
+            redirect_to( session[:return_to] || default )
+          else
+            redirect_to root_url
+          end
+          session[:return_to] = nil
+        end
+
+        def store_location
+          session[:return_to] = request.fullpath
+        end
+
+        def build_resource(params, classify = true)
+          Amalgam.authorities.each do |auth_name,type|
+            if params[auth_name]
+              self.resource_name = auth_name
+              return auth_name.to_s.classify.constantize.new if classify
+            end
+          end
+        end
+
+        def resource_name
+          @resource_name
+        end
+
+        def resource_name=(name)
+          @resource_name = name
+        end
+
+        def can_edit?
+          admin_signed_in?
         end
       end
     end

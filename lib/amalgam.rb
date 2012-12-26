@@ -56,6 +56,7 @@ module Amalgam
     require 'amalgam/authorities/controllers/helpers'
     require 'amalgam/authorities/model'
     require 'amalgam/authorities/models/active_record'
+    require 'amalgam/globalize/helpers'
     require 'amalgam/tree/exportable'
     require 'amalgam/tree/importable'
   end
