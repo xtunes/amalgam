@@ -39,6 +39,7 @@ module Amalgam
         helper Amalgam::Editor::PropertiesBuilderHelper
         helper Amalgam::AttachmentsHelper
         helper Amalgam::PagesHelper
+        helper Amalgam::UrlHelper if Amalgam.i18n
       end
     end
   end

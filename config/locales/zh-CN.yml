@@ -32,6 +32,7 @@ zh-CN:
   amalgam:
     locales:
       zh-CN: '中文(简体)'
+      zh-cn: '中文(简体)'
       en: '英文'
     registrations:
       currentpassword: '输入当前密码以确认修改'

@@ -1,7 +1,6 @@
-require 'page_routes'
 Rails.application.routes.draw do
 
-  hierarchical_resource :pages, /zh-CN|en/
+  globalize_hierarchical_resource :pages, /zh-cn|en/
   resources :posts, :only => [:show]
   mount Amalgam::Engine => '/'
   root :to => 'pages#show' , :defaults => {:slug => 'home'}

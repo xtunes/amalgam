@@ -24,6 +24,10 @@ module Amalgam
   mattr_accessor :attachment_class_name
   @@attachment_class_name = 'Attachment'
 
+  #params or subdomain or nil
+  mattr_accessor :i18n
+  @@i18n = nil
+
   def self.resources(*args,&block)
     self.routes << {:args => args, :block => block}
     self.controllers << args.first.to_s
@@ -57,6 +61,7 @@ module Amalgam
     require 'amalgam/authorities/model'
     require 'amalgam/authorities/models/active_record'
     require 'amalgam/globalize/helpers'
+    require 'amalgam/globalize'
     require 'amalgam/tree/exportable'
     require 'amalgam/tree/importable'
   end

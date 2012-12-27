@@ -10,31 +10,30 @@ module Amalgam
         extracted_locale = ''
         if can_edit?
           extracted_locale = params[:locale] ||
-              session[:locale] ||
               extract_locale_from_subdomain ||
-              extract_locale_from_tld
+              session[:locale]
         else
           extracted_locale = params[:locale] ||
-              extract_locale_from_subdomain ||
-              extract_locale_from_tld
+              extract_locale_from_subdomain
         end
 
-        I18n.locale = (I18n::available_locales.include? extracted_locale.to_sym) ?
-            extracted_locale : I18n.default_locale
+        available_locales = ::I18n::available_locales.collect{|m| m.to_s.downcase}
+
+        ::I18n.locale = (available_locales.include? extracted_locale.to_s.downcase) ?
+            extracted_locale : ::I18n.default_locale
 
         session[:locale] = extracted_locale if params[:locale] && can_edit?
       end
 
       def default_url_options(options={})
-        can_edit? ? { :locale => I18n.locale } : {}
+        return {} if Amalgam.i18n == 'subdomain'
+        if Amalgam.i18n == 'param'
+          return can_edit? && !options[:locale] ? { :locale => ::I18n.locale.to_s.downcase } : {}
+        end
+        {}
       end
 
       protected
-
-      def extract_locale_from_tld
-        res = request.host.split('.').last
-        res if res != request.host
-      end
 
       def extract_locale_from_subdomain
         res = request.subdomains.first

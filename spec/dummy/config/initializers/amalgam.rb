@@ -3,4 +3,5 @@ Amalgam.setup do |config|
 	config.resources :pages, :except => [:show]
 	config.resources :posts, :except => [:show]
   config.authority_model :admin_user, :as => :admin
+  config.i18n = 'param'
 end
