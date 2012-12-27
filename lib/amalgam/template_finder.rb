@@ -110,9 +110,10 @@ module Amalgam
 
     protected
 
-    def template_for(page)
+    def template_for(page,options={})
       rule = Amalgam::TemplateFinder::Rule.look_up(page.ancestors.reverse.unshift(page))
-      page.class.model_name.tableize+'/'+rule.join('/')
+      options[:path] ||= page.class.model_name.tableize
+      options[:path]+'/'+rule.join('/')
     end
   end
 end
