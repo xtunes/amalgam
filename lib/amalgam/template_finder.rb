@@ -111,6 +111,11 @@ module Amalgam
     protected
 
     def template_for(page,options={})
+      if Rails.env == 'development'
+        Amalgam.controllers.each do |arg|
+          Amalgam::TemplateFinder::Rule.load(Rails.root,arg)
+        end
+      end
       rule = Amalgam::TemplateFinder::Rule.look_up(page.ancestors.reverse.unshift(page))
       options[:path] ||= page.class.model_name.tableize
       options[:path]+'/'+rule.join('/')
