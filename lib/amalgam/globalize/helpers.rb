@@ -28,7 +28,7 @@ module Amalgam
       def default_url_options(options={})
         return {} if Amalgam.i18n == 'subdomain'
         if Amalgam.i18n == 'param'
-          return can_edit? && !options[:locale] ? { :locale => ::I18n.locale.to_s.downcase } : {}
+          return !options[:locale] ? { :locale => ::I18n.locale.to_s.downcase } : {}
         end
         {}
       end
