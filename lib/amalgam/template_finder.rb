@@ -112,9 +112,7 @@ module Amalgam
 
     def template_for(page,options={})
       if Rails.env == 'development'
-        Amalgam.controllers.each do |arg|
-          Amalgam::TemplateFinder::Rule.load(Rails.root,arg)
-        end
+        Amalgam.models_with_templates = ['pages','posts']
       end
       rule = Amalgam::TemplateFinder::Rule.look_up(page.ancestors.reverse.unshift(page))
       options[:path] ||= page.class.model_name.tableize

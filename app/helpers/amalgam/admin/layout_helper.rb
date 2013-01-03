@@ -31,9 +31,19 @@ module Amalgam
 
     def controller_links
       links = ""
-      Amalgam.controllers.each do |controller|
-        links += drop_down controller.classify.constantize.model_name.human,'#', :controller => "amalgam/admin/#{controller}" do
-          dropdown_item(::I18n.t('amalgam.admin.actions.index'), amalgam.send("admin_#{controller}_path")) + dropdown_item(I18n.t('amalgam.admin.actions.new'), amalgam.send("new_admin_#{controller.singularize}_path"))
+      Amalgam.admin_menus.each do |name,actions|
+        unless actions.first.is_a? Hash
+          links += drop_down name.classify.constantize.model_name.human,'#', :controller => "amalgam/admin/#{name}" do
+            dropdown = ""
+            actions.each do |action|
+              dropdown += dropdown_item(I18n.t("amalgam.admin.actions.#{action}"), amalgam.send("admin_#{name}_path")) if action == 'index' || action == :index
+              dropdown += dropdown_item(I18n.t('amalgam.admin.actions.new'), amalgam.send("new_admin_#{name.singularize}_path")) if action == 'new' || action == :new
+              dropdown += dropdown_item(I18n.t("amalgam.admin.actions.#{action}"), amalgam.send("#{action}_admin_#{name}_path")) if action != 'index' && action != :index && action != 'new' && action != :new
+            end
+            dropdown.html_safe
+          end
+        else
+          links += menu_item I18n.t("amalgam.admin.menus.#{name}"), amalgam.send("admin_#{name}_path"), :controller => "amalgam/admin/#{actions.first[:controller]}"
         end
       end
       links.html_safe

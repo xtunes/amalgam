@@ -104,6 +104,7 @@ describe Amalgam::TemplateFinder::Rule do
   it "在没有自身满足条件，但是存在上级节点的级别限定模板的时候（如:level1）" do
     Amalgam::TemplateFinder::Rule.look_up([@page4,@page]).should eq ["@group1", "&l1"]
     Amalgam::TemplateFinder::Rule.look_up([@page8,@page2,@page4]).should eq ["@group1", "&l1"]
+    Amalgam::TemplateFinder::Rule.look_up([@page8,@page4,@page2]).should eq ["@group1", "&l2"]
   end
 
   it "在没有自身满足条件，存在祖先节点下的default文件时" do

@@ -6,11 +6,11 @@ module Amalgam
     yield self
   end
 
+  mattr_accessor :admin_menus
+  @@admin_menus = {}
+
   mattr_accessor :type_whitelist
   @@type_whitelist = []
-
-  mattr_accessor :routes
-  @@routes = []
 
   mattr_accessor :controllers
   @@controllers = []
@@ -28,10 +28,19 @@ module Amalgam
   mattr_accessor :i18n
   @@i18n = nil
 
-  def self.resources(*args,&block)
-    self.routes << {:args => args, :block => block}
-    self.controllers << args.first.to_s
-    Amalgam::TemplateFinder::Rule.load(Rails.root,args.first.to_s)
+  mattr_reader :routes
+  @@routes = Proc.new do
+    resources :pages, :except => [:show]
+  end
+
+  def self.models_with_templates=(models=[])
+    models.each do |model|
+      Amalgam::TemplateFinder::Rule.load(Rails.root,model.to_s)
+    end
+  end
+
+  def self.admin_routes(&block)
+    @@routes = Proc.new(&block)
   end
 
   def self.authority_model(model,options = {})
