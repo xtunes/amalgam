@@ -11,6 +11,8 @@ $ ->
   msgDone = $tree.data('done')
   msgError = $tree.data('error')
   param = $tree.data('param')
+  if($tree.data('path').indexOf('?') >= 0)
+    dataPath = $tree.data('path').substring(0,$tree.data('path').indexOf('?'))
 
   $('div > ol.tree').nestedSortable
       helper: 'clone'
