@@ -14,7 +14,7 @@ module Amalgam
     private
 
     def layout_with_mercury
-      !params[:mercury_frame]&&can_edit? ? 'amalgam/admin/editor' : content_layout
+      !params[:mercury_frame] && can_edit? && !request.xhr? ? 'amalgam/admin/editor' : content_layout
     end
 	end
 end
