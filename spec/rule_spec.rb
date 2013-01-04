@@ -102,9 +102,9 @@ describe Amalgam::TemplateFinder::Rule do
   end
 
   it "在没有自身满足条件，但是存在上级节点的级别限定模板的时候（如:level1）" do
-    Amalgam::TemplateFinder::Rule.look_up([@page4,@page]).should eq ["@group1", "&l1"]
-    Amalgam::TemplateFinder::Rule.look_up([@page8,@page2,@page4]).should eq ["@group1", "&l1"]
-    Amalgam::TemplateFinder::Rule.look_up([@page8,@page4,@page2]).should eq ["@group1", "&l2"]
+    Amalgam::TemplateFinder::Rule.look_up([@page4,@page]).should eq ["@group1", "&1"]
+    Amalgam::TemplateFinder::Rule.look_up([@page8,@page2,@page4]).should eq ["@group1", "&1"]
+    Amalgam::TemplateFinder::Rule.look_up([@page8,@page4,@page2]).should eq ["@group1", "&2"]
   end
 
   it "在没有自身满足条件，存在祖先节点下的default文件时" do
@@ -112,8 +112,8 @@ describe Amalgam::TemplateFinder::Rule do
   end
 
   it "在没有条件满足的情况下，去根目录的default文件夹里的层级结果去找" do
-    Amalgam::TemplateFinder::Rule.look_up([@page5,@page6]).should eq ["default", "&l1"]
-    Amalgam::TemplateFinder::Rule.look_up([@default_l2,@default_l1,@default]).should eq ['default','&l2']
+    Amalgam::TemplateFinder::Rule.look_up([@page5,@page6]).should eq ["default", "&1"]
+    Amalgam::TemplateFinder::Rule.look_up([@default_l2,@default_l1,@default]).should eq ['default','&2']
   end
 
   it "在有祖先节点满足的时候，使用祖先节点的模板" do

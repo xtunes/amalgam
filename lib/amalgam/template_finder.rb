@@ -56,11 +56,11 @@ module Amalgam
           check_result = check(rule,page,is_self)
           is_self = false if is_self
           #puts check_result.to_s + ':'+rule+":"+page.template_keys.to_s
-          if check_result>0 || rule.match(/^&l?(\d+)/)
+          if check_result>0 || rule.match(/^&?(\d+)/)
             result += check_result*(level&&rule!='default' ? 10 : 1) unless rule=='default'&&pages.length>1&&list.length<=1
-            rule = list.shift unless rule.match(/^&l?(\d+)/)
-            if rule && rule.match(/^&l?(\d+)/)
-              position = rule.match(/^&l?(\d+)/)[1].to_i-1
+            rule = list.shift unless rule.match(/^&?(\d+)/)
+            if rule && rule.match(/^&?(\d+)/)
+              position = rule.match(/^&?(\d+)/)[1].to_i-1
               if pages.length > position+1
                 rule = list.shift
                 position.times{pages.shift}
