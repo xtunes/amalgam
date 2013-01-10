@@ -4,7 +4,7 @@ module Amalgam
   def self.setup
     require_all!
     yield self
-    if Rails.application.config.consider_all_requests_local
+    if !Rails.application.config.consider_all_requests_local
       load_templates
     end
   end
