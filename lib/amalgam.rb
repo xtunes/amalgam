@@ -4,6 +4,9 @@ module Amalgam
   def self.setup
     require_all!
     yield self
+    if Rails.application.config.consider_all_requests_local
+      load_templates
+    end
   end
 
   mattr_accessor :admin_menus
@@ -28,13 +31,16 @@ module Amalgam
   mattr_accessor :i18n
   @@i18n = nil
 
+  mattr_accessor :models_with_templates
+  @@models_with_templates = []
+
   mattr_reader :routes
   @@routes = Proc.new do
     resources :pages, :except => [:show]
   end
 
-  def self.models_with_templates=(models=[])
-    models.each do |model|
+  def self.load_templates
+    models_with_templates.each do |model|
       Amalgam::TemplateFinder::Rule.load(Rails.root,model.to_s)
     end
   end

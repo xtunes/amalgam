@@ -34,9 +34,9 @@ module Amalgam
         @list
       end
 
-      def self.look_up(pages)
+      def self.look_up(pages,options = {})
         list = []
-        @@rules[pages.first.class.model_name.tableize].clone.each{|rule| list << rule.look_up_single(pages.clone)}
+        @@rules[options[:path] || pages.first.class.model_name.tableize].clone.each{|rule| list << rule.look_up_single(pages.clone)}
         result1 = list.max{|x,y| x[1] <=> y[1]}
         result2 = list.select{|x| x[0].first != 'default' && x[0].first != 'show'}.max{|x,y| x[1] <=> y[1]}
         return result1[0] unless result2
@@ -111,11 +111,11 @@ module Amalgam
     protected
 
     def template_for(page,options={})
-      if Rails.env == 'development'
-        Amalgam.models_with_templates = ['pages','posts']
+      if Rails.application.config.consider_all_requests_local
+        Amalgam.load_templates
       end
-      rule = Amalgam::TemplateFinder::Rule.look_up(page.ancestors.reverse.unshift(page))
-      options[:path] ||= page.class.model_name.tableize
+      options[:path] ||= controller_name
+      rule = Amalgam::TemplateFinder::Rule.look_up(page.ancestors.reverse.unshift(page),options)
       options[:path]+'/'+rule.join('/')
     end
   end
