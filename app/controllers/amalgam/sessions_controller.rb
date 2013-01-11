@@ -16,7 +16,7 @@ module Amalgam
       else
         if @resource
           session["#{resource_name}_id".to_sym] = @resource.id
-          redirect_back_or_default params[:return_to] || main_app.root_url
+          redirect_back_or_default params[:return_to] || Amalgam.authority_urls[resource_name.to_sym] || main_app.root_url
         else
           redirect_to eval("#{resource_name}_signin_url"), :alert => I18n.t('amalgam.sessions.fail.invalid_name_or_password')
         end

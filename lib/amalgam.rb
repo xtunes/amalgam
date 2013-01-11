@@ -24,6 +24,9 @@ module Amalgam
   mattr_accessor :authorities
   @@authorities = {}
 
+  mattr_accessor :authority_urls
+  @@authority_urls = {}
+
   mattr_accessor :attachment_class_name
   @@attachment_class_name = 'Attachment'
 
@@ -54,6 +57,11 @@ module Amalgam
       @@authorities[model] = options[:as]
     else
       @@authorities[model] = :default
+    end
+    if options[:redirect_url].present?
+      @@authority_urls[model] = options[:redirect_url]
+    else
+      @@authority_urls[model] = nil
     end
     Amalgam::Authorities::Controllers::Helpers.amalgam_define_helpers(model.to_s,options)
   end
