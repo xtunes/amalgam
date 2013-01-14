@@ -20,7 +20,7 @@ module Amalgam
         available_locales = ::I18n::available_locales.collect{|m| m.to_s.downcase}
 
         ::I18n.locale = (available_locales.include? extracted_locale.to_s.downcase) ?
-            extracted_locale : ::I18n.default_locale
+            extracted_locale : ::I18n.default_locale.downcase
 
         session[:locale] = extracted_locale if params[:locale] && can_edit?
       end
