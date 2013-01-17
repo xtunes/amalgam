@@ -18,12 +18,12 @@ module Amalgam
        elements = Nokogiri::HTML::DocumentFragment.parse(html_tag).css "label, input"
        elements.each do |e|
          if e.node_name.eql? 'label'
-           html = %(<div class="clearfix error">#{e}</div>).html_safe
+           html = %(<div class="error">#{e}</div>).html_safe
          elsif e.node_name.eql? 'input'
            if instance.error_message.kind_of?(Array)
-             html = %(<div class="clearfix error">#{html_tag}<span class="help-inline">&nbsp;#{instance.error_message.join(',')}</span></div>).html_safe
+             html = %(<div class="error">#{html_tag}<span class="help-inline">&nbsp;#{instance.error_message.join(',')}</span></div>).html_safe
            else
-             html = %(<div class="clearfix error">#{html_tag}<span class="help-inline">&nbsp;#{instance.error_message}</span></div>).html_safe
+             html = %(<div class="error">#{html_tag}<span class="help-inline">&nbsp;#{instance.error_message}</span></div>).html_safe
            end
          end
        end
