@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'acts_as_list'
   s.add_dependency 'kaminari'
   s.add_dependency 'globalize3'
+  s.add_dependency 'nokogiri', '~> 1.3'
 
   s.add_dependency 'jquery-rails', '2.0.2'
 
