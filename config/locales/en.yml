@@ -30,6 +30,13 @@ en:
         parent_id: 'parent page'
         group_ids: "groups"
   amalgam:
+    file_download: 'file download'
+    file_pre: 'file pre'
+    file_upload: 'file upload'
+    attachment_list: 'attachment list'
+    attachment: 'attachment'
+    description: 'description'
+    name: 'name'
     locales:
       zh-CN: 'simplified Chinese'
       zh-cn: 'simplified Chinese'

@@ -7,7 +7,8 @@ module Amalgam
         :builder => PropertyFormBuilder,
         :url => amalgam.admin_editor_path,
         :method => :put,
-        :remote => true
+        :remote => true,
+        :html => { :style => 'width:450px;padding-bottom:30px;' }
       }
 
       options.reverse_merge!(defaults)
@@ -30,21 +31,33 @@ module Amalgam
       end
 
       def attachment(name, options={})
+        options[:class] ||= 'input-xlarge'
         index_create
         obj = object.attachments[name]
-        @buffer = label("attachment.#{name}",options.delete(:lable_options)||{})
+        @buffer = label("#{I18n.t('amalgam.attachment')} : #{name}",options.delete(:lable_options)||{:style => 'font-weight:bold;'})
+        @buffer.concat '<div style = "border-bottom: solid #cccccc 1px;padding:5px; margin-bottom:3px;">'.html_safe
+        @buffer.concat label(I18n.t("amalgam.description")+':',:style => "display:inline;margin-right:35px;")
         @buffer.concat attachment_field(:text_field, :description, obj.try(:description), options)
+        @buffer.concat '<br>'.html_safe
+        @buffer.concat label(I18n.t("amalgam.file_upload")+':',:style => "display:inline;margin-right:10px;")
         @buffer.concat attachment_field(:file_field, :file)
-        @buffer.concat @template.image_tag(obj.file.thumb.url) if obj.try(:content_type).to_s =~ /image/
+        @buffer.concat '<br>'.html_safe
+        if obj.try(:content_type).to_s =~ /image/
+          @buffer.concat label(I18n.t("amalgam.file_pre")+':',:style => "display:inline;margin-right:10px;")
+          @buffer.concat @template.image_tag(obj.file.thumb.url)
+        else
+          @buffer.concat "<a href= '#{obj.file.try(:url)}'>#{I18n.t("amalgam.file_download")}</a>".html_safe if obj
+        end
         @buffer.concat attachment_field(:hidden_field, :name, name)
         @buffer.concat attachment_field(:hidden_field, :id, obj.id) if obj.try(:persisted?)
-        @buffer
+        @buffer.concat '</div>'.html_safe
+        @buffer.html_safe
       end
 
       def attachment_list(name, options={})
         options[:class] ||= "attachment_list_#{name}"
         @buffer = @template.content_tag(:div,options) do
-          buffer = label("attachment.#{name}",options.delete(:lable_options)||{})
+          buffer = label("#{I18n.t('amalgam.attachment_list')} : #{name}",options.delete(:lable_options)||{:style => 'font-weight:bold;'})
           objs = object.attachments[name] || []
           objs.each do |obj|
             buffer.concat attachment_item(obj).html_safe
@@ -63,12 +76,23 @@ module Amalgam
       def attachment_item(attachment)
         index_create
         @template.content_tag(:div,options) do
-          buffer = attachment_field(:text_field, :description, attachment.try(:description), :class => 'attachment_description')
+          buffer = '<div style = "border-bottom: solid #cccccc 1px;padding:5px; margin-bottom:3px;">'.html_safe
+          buffer.concat label(I18n.t("amalgam.description")+':',:style => "display:inline;margin-right:35px;")
+          buffer.concat attachment_field(:text_field, :description, attachment.try(:description), :class => 'input-xlarge')
+          buffer.concat '<br>'.html_safe
+          buffer.concat label(I18n.t("amalgam.file_upload")+':',:style => "display:inline;margin-right:10px;")
           buffer.concat attachment_field(:file_field, :file)
           buffer.concat destroy_field(attachment)
-          buffer.concat @template.image_tag(attachment.file.thumb.url) if attachment.try(:content_type).to_s =~ /image/
+          buffer.concat '<br>'.html_safe
+          if attachment.try(:content_type).to_s =~ /image/
+            buffer.concat label(I18n.t("amalgam.file_pre")+':',:style => "display:inline;margin-right:10px;")
+            buffer.concat @template.image_tag(attachment.file.thumb.url)
+          else
+            buffer.concat "<a href= '#{attachment.file.try(:url)}'>#{I18n.t("amalgam.file_download")}</a>".html_safe if attachment
+          end
           buffer.concat attachment_field(:hidden_field, :name, attachment.name)
           buffer.concat attachment_field(:hidden_field, :id, attachment.id) if attachment.try(:persisted?)
+          buffer.concat '</div>'.html_safe
           buffer.html_safe
         end
       end

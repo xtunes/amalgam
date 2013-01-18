@@ -20,7 +20,7 @@ zh-CN:
           blank: "%{attribute}不能为空"
     models:
       page: "页面"
-      amalgam/models/group: '组'
+      amalgam/models/group: '页面分组'
     attributes:
       amalgam/models/group:
         name: "名称"
@@ -30,6 +30,13 @@ zh-CN:
         parent_id: '父页面'
         group_ids: "分组"
   amalgam:
+    file_download: '文件下载'
+    file_pre: '文件预览'
+    file_upload: '文件上传'
+    attachment_list: '附件列表'
+    attachment: '附件'
+    description: '描述'
+    name: '名称'
     locales:
       zh-CN: '中文(简体)'
       zh-cn: '中文(简体)'
