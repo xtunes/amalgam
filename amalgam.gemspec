@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Amalgam is a gem for cms building"
   s.description = "Amalgam is a WYSIWYG gem for CMS"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib,vendor,spec,script}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
   s.add_dependency "rails", "~> 3.2.8"
   s.add_dependency "haml-rails"
