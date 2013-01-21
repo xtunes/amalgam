@@ -1,3 +1,4 @@
+require 'page_routes'
 Rails.application.routes.draw do
 
   globalize_hierarchical_resource :pages, /zh-cn|en/

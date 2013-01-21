@@ -48,7 +48,7 @@ module Amalgam
         is_self = true
         list = @list.clone.reverse<<nil
         pages<<nil
-        level = false
+        level = nil
         rule = list.shift
         while list.present? && pages.present?
           page = pages.shift
@@ -57,20 +57,21 @@ module Amalgam
           is_self = false if is_self
           #puts check_result.to_s + ':'+rule+":"+page.template_keys.to_s
           if check_result>0 || rule.match(/^&?(\d+)/)
-            result += check_result*(level&&rule!='default' ? 10 : 1) unless rule=='default'&&pages.length>1&&list.length<=1
+            result += check_result*(level&&rule!='default' ? 10*(1.0/level) : 1) unless rule=='default'&&pages.length>1&&list.length<=1
+            level = nil
             rule = list.shift unless rule.match(/^&?(\d+)/)
             if rule && rule.match(/^&?(\d+)/)
               position = rule.match(/^&?(\d+)/)[1].to_i-1
               if pages.length > position+1
                 rule = list.shift
                 position.times{pages.shift}
-                level = true
+                level = position + 1
               else
                 break
               end
             end
           else
-            if level == true
+            if level
               return [@list,0]
             end
           end

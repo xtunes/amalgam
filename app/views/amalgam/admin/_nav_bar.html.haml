@@ -12,7 +12,7 @@
           - if Amalgam.i18n
             = drop_down t("amalgam.locales.#{I18n.locale.to_s}"), '#' do
               - I18n::available_locales.each do |locale|
-                = dropdown_item(t("amalgam.locales.#{locale.to_s}"), locale_url(locale.to_s.downcase))
+                = dropdown_item(t("amalgam.locales.#{locale.to_s}"), locale_url(locale.to_s))
         %ul.nav.pull-right
           - if editor
             %li.edit

@@ -82,6 +82,9 @@ describe Amalgam::TemplateFinder::Rule do
 
     @page10 = TestPage.new(:slug => 'slug11')
     @page10_group1 = @page10.test_groups.new(:name => 'group10')
+
+    @page11 = @page6.children.new(:slug => 'slug12')
+    @page12 = @page6.children.new(:slug => 'slug13')
   end
 
   it "page with groups should has keys" do
@@ -122,6 +125,14 @@ describe Amalgam::TemplateFinder::Rule do
 
   it "在没有任何规则满足的情况下，使用根目录的show文件" do
     Amalgam::TemplateFinder::Rule.look_up([@page9]).should eq ["show"]
+  end
+
+  it "在存在嵌套slug或者group的情况下，内部slug或者group设定的level模板优先级高于外部" do
+    Amalgam::TemplateFinder::Rule.look_up([@page9,@page11,@page6]).should eq ["slug7","slug12","&1"]
+  end
+
+  it "如果存在并列的父节点和子节点的level模板，优先使用子节点的模板" do
+    Amalgam::TemplateFinder::Rule.look_up([@page9,@page12,@page6]).should eq ["slug13","&1"]
   end
 end
 

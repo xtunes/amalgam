@@ -40,7 +40,7 @@ zh-CN:
     locales:
       zh-CN: '中文(简体)'
       zh-cn: '中文(简体)'
-      en: '英文'
+      en: 'English'
     registrations:
       currentpassword: '输入当前密码以确认修改'
       leaveblank: '如果不打算修改密码，请留空'

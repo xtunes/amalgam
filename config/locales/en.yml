@@ -38,8 +38,8 @@ en:
     description: 'description'
     name: 'name'
     locales:
-      zh-CN: 'simplified Chinese'
-      zh-cn: 'simplified Chinese'
+      zh-CN: '中文(简体)'
+      zh-cn: '中文(简体)'
       en: 'English'
     registrations:
       currentpassword: 'we need your current password to confirm your changes'
