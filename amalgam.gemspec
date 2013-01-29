@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["andrew@xtunes.cn"]
   s.homepage    = "http://github.com/amalgam/amalgam"
   s.summary     = "Amalgam is a gem for cms building"
-  s.description = "Amalgam is a WYSIWYG gem for CMS"
+  s.description = "CMS based on Mercury Editor"
 
   s.files = Dir["{app,config,db,lib,vendor,spec,script}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 

@@ -2,16 +2,16 @@ en:
   helpers:
     submit:
       page:
-        create: "add %{model}"
-        update: "update %{model}"
+        create: "Add %{model}"
+        update: "Update %{model}"
       group:
-        create: "add %{model}"
-        update: "update %{model}"
+        create: "Add %{model}"
+        update: "Update %{model}"
     label:
       page:
-        slug: 'slug:'
-        path: 'path:'
-        parent_id: 'parent page:'
+        slug: 'Slug:'
+        path: 'Path:'
+        parent_id: 'Parent Page:'
   activerecord:
     errors:
       models:
@@ -19,73 +19,73 @@ en:
           taken: "%{attribute} has been taken"
           blank: "%{attribute} can not be blank"
     models:
-      page: "page"
-      amalgam/models/group: 'group'
+      page: "Page"
+      amalgam/models/group: 'Group'
     attributes:
       amalgam/models/group:
-        name: 'name'
+        name: 'Name'
       page:
-        slug: 'slug'
-        path: 'path'
-        parent_id: 'parent page'
-        group_ids: "groups"
+        slug: 'Slug'
+        path: 'Path'
+        parent_id: 'Parent Page'
+        group_ids: "Groups"
   amalgam:
-    file_download: 'file download'
-    file_pre: 'file pre'
-    file_upload: 'file upload'
-    attachment_list: 'attachment list'
-    attachment: 'attachment'
-    description: 'description'
-    name: 'name'
+    file_download: 'File Download'
+    file_pre: 'File Preview'
+    file_upload: 'File Upload'
+    attachment_list: 'Attachment List'
+    attachment: 'Attachment'
+    description: 'Description'
+    name: 'Name'
     locales:
       zh-CN: '中文(简体)'
       zh-cn: '中文(简体)'
       en: 'English'
     registrations:
-      currentpassword: 'we need your current password to confirm your changes'
-      leaveblank: "leave it blank if you don't want to change it"
+      currentpassword: 'We need your current password to confirm your changes'
+      leaveblank: "Leave it blank if you don't want to change it"
       fail:
-        password_confirmation_not_match: "password and password_confirmation are not match"
-        current_password_not_match: "current_password not match"
+        password_confirmation_not_match: "Password and password_confirmation are not match"
+        current_password_not_match: "Current_password not match"
     sessions:
       actions:
-        sign_in: 'sign in'
-        sign_out: 'sign out'
-        edit_info: 'edit info'
+        sign_in: 'Sign In'
+        sign_out: 'Sign Out'
+        edit_info: 'Edit Info'
       success:
-        sign_in: 'sign in successfully'
-        sign_out: 'sign out successfully'
+        sign_in: 'Sign in successfully'
+        sign_out: 'Sign out successfully'
       fail:
-        invalid_name_or_password: 'invalid username or password'
-        need_to_be_admin: 'you need to be an admin,please sign in as a admin'
-        need_to_be_user: 'you need to be an user,please sign in as a user'
-        not_enough_authority: 'you do not have enough authority,please sign in'
+        invalid_name_or_password: 'Invalid username or password'
+        need_to_be_admin: 'You need to be an admin,please sign in as a admin'
+        need_to_be_user: 'You need to be an user,please sign in as a user'
+        not_enough_authority: 'You do not have enough authority,please sign in'
     admin:
       actions:
-        edit: 'edit'
-        update: 'update'
-        apply: 'apply'
-        cancel: 'cancel'
-        index: 'index'
-        new: 'new'
-        show: "show"
-        destroy: 'destroy'
-        preview: 'preview'
-        new_child: 'new child'
-        edit_content: 'edit content'
+        edit: 'Edit'
+        update: 'Update'
+        apply: 'Apply'
+        cancel: 'Cancel'
+        index: 'Index'
+        new: 'New'
+        show: "Show"
+        destroy: 'Destroy'
+        preview: 'Preview'
+        new_child: 'New child'
+        edit_content: 'Edit content'
       a:
-        back: "back"
-        show: "show"
+        back: "Back"
+        show: "Show"
       confirmation:
-        delete_child: 'delete this %{model} and all its children %{model}, are you sure to remove this %{model}?'
+        delete_child: 'Delete this %{model} and all its children %{model}, are you sure to remove this %{model}?'
       tree:
-        moved: "moved successfully"
-        move_error: "move error"
+        moved: "Moved successfully"
+        move_error: "Move error"
       message:
-        create_successfully: 'created successfully'
-        update_successfully: 'updated successfully'
-        destroy_successfully: 'destroyed successfully'
-        destroy_failed: 'destroy failed'
-        error: "load error!"
-        loading: "loading..."
-        done: "done!"
+        create_successfully: 'Created successfully'
+        update_successfully: 'Updated successfully'
+        destroy_successfully: 'Destroyed successfully'
+        destroy_failed: 'Destroy failed'
+        error: "Load error!"
+        loading: "Loading..."
+        done: "Done!"
