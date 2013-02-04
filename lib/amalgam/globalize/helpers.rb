@@ -37,7 +37,7 @@ module Amalgam
 
       def extract_locale_from_subdomain
         res = request.subdomains.first
-        res if !request.subdomains.empty? and res != request.host and available_locales.include? res
+        res if !request.subdomains.empty? and res != request.host and ::I18n::available_locales.collect{|m| m.to_s}.include? res
       end
     end
   end
