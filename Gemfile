@@ -2,7 +2,7 @@ source "http://rubygems.org"
 
 gem 'turn', :require => false
 gem 'factory_girl_rails' , :require => false
-gem 'anjlab-bootstrap-rails', '~> 2.0.3' , :require => 'bootstrap-rails'
+gem 'anjlab-bootstrap-rails', '~> 2.2' , :require => 'bootstrap-rails'
 gem 'mercury-rails', '~> 0.8.0'
 gem 'nested_set', "~> 1.7.0"
 
@@ -16,6 +16,9 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'carrierwave', "~> 0.6.2"
 gem 'mini_magick'
 gem 'globalize3'
+gem "quiet_assets", ">= 1.0.1", :group => :development
+gem "better_errors", ">= 0.3.2", :group => :development
+gem "binding_of_caller", ">= 0.6.8", :group => :development
 
 # Gems used only for assets and not required
 # in production environments by default.
