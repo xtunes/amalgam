@@ -17,6 +17,11 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'carrierwave', "~> 0.6.2"
 gem 'mini_magick'
 gem 'globalize3'
+gem 'stringex'
+gem 'database_cleaner'
+gem 'carrierwave', "~> 0.6.2"
+gem 'mini_magick'
+
 gem "quiet_assets", ">= 1.0.1", :group => :development
 gem "better_errors", ">= 0.3.2", :group => :development
 gem "binding_of_caller", ">= 0.6.8", :group => :development

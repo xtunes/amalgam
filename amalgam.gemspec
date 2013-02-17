@@ -1,5 +1,5 @@
 $:.push File.expand_path("../lib", __FILE__)
-
+$:.push File.expand_path("../simple_nested_set/lib", __FILE__)
 # Maintain your gem's version:
 require "amalgam/version"
 
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency "jquery-ui-rails"
   s.add_dependency 'anjlab-bootstrap-rails', '~> 2.3'
   s.add_dependency 'nested_set', "~> 1.7.0"
+  s.add_dependency 'stringex', '~> 1.5.1'
   #s.add_dependency 'carrierwave', "~> 0.6.2"
   #s.add_dependency 'mini_magick'
   s.add_dependency 'acts_as_list'
@@ -42,4 +43,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "guard-rspec"
   s.add_development_dependency "guard-spork"
   s.add_development_dependency "launchy"
+  s.add_development_dependency "factory_girl_rails", "~> 4.0"
+  s.add_development_dependency 'database_cleaner', '~> 0.9.1'
 end
