@@ -10,7 +10,7 @@ module Amalgam
         attr_accessor :prev_id,:next_id
 
         validates :title, :slug, :presence => true
-        validates_uniqueness_of :slug, :scope => :parent_id
+        validates_uniqueness_of :slug
         validates_with Amalgam::Validator::Slug
 
         default_scope order('lft ASC')

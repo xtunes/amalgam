@@ -11,7 +11,7 @@ module Amalgam
         @@rules[model] = []
         path = "#{root}/app/views/#{model.tableize}/"
         Find.find(path).each do |p|
-          if File.file?(p)
+          if File.file?(p) && Amalgam.accepted_formats.include?(File.extname(p))
             p.slice!(path)
             list = p.split('/')
             list[list.length-1] = list.last.split('.').first

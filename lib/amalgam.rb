@@ -9,6 +9,9 @@ module Amalgam
     end
   end
 
+  mattr_accessor :accepted_formats
+  @@accepted_formats = [".haml", ".erb"]
+
   mattr_accessor :admin_menus
   @@admin_menus = {}
 

@@ -87,6 +87,10 @@ describe Amalgam::TemplateFinder::Rule do
     @page12 = @page6.children.new(:slug => 'slug13')
   end
 
+  it 'only accept templates' do
+    @rules.select{|rule| rule.list == ['test']}.present?().should eq(false)
+  end
+
   it "page with groups should has keys" do
     @page.test_groups.length.should eq(2)
     @page.template_keys.length.should eq(3)
