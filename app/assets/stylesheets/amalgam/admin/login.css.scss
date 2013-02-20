@@ -1,19 +1,54 @@
+@import 'mixins';
 .login{
-  .box {
-    margin-top:100px;
-    background-color: #fff;
-    padding:10px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-    box-shadow: 0 1px 2px rgba(0,0,0,.15);
-    h2.title {
-      font-size: 12px;
-      margin:0 -10px; padding:0 10px; margin-bottom:8px;
-      color:#999; line-height:100%;
-      border-bottom:1px solid #ddd; padding-bottom:8px;
+  padding-top: 150px;
+  .alert {
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .login-box {
+    background: #fff;
+    border: 1px solid #c2c2c2;
+    @include border-radius(4px);
+    width: 300px;
+    margin: 0 auto;
+
+    .top{
+      background: #f8f8f8;
+      height: 50px;
+      border:none;
+      @include rounded-top(4px);
+      border-bottom: 1px solid #e4e6e8;
+      h1{
+        font-size: 14px;
+        line-height: 50px;
+        color: #525252;
+        margin: 0;
+      }
+      padding: 0 27px 0;
+    }
+
+    form{
+      margin-top: 15px;
+      padding:0 27px;
+    }
+    .controls{
+      margin-bottom: 10px;
+      input{
+        height:25px;
+        display: inline;
+      }
+      .add-on{
+        height:21px;
+        width:21px;
+        padding-top:8px;
+      }
+      .input-append input{
+        width:204px;
+      }
+    }
+    .actions{
+      float:right;
     }
   }
 }

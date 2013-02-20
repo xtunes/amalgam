@@ -1,6 +1,6 @@
 module Amalgam
   module AttachmentsHelper
-    def link_to_attachment(attachment,url=nil,version=nil)
+    def link_to_attachment(attachment,url=nil,version=nil,options={},&block)
       return unless attachment
       if attachment.content_type.include?("image")
         file = version.present? ? attachment.file.send(version) : attachment.file

@@ -6,10 +6,29 @@
     = javascript_include_tag "amalgam/admin"
     = csrf_meta_tags
     = yield(:head)
+    :javascript
+      $(function(){
+        $('.tree-container').jstree({
+          "plugins" : ["html_data"],
+          "core": {
+
+          }
+        });
+        //$(".tree-container").jstree("set_theme","apple");
+      })
   %body{:class => body_class}
     =render :partial => "amalgam/admin/nav_bar", :locals => {:editor => false}
-    .container
+    .container.wrapper
       .row
-        .span12.main
-          = yield
+        .span4.sidebar
+          .tree-container
+            %ul
+              %li
+                %a{:herf => '#'}root
+                %ul
+                  %li
+                    %a{:herf => '#'}child
+        .span8.main
+          %br
+          =# yield
     .footer

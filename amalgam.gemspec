@@ -15,13 +15,13 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib,vendor,script}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency "rails", "~> 3.2.8"
-  s.add_dependency "haml-rails"
+  s.add_dependency "rails", "~> 3.2.12"
+  s.add_dependency "haml"
   s.add_dependency "mercury-rails", "~> 0.8.0"
   s.add_dependency "modernizr-rails"
   s.add_dependency "remotipart", '~> 1.0'
   s.add_dependency "jquery-ui-rails"
-  s.add_dependency 'anjlab-bootstrap-rails', '~> 2.0.3'
+  s.add_dependency 'anjlab-bootstrap-rails', '~> 2.3'
   s.add_dependency 'nested_set', "~> 1.7.0"
   #s.add_dependency 'carrierwave', "~> 0.6.2"
   #s.add_dependency 'mini_magick'

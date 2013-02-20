@@ -7,10 +7,11 @@
 //= require jquery.ui.nestedSortable
 //= require jquery.scrollto
 //= require jquery_ujs
-//= require bootstrap-dropdown
-//= require bootstrap-alert
-//= require bootstrap-tooltip
-//= require bootstrap-button
+//= require twitter/bootstrap/dropdown
+//= require twitter/bootstrap/alert
+//= require twitter/bootstrap/tooltip
+//= require twitter/bootstrap/button
+//= require jquery.jstree
 //= require amalgam/extra
 //= require_tree ./admin
 

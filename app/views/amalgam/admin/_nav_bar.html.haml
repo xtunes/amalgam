@@ -1,28 +1,26 @@
 .navbar.navbar-fixed-top
   .navbar-inner
     .container
-      .nav-collapse
-        %h3.brand
-          =link_to 'Amalgam', '/'
-        %ul.nav
-          = controller_links
-          = drop_down Amalgam::Models::Group.model_name.human,'#', :controller => "amalgam/admin/groups" do
-            = dropdown_item(t('amalgam.admin.actions.index'), amalgam.admin_groups_path)
-            = dropdown_item(t('amalgam.admin.actions.new'), amalgam.new_admin_group_path)
-          - if Amalgam.i18n
-            = drop_down t("amalgam.locales.#{I18n.locale.to_s}"), '#' do
-              - I18n::available_locales.each do |locale|
-                = dropdown_item(t("amalgam.locales.#{locale.to_s}"), locale_url(locale.to_s))
-        %ul.nav.pull-right
-          - if editor
-            %li.edit
-              %a{:href => '#'}= t('amalgam.admin.actions.edit')
-          %li.divider-vertical
-          - if admin_signed_in?
-            %li.dropdown
-              %a.dropdown-toggle{"data-toggle" => "dropdown"}
-                = current_admin.username
-                %b.caret
-              %ul.dropdown-menu
-                %li= link_to(t('amalgam.sessions.actions.edit_info'),amalgam.edit_info_path('admin_user'))
-                %li= link_to(t('amalgam.sessions.actions.sign_out'), amalgam.signout_path("admin_user"), :method => 'delete')
+      =link_to 'Amalgam', '/' ,:class => 'brand'
+      %ul.nav
+        = controller_links
+        = drop_down Amalgam::Models::Group.model_name.human,'#', :controller => "amalgam/admin/groups" do
+          = dropdown_item(t('amalgam.admin.actions.index'), amalgam.admin_groups_path)
+          = dropdown_item(t('amalgam.admin.actions.new'), amalgam.new_admin_group_path)
+        - if Amalgam.i18n
+          = drop_down t("amalgam.locales.#{I18n.locale.to_s}"), '#' do
+            - I18n::available_locales.each do |locale|
+              = dropdown_item(t("amalgam.locales.#{locale.to_s}"), locale_url(locale.to_s.downcase))
+      %ul.nav.pull-right
+        - if editor
+          %li.edit
+            %a{:href => '#'}= t('amalgam.admin.actions.edit')
+        %li.divider-vertical
+        - if admin_signed_in?
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown"}
+              = current_admin.username
+              %b.caret
+            %ul.dropdown-menu
+              %li= link_to(t('amalgam.sessions.actions.edit_info'),amalgam.edit_info_path('admin_user'))
+              %li= link_to(t('amalgam.sessions.actions.sign_out'), amalgam.signout_path("admin_user"), :method => 'delete')
