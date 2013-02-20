@@ -16,11 +16,11 @@
           %li.edit
             %a{:href => '#'}= t('amalgam.admin.actions.edit')
         %li.divider-vertical
-        - if admin_signed_in?
+        - if current_admin != true
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown"}
               = current_admin.username
               %b.caret
             %ul.dropdown-menu
-              %li= link_to(t('amalgam.sessions.actions.edit_info'),amalgam.edit_info_path('admin_user'))
-              %li= link_to(t('amalgam.sessions.actions.sign_out'), amalgam.signout_path("admin_user"), :method => 'delete')
+              %li= link_to(t('amalgam.sessions.actions.edit_info'),edit_admin_path('admin_user'))
+              %li= link_to(t('amalgam.sessions.actions.sign_out'), signout_path("admin_user"), :method => 'delete')

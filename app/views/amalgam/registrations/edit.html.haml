@@ -1,6 +1,6 @@
 %article.registration
-  = form_for(@resource, :url => amalgam.send("#{params['resource'] || resource_name}_edit_info_path")) do |f|
-    %legend="#{t('amalgam.admin.actions.edit')}#{(params['resource'] || resource_name).to_s.classify.safe_constantize.model_name.human}"
+  = form_for(@resource, :url => update_admin_path) do |f|
+    %legend="#{t('amalgam.admin.actions.edit')}"
 
     .input
       = f.label :username

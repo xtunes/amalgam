@@ -1,34 +1,24 @@
 module Amalgam
   class RegistrationsController < Amalgam::ApplicationController
-    before_filter :get_resource_name, :only => [:update,:edit]
-    before_filter :authenticate_scope!, :only => [:edit, :update]
+    before_filter :authenticate_admin!
     layout 'amalgam/admin/login'
 
     def edit
+      @resource = current_admin
       render :edit
     end
 
     def update
+      @resource = current_admin
       respond_to do |format|
         format.html do
-          if @resource.update_attributes(params[resource_name])
-            redirect_to after_update_path_for(@resource)
+          if @resource.update_attributes(params[Amalgam.user_model.to_s.tableize.singularize])
+            redirect_to amalgam.admin_root_url
           else
             render :edit
           end
         end
       end
-    end
-
-    private
-
-    def authenticate_scope!
-      send(:"authenticate_#{params[:resource] || resource_name}!")
-      @resource = send(:"current_#{params[:resource] || resource_name}")
-    end
-
-    def get_resource_name
-      build_resource(params,false)
     end
   end
 end

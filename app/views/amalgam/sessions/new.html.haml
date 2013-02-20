@@ -6,7 +6,7 @@
 .login-box
   .top
     %h1= "#{t('amalgam.sessions.actions.sign_in')}"
-  = form_for @resource, :url => amalgam.send("#{params['resource'] || resource_name}_signin_path") do |f|
+  = form_for @resource, :url => signin_path do |f|
     %fieldset
       .control-groups
         .controls

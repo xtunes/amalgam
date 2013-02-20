@@ -9,6 +9,7 @@ gem 'nested_set', "~> 1.7.0"
 #Dependencies for the dummy app
 gem 'jquery-rails', '2.0.2'
 gem 'sqlite3'
+gem 'haml'
 gem 'modernizr-rails'
 gem 'jquery-ui-rails'
 gem "remotipart", '~> 1.0'

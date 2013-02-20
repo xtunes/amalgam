@@ -21,14 +21,7 @@ module Amalgam
   mattr_accessor :controllers
   @@controllers = []
 
-  mattr_accessor :authority_keys
-  @@authority_keys = [:username]
-
-  mattr_accessor :authorities
-  @@authorities = {}
-
-  mattr_accessor :authority_urls
-  @@authority_urls = {}
+  mattr_accessor :user_model
 
   mattr_accessor :attachment_class_name
   @@attachment_class_name = 'Attachment'
@@ -66,7 +59,6 @@ module Amalgam
     else
       @@authority_urls[model] = nil
     end
-    Amalgam::Authorities::Controllers::Helpers.amalgam_define_helpers(model.to_s,options)
   end
 
   protected
@@ -83,9 +75,10 @@ module Amalgam
     require 'amalgam/models/page'
     require 'amalgam/template_finder'
     require 'amalgam/editable'
-    require 'amalgam/authorities/controllers/helpers'
-    require 'amalgam/authorities/model'
-    require 'amalgam/authorities/models/active_record'
+    require 'amalgam/authentication/controllers/helpers'
+    require 'amalgam/authentication/routes'
+    require 'amalgam/authentication/controllers/authentication_methods'
+    require 'amalgam/authentication/models/active_record'
     require 'amalgam/globalize/helpers'
     require 'amalgam/globalize'
     require 'amalgam/tree/exportable'
