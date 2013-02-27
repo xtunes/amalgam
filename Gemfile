@@ -3,7 +3,7 @@ source "http://rubygems.org"
 gem 'turn', :require => false
 gem 'factory_girl_rails' , :require => false
 gem 'anjlab-bootstrap-rails', '~> 2.3' , :require => 'bootstrap-rails'
-gem 'mercury-rails', '~> 0.8.0'
+gem 'mercury-rails', '~> 0.9.0'
 gem 'nested_set', "~> 1.7.0"
 
 #Dependencies for the dummy app

@@ -22,5 +22,5 @@
               = current_admin.username
               %b.caret
             %ul.dropdown-menu
-              %li= link_to(t('amalgam.sessions.actions.edit_info'),edit_admin_path('admin_user'))
-              %li= link_to(t('amalgam.sessions.actions.sign_out'), signout_path("admin_user"), :method => 'delete')
+              %li= link_to(t('amalgam.sessions.actions.edit_info'),amalgam.edit_admin_path('admin_user'))
+              %li= link_to(t('amalgam.sessions.actions.sign_out'), amalgam.signout_path("admin_user"), :method => 'delete')
