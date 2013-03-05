@@ -15,6 +15,26 @@ module Amalgam
       end
     end
 
+    def editable_image_tag obj,field,options={}
+      if can_edit?
+        options[:data] = (options[:data] || {}).merge(:type => 'editable')
+        options[:data][:mercury] = "image"
+        options[:data][:id] = "#{obj.class.to_s.tableize}/#{obj.id.to_s}.#{field.to_s}"
+        options[:data][:thumb] = options[:thumb]
+      end
+      value = fetch_field(obj,field)
+      image_url = options.delete(:default) || '#'
+      if value
+        if options[:thumb]
+          image_url = Amalgam::Models::Image.find(value.to_i).file.thumb(options[:thumb]).url
+        else
+          image_url = Amalgam::Models::Image.find(value.to_i).url
+        end
+        options[:data][:image_id] ||= value if can_edit?
+      end
+      image_tag(image_url.to_s.html_safe,options)
+    end
+
     def properties_button(model_or_url,title=nil)
       return unless can_edit?
       title ||= I18n.t('properties_edit')

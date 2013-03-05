@@ -82,6 +82,7 @@ module Amalgam
     require 'amalgam/models/base_group'
     require 'amalgam/models/groupable'
     require 'amalgam/models/page'
+    require 'amalgam/models/image'
     require 'amalgam/template_finder'
     require 'amalgam/editable'
     require 'amalgam/authentication/controllers/helpers'

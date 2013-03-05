@@ -1,19 +1,14 @@
 #= require jquery
 #= require amalgam/mercury
+#= require amalgam/mercury/regions/image
+#= require amalgam/mercury/image_uploader
 #= require twitter/bootstrap/dropdown
 #= require jquery.remotipart
 #= require_self
 
 Mercury.uploader.MultiPartPost::buildBody = ->
-  boundary = undefined
-  name = undefined
-  value = undefined
-  _ref = undefined
-  boundary = "--" + @boundary
-  _ref = @formInputs
-  for name of _ref
-    continue  unless __hasProp_.call(_ref, name)
-    value = _ref[name]
+  boundary = '--' + @boundary
+  for own name, value of @formInputs
     @body += "" + boundary + "\r\nContent-Disposition: form-data; name=\"" + name + "\"\r\n\r\n" + (unescape(encodeURIComponent(value))) + "\r\n"
   @body += "" + boundary + "\r\nContent-Disposition: form-data; name=\"" + @inputName + "\"; filename=\"" + (unescape(encodeURIComponent(@file.name))) + "\"\r\nContent-Type: " + @file.type + "\r\nContent-Transfer-Encoding: binary\r\n\r\n" + @contents + "\r\n" + boundary + "--"
 

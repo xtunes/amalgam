@@ -31,8 +31,14 @@ module Amalgam
 	        :attributes => {}
 	      }
 	      # convert form 'field.sub1.sub2 = value' to '{field:{sub1:{sub2:value}}'
-	      attribute = (field.split('.') << content_value['value']).reverse.reduce{|value,key| {key => value} }
-	      record[:attributes].deep_merge!(attribute)
+	      attribute ||= {}
+	      case content_value['type']
+	      when 'full'
+		      attribute = (field.split('.') << content_value['value']).reverse.reduce{|value,key| {key => value} }
+		    when 'image'
+		    	attribute = (field.split('.') << content_value['attributes']['uid']).reverse.reduce{|value,key| {key => value} }
+		    end
+		    record[:attributes].deep_merge!(attribute)
 	    end
 	    records
 	  end

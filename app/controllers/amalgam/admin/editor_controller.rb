@@ -13,11 +13,21 @@ module Amalgam
 
     # POST /images.json
     def upload_image
-      @image = Attachment.new(params[:image])
+      @image = params[:image_id] ? Amalgam::Models::Image.find(params[:image_id]) : Amalgam::Models::Image.new(params[:image])
+      @image.thumb = params[:thumb]
       respond_to do |format|
-        if @image.save
+        if save_image(params[:image_id],params[:image])
           format.json { render :json => @image }
         end
+      end
+    end
+
+    protected
+    def save_image(uid,params)
+      if uid
+        return @image.update_attributes(params)
+      else
+        return @image.save
       end
     end
   end

@@ -9,6 +9,7 @@ spec/dummy/attachments
 spec/dummy/app/views/pages/
 spec/dummy/public/uploads
 spec/dummy/.sass-cache
+spec/dummy/public/system
 tmp/
 .DS_Store
 
