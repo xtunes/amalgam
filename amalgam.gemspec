@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'globalize3'
   s.add_dependency 'nokogiri', '~> 1.3'
 
-  s.add_dependency 'jquery-rails', '2.0.2'
+  s.add_dependency 'jquery-rails'
 
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "capybara"

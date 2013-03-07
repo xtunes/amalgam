@@ -1,4 +1,4 @@
-#= require jquery
+#= require amalgam/mercury/jquery-1.7
 #= require amalgam/mercury
 #= require amalgam/mercury/regions/image
 #= require amalgam/mercury/image_uploader

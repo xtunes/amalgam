@@ -7,7 +7,7 @@ gem 'mercury-rails', '~> 0.9.0'
 gem 'nested_set', "~> 1.7.0"
 
 #Dependencies for the dummy app
-gem 'jquery-rails', '2.0.2'
+gem 'jquery-rails', '~>2.2'
 gem 'sqlite3'
 gem 'haml'
 gem 'modernizr-rails'
