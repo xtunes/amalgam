@@ -1,10 +1,9 @@
 class Page < ActiveRecord::Base
-	include Amalgam::Models::Page
+	include Amalgam::Types::Page
 
-	attr_accessible :parent_id ,:prev_id ,:next_id ,:title ,:slug , :body
-  # attr_accessible :parent_id, :prev_id ,:next_id ,:title ,:slug , :as => :admin
-  # attr_accessible :body, :as => :edit
-  translates :body, :title
-  store :body
-  translation_class.send :store, :body
+  def template_keys
+    keys = []
+    keys << self.slug
+    keys
+  end
 end
