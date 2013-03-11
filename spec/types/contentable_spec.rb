@@ -48,6 +48,7 @@ describe Amalgam::Types::Contentable do
   end
 
   it "content should support i18n" do
+    I18n.locale = I18n.default_locale
     @con_page2.content = {}
     @con_page2.content['test'] = 'test'
     @con_page2.save
