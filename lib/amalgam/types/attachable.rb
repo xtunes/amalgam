@@ -5,7 +5,8 @@ module Amalgam
       extend ActiveSupport::Concern
 
       included do
-        attr_accessible :attachments_attributes
+        attr_accessible :attachments_attributes, :as => Amalgam.admin_access_attr_as
+        attr_accessible :attachments_attributes, :as => Amalgam.edit_access_attr_as
         has_many :attachments, :as => :attachable, :class_name => Amalgam.attachment_class_name, :extend => ::Amalgam::Models::Attachable::AttachmentExtension
         accepts_nested_attributes_for :attachments,
           :allow_destroy => true,

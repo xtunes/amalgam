@@ -7,7 +7,7 @@ module Amalgam
       include Amalgam::Types::Contentable
 
       included do
-        attr_accessible :title, :identity, :redirect
+        attr_accessible :identity, :redirect, :as => Amalgam.admin_access_attr_as
         auto_generate_slug_with :title
         has_content
 

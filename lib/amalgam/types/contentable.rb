@@ -12,7 +12,6 @@ module Amalgam
           options = fields_and_options.extract_options!
           fields_and_options = [:content] unless fields_and_options.present?
           self.content_fields = fields_and_options
-          attr_accessible *fields_and_options
           if Amalgam.i18n
             translates *fields_and_options
             store *fields_and_options
@@ -20,6 +19,9 @@ module Amalgam
           else
             store *fields_and_options
           end
+          attrs = fields_and_options.clone
+          attrs << {:as => Amalgam.edit_access_attr_as}
+          attr_accessible *attrs
         end
       end
     end

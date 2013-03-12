@@ -7,7 +7,7 @@ module Amalgam
 	      instance = record[:class].constantize.find(record[:id])
 	      # merge only changed field of model
 	      attrs = instance.attributes.slice(*record[:attributes].keys).deep_merge(record[:attributes])
-	      instance.update_attributes(attrs)
+	      instance.update_attributes(attrs, :as => Amalgam.edit_access_attr_as)
 	    end
 	  end
 

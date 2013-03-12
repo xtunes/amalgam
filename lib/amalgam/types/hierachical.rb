@@ -10,7 +10,7 @@ module Amalgam
 
         acts_as_nested_set :dependent => :destroy
 
-        attr_accessible :lft, :rgt, :parent_id, :left_id,:right_id
+        attr_accessible :parent_id, :left_id,:right_id, :as => Amalgam.admin_access_attr_as
 
         attr_accessor :left_id,:right_id
 

@@ -1,20 +1,22 @@
 require 'spec_helper'
 
 class TestPage < ActiveRecord::Base
+  include Amalgam::Types::Contentable
   def self.columns() @columns ||= []; end
 
   def self.column(name, sql_type = nil, default = nil, null = true)
     columns << ActiveRecord::ConnectionAdapters::Column.new(name.to_s, default, sql_type.to_s, null)
   end
 
-  store :body
+  has_content :body
 
   column :title, :string
   column :body, :string
   column :subtitle, :string
   column :protected_field, :string
 
-  attr_accessible :title,:body,:subtitle
+  attr_accessible :title,:subtitle, :as => :edit
+  attr_accessible :title,:subtitle
 end
 
 describe Amalgam::ContentPersistence do

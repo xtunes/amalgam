@@ -18,6 +18,12 @@ module Amalgam
   mattr_accessor :type_whitelist
   @@type_whitelist = []
 
+  mattr_accessor :admin_access_attr_as
+  @@admin_access_attr_as = :admin
+
+  mattr_accessor :edit_access_attr_as
+  @@edit_access_attr_as = :edit
+
   mattr_accessor :controllers
   @@controllers = []
 
