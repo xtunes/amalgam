@@ -12,8 +12,8 @@ module Amalgam
         has_content
 
         validates :title, :presence => true
-        validates_uniqueness_of :identity, :allow_nil => true
-        validates :identity, :format => { :with => /\A[0-9a-z\-_]+\z/}, :allow_nil => true
+        validates_uniqueness_of :identity, :allow_nil => true, :allow_blank => true
+        validates :identity, :format => { :with => /\A[0-9a-z\-_]+\z/}, :allow_nil => true, :allow_blank => true
       end
 
       def unique_name
