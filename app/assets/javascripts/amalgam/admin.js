@@ -11,7 +11,7 @@
 //= require twitter/bootstrap/alert
 //= require twitter/bootstrap/tooltip
 //= require twitter/bootstrap/button
-//= require jquery.jstree
+//= require amalgam/datepicker
 //= require amalgam/extra
 //= require_tree ./admin
 

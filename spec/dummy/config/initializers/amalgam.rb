@@ -4,8 +4,8 @@ Amalgam.setup do |config|
 	config.models_with_templates = ['pages','posts']
   config.admin_routes do
     namespace :admin do
-      resources :pages, :except => [:show]
-      resources :posts, :except => [:show]
+      amalgam_resources :pages, :except => [:show]
+      amalgam_resources :posts
     end
     authentication_for AdminUser, :redirect_after_siginout => :root
   end

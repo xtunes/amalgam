@@ -19,10 +19,12 @@ gem 'mini_magick'
 gem 'globalize3'
 gem 'stringex'
 gem 'database_cleaner'
+gem 'kaminari'
 #gem 'carrierwave', "~> 0.6.2"
 #gem 'mini_magick'
 gem 'rack-cache', :require => 'rack/cache'
 gem 'dragonfly', '~>0.9.14'
+gem 'anjlab-widgets'
 
 gem "quiet_assets", ">= 1.0.1", :group => :development
 gem "better_errors", ">= 0.3.2", :group => :development

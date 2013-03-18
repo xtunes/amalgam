@@ -1,0 +1,8 @@
+= form_for @resource, :url => admin_update_resource_path(params[:resources]) ,:html => {:class => 'basic'}, :builder => Amalgam::Admin::AttrInputFormBuilder do |f|
+  %legend
+  - @resource.class.admin_attrs.each do |attr|
+    = f.label attr
+    = f.attr_input attr
+  %p
+    = f.submit :class => "btn-primary btn"
+    = link_to t("admin.a.back"), @back_path, :class => "btn"

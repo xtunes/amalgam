@@ -1,0 +1,12 @@
+%table.table.table-striped.table-bordered
+  %thaed
+    %tr
+      %th title
+      %th
+  %tbody
+    - @collection.each do |resource|
+      %tr
+        %td= resource.title
+        %td.right
+          = link_to t('admin.actions.edit'), admin_edit_resource_path(params[:resources],resource.id)
+          = link_to t('admin.actions.destroy'), admin_resource_path(params[:resources],resource.id), :confirm => 'alert', :method => :delete

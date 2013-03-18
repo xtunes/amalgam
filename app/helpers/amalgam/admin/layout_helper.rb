@@ -13,7 +13,7 @@ module Amalgam
     end
 
     def drop_down(title, path='#', options={}, &block)
-      content_tag :li, :class => "dropdown #{is_active?(path,options)}" do
+      content_tag :li, :class => "dropdown #{is_active?(title,path,options)}" do
         drop_down_link(title,path) + drop_down_list(&block)
       end
     end
@@ -36,9 +36,8 @@ module Amalgam
           links += drop_down name.classify.constantize.model_name.human,'#', :controller => "amalgam/admin/#{name}" do
             dropdown = ""
             actions.each do |action|
-              dropdown += dropdown_item(I18n.t("amalgam.admin.actions.#{action}"), amalgam.send("admin_#{name}_path")) if action == 'index' || action == :index
-              dropdown += dropdown_item(I18n.t('amalgam.admin.actions.new'), amalgam.send("new_admin_#{name.singularize}_path")) if action == 'new' || action == :new
-              dropdown += dropdown_item(I18n.t("amalgam.admin.actions.#{action}"), amalgam.send("#{action}_admin_#{name}_path")) if action != 'index' && action != :index && action != 'new' && action != :new
+              dropdown += dropdown_item(I18n.t("amalgam.admin.actions.#{action}"), amalgam.admin_resources_path(:resources => name)) if action == 'index' || action == :index
+              dropdown += dropdown_item(I18n.t('amalgam.admin.actions.new'), amalgam.admin_new_resource_path(:resources => name)) if action == 'new' || action == :new
             end
             dropdown.html_safe
           end
@@ -52,8 +51,11 @@ module Amalgam
 
     private
 
-    def is_active?(path,options)
-       controllers = options[:controller].is_a?(Array) ? options[:controller] : [options[:controller]].compact
+    def is_active?(title,path,options)
+      if params[:resources]
+        return 'active' if params[:resources].to_s == title.to_s.pluralize
+      end
+      controllers = options[:controller].is_a?(Array) ? options[:controller] : [options[:controller]].compact
       "active" if current_page?(path) || controller && controllers.include?(params[:controller])
     end
 

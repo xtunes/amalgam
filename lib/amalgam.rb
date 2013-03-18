@@ -69,7 +69,6 @@ module Amalgam
 
   protected
   def self.require_all!
-    require 'page_routes'
     require 'amalgam/types/base'
     require 'amalgam/types/seo'
     require 'amalgam/types/hierachical'
@@ -78,6 +77,8 @@ module Amalgam
     require 'amalgam/types/sortable'
     require 'amalgam/types/attachment'
     require 'amalgam/types/attachable'
+    require 'amalgam/types/controllers/actions'
+    require 'amalgam/types/controllers/filters'
     require 'amalgam/uploaders/attachment_uploader'
     require 'amalgam/validators/slug'
     require 'amalgam/utils/delegate_array'

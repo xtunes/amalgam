@@ -1,4 +1,3 @@
-require 'page_routes'
 Rails.application.routes.draw do
 
   mount Mercury::Engine => "/"

@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'kaminari'
   s.add_dependency 'globalize3'
   s.add_dependency 'nokogiri', '~> 1.3'
+  s.add_dependency 'anjlab-widgets'
 
   s.add_dependency 'jquery-rails'
 

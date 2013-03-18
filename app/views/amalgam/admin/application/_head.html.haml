@@ -1,0 +1,5 @@
+- if @resource_class && @resource_class.included_modules.include?(Amalgam::Types::Hierachical)
+  :javascript
+    var UNITS = jQuery.parseJSON('#{j(@resource_class.tree_json)}')
+    var NODE_NAME = '#{@resource_class.node_name}'
+  = javascript_include_tag "amalgam/js-tree"

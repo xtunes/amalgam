@@ -2,27 +2,32 @@ Amalgam::Engine.routes.draw do
 
 	namespace :admin do
     resources :groups
-    root :to => 'pages#index'
+    root :to => 'resources#index', :defaults => { :resources => "pages" }
     post 'editor/upload_image' => 'editor#upload_image'
     put 'editor' => 'editor#update' , :as => 'editor'
 	end
 
-  def match(path, *rest)
-    path[:menu_item] ||= false if path.is_a? Hash
-    default_actions = [:new,:index]
-    if parent_resource
-      Amalgam.admin_menus[@scope[:controller]] ||= parent_resource.actions & default_actions
-      Amalgam.admin_menus[@scope[:controller]] << (rest.first[:as] || path) if rest.present? && rest.first.delete(:menu_item)
-    else
-      if path.is_a?(Hash) && path.delete(:menu_item)
-        name = path[:as] ? path[:as] : path.keys.first.split('/').last
-        if name.present?
-          Amalgam.admin_menus[name] = []
-          Amalgam.admin_menus[name] << {:controller => path.first[1].split("#").first}
-        end
-      end
+  def amalgam_resources(*resources, &block)
+    options = resources.extract_options!.dup
+    options[:only] ||= ['index','new','edit','create','update','destroy']
+    options[:except] ||= []
+    options[:only] = options[:only].map!{|x| x.to_s } - options[:except].map!{|x| x.to_s }
+    resources.map!{|x| x.to_s}
+    resources.each do |resource|
+      Amalgam.admin_menus[resource.to_s] = options[:only]
     end
-    super(path,*rest)
+
+    scope '/:resources', :constraints => lambda{|req| resources.include?(req.path_parameters[:resources].to_s) } do
+
+      get '' => 'resources#index', :as => :resources if options[:only].include?('index')
+      get 'new' => 'resources#new', :as => :new_resource if options[:only].include?('new')
+      get '/:id/edit' => 'resources#edit', :as => :edit_resource if options[:only].include?('edit')
+      post '/create' => 'resources#create', :as => :create_resource if options[:only].include?('create')
+      put '/:id' => 'resources#update', :as => :update_resource if options[:only].include?('update')
+      delete '/:id' => 'resources#destroy', :as => :resource if options[:only].include?('destroy')
+    end
+
+    self
   end
 
   instance_eval &Amalgam.routes
