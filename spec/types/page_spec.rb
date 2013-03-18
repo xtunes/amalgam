@@ -26,7 +26,7 @@ describe Amalgam::Types::Page do
   end
 
   before do
-    @page_page = PagePage.create(:title => 'this is a test')
+    @page_page = PagePage.create({:title => 'this is a test'}, :as => Amalgam.admin_access_attr_as)
   end
 
   it "在没有手动设置identity时候,unique_name应当返回slug" do

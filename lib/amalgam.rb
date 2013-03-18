@@ -70,6 +70,7 @@ module Amalgam
   protected
   def self.require_all!
     require 'page_routes'
+    require 'amalgam/types/base'
     require 'amalgam/types/seo'
     require 'amalgam/types/hierachical'
     require 'amalgam/types/contentable'

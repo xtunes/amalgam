@@ -2,6 +2,7 @@ module Amalgam
   module Types
     module Contentable
       extend ActiveSupport::Concern
+      include Amalgam::Types::Base
 
       included do
         cattr_accessor :content_fields

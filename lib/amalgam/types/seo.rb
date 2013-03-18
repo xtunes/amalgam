@@ -2,6 +2,7 @@ module Amalgam
   module Types
     module Seo
       extend ActiveSupport::Concern
+      include Amalgam::Types::Base
 
       included do
         cattr_accessor :slug_field, :source_field
@@ -9,6 +10,7 @@ module Amalgam
 
       module ClassMethods
         def auto_generate_slug_with(field=:title,options={})
+          self.node_name = field if self.included_modules.include?(Amalgam::Types::Hierachical)
           options[:slug_field] ||= :slug
           self.slug_field = options[:slug_field]
           self.source_field = field

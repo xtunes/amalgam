@@ -60,6 +60,7 @@ describe Amalgam::Types::Hierachical do
   end
 
   it "如果有path字段，path应该将层级串联起来" do
+    HierachicalPage.node_name.to_s.should eq('title')
     @page3.parent.id.should eq(@page1.id)
     @page3_seo.path.should eq('test1/test3')
   end

@@ -2,6 +2,7 @@ module Amalgam
   module Types
     module Hierachical
       extend ActiveSupport::Concern
+      include Amalgam::Types::Base
       class NotWorkWithSortableError < StandardError; end
 
       included do
@@ -13,6 +14,8 @@ module Amalgam
         attr_accessible :parent_id, :left_id,:right_id, :as => Amalgam.admin_access_attr_as
 
         attr_accessor :left_id,:right_id
+        cattr_accessor :node_name
+        @@node_name = 'title'
 
         default_scope order('lft ASC')
 
@@ -25,6 +28,26 @@ module Amalgam
         def assert_not_work_with_sortable
           raise ::Amalgam::Types::Hierachical::NotWorkWithSortableError.new("this module can not work with sortable type") if included_modules.include?(Amalgam::Types::Sortable)
         end
+        def tree_json(fields=[])
+          fields = self.admin_attrs if self.respond_to?(:admin_attrs) && fields.empty?
+          fields.map!{|x| x.to_sym} << self.node_name.to_sym
+          fields.uniq!
+          self.includes(:children).roots.collect{|p| p.to_nodes(fields)}.to_json
+        end
+      end
+
+      def to_nodes(fields=[])
+        hash = {"metadata" => {},"data" => {}, "attr" => {}}
+        hash['attr']['id'] = "unit-#{self.id}"
+        hash['attr']['resources'] = self.class.to_s.tableize
+        hash['attr']['model'] = self.class.to_s.downcase
+        hash['metadata']['id'] = self.id
+        hash['attr']['href'] = "/admin/#{self.class.to_s.tableize}/#{self.id}/edit"
+        fields.each do |field|
+          hash['data'][field.to_s] = self.send(field)
+        end
+        hash["children"] = self.children.map { |c| c.to_nodes(fields) } if self.children.present?
+        hash
       end
 
       protected

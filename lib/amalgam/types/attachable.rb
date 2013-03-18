@@ -3,6 +3,7 @@ module Amalgam
   module Types
     module Attachable
       extend ActiveSupport::Concern
+      include Amalgam::Types::Base
 
       included do
         attr_accessible :attachments_attributes, :as => Amalgam.admin_access_attr_as

@@ -2,6 +2,7 @@ module Amalgam
   module Types
     module Sortable
       extend ActiveSupport::Concern
+      include Amalgam::Types::Base
       class InvalidSortableList < StandardError; end
       class NotWorkWithHierachicalError < StandardError; end
 
