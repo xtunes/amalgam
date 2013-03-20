@@ -109,8 +109,14 @@ $(function(){
     });
   });
 
-  $('.search input').on("input", function(event){
+  $('.search input#content').on("keydown",function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+  $('.search input#content').on("input", function(event){
     $(".tree-container").jstree("clear_search");
-    $(".tree-container").jstree("search", $('.search input')[0].value);
+    $(".tree-container").jstree("search", $('.search input#content')[0].value);
   });
 });

@@ -28,6 +28,18 @@ module Amalgam
             return nil
           end
         end
+
+        def search(content,page = 1)
+          list = []
+          self.columns.select{|x|x.type == :string || x.type == :text}.each do |column|
+            list << "#{column.name} like '%#{content}%'"
+          end
+          if list.present?
+            return self.where(list.join(' or ')).page(page)
+          else
+            return self.page(page)
+          end
+        end
       end
     end
   end

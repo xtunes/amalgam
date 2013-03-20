@@ -13,6 +13,10 @@ module Amalgam
           respond_with(collection)
         end
 
+        def search
+          @collection = @resource_class.search(params[:content],params[:page])
+        end
+
         def show
           respond_with(resource)
         end

@@ -15,6 +15,9 @@
         - if editor
           %li.edit
             %a{:href => '#'}= t('amalgam.admin.actions.edit')
+        - elsif params[:resources]
+          = form_tag(admin_search_resources_url(params[:resources]),:method => 'get', :class => "navbar-search pull-left search") do
+            = text_field_tag 'content', nil, :class => 'span2 search-query', :placeholder => 'Search'
         %li.divider-vertical
         - if current_admin != true
           %li.dropdown
