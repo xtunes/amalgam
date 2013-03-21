@@ -1,5 +1,10 @@
 module Amalgam
   class Admin::EditorController < Admin::BaseController
+    layout false
+
+    def edit
+      render :text => '', :layout => 'amalgam/admin/editor'
+    end
 
     def update
       ContentPersistence.save(params[:content]) if params[:content]

@@ -6,3 +6,4 @@
   %p
     = f.submit :class => "btn-primary btn"
     = link_to t("admin.a.back"), @back_path, :class => "btn"
+    = link_to t("admin.a.edit"), amalgam.mercury_editor_path("#{@resource.class.to_s.tableize}/#{@resource.class.respond_to?(:slug_field) ? @resource.send(@resource.class.slug_field) : @resource.to_param}"), :class => "btn"

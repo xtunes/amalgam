@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
   include Amalgam::TemplateFinder
-  include Amalgam::Editable
 
   def show
     @page = Page.where(:slug => params[:id]).first

@@ -92,7 +92,6 @@ module Amalgam
     require 'amalgam/models/page'
     require 'amalgam/models/image'
     require 'amalgam/template_finder'
-    require 'amalgam/editable'
     require 'amalgam/authentication/controllers/helpers'
     require 'amalgam/authentication/routes'
     require 'amalgam/authentication/controllers/authentication_methods'

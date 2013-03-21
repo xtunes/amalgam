@@ -32,4 +32,7 @@ Amalgam::Engine.routes.draw do
   end
 
   instance_eval &Amalgam.routes
+
+  match '/editor(/*requested_uri)' => "admin/editor#edit", :as => :mercury_editor
+  mount Mercury::Engine => "/"
 end
