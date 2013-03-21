@@ -99,7 +99,7 @@ $ ->
     $($(".mercury-panel .mercury-panel-pane")[0]).css("visibility","visible")
     $('.mercury-panel-close').css("opacity", '1')
     @editor.iframe.contents().find("button.properties").click () ->
-      getform($(this).data().url)
+      loadform($('iframe').contents().find('#property-form-'+$(this).data().id).html())
     # TODO 使加载的页面
     # $(@editor.iframe.get(0).contentWindow.document).on 'click','a', (e)->
     #   $target = $(e.target)
@@ -114,7 +114,7 @@ $ ->
   $('.mercury-editproperties-button').click (event,state) ->
     if state != "button"
       if $('.mercury-editproperties-button.pressed').length
-        $(".mercury-panel .mercury-panel-pane .content").html($('#mercury_iframe').contents().find('script#property-form').html())
+        $(".mercury-panel .mercury-panel-pane .content").html($('#mercury_iframe').contents().find('script.default').html())
 
   $(".mercury-preview-button").click (event,state) ->
     buttons = $('#mercury_iframe').contents().find("button.properties")
@@ -122,18 +122,6 @@ $ ->
       buttons.hide()
     else
       buttons.show()
-
-  getform = (src) ->
-    $.ajax({
-      url: src,
-      type: "get",
-      dataType: "html",
-      success: (data) ->
-        reg = /<script id=\"property-form\" type=\"text\/html\">([\s\S]*?)<\/script>/i
-        result = reg.exec(data)
-        if result != null && result.length > 1
-          loadform(result[1])
-      })
 
   loadform = (content=null) ->
     if $('.mercury-editproperties-button.pressed').length == 0

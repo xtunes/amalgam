@@ -36,6 +36,7 @@ en:
     attachment_list: 'Attachment List'
     attachment: 'Attachment'
     description: 'Description'
+    properties_edit: 'Properties'
     name: 'Name'
     locales:
       zh-CN: '中文(简体)'

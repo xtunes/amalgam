@@ -36,6 +36,7 @@ zh-CN:
     attachment_list: '附件列表'
     attachment: '附件'
     description: '描述'
+    properties_edit: '编辑属性'
     name: '名称'
     locales:
       zh-CN: '中文(简体)'

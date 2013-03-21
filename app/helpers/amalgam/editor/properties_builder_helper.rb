@@ -17,7 +17,7 @@ module Amalgam
         concat('<hr/>'.html_safe)
         concat(f.submit(:class => 'btn btn-primary'))
       end
-      content_tag(:script, form , :type => "text/html" ,:id => 'property-form')
+      content_tag(:script, form , :type => "text/html" ,:id => "property-form-#{record.class.to_s.downcase}-#{record.id}", :class => params[:type] || 'default' )
     end
 
     class PropertyFormBuilder < ActionView::Helpers::FormBuilder

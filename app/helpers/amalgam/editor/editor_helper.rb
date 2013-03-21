@@ -35,14 +35,21 @@ module Amalgam
       image_tag(image_url.to_s.html_safe,options)
     end
 
-    def properties_button(model_or_url,title=nil)
+    def properties_button(record,title=nil,&block)
       return unless can_edit?
-      title ||= I18n.t('properties_edit')
-      url = case url
-             when String then "#{model_or_url}?mercury_frame=true"
-             else "#{url_for(model_or_url)}?mercury_frame=true"
-            end
-      button_tag(title, :type=>'button', :data => {:url => url }, :class => 'properties', :style => "display:none")
+      title ||= I18n.t('amalgam.properties_edit')
+      content = button_tag(title, :type=>'button', :data => {:id => "#{record.class.to_s.downcase}-#{record.id}" }, :class => 'properties', :style => "display:none")
+      if block_given?
+        content += yield(record)
+      else
+        content += properties_for(record, :type => 'button') do |p|
+          columns = record.class.attr_accessible[:edit].to_a
+          record.class.columns.select{|x| columns.include?(x.name) && x.type != :text}.each do |column|
+            concat(p.string(column.name)) if column.type == :integer || column.type == :string
+          end
+        end
+      end
+      content
     end
 
     private
