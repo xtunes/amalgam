@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'anjlab-widgets'
 
   s.add_dependency 'jquery-rails'
+  s.add_dependency 'pjax_rails'
 
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "capybara"

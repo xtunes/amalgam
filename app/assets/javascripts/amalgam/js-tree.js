@@ -7,13 +7,8 @@ $(function(){
     "json_data" : {
       "data" : UNITS
     }
-  }).bind("hover_node.jstree", function(e, data){
-   var node = data.rslt.obj;
-   $("input.hoverd").remove();
-   node.find('a').first().append('<input type=button class="hoverd" style="font-size:14px;margin-left:3px;line-height: 14px;" value="edit" onClick="window.location=\''+node.attr('href')+'\'">');
-   setTimeout(function(){
-     $("#"+node.attr('id')+" input.hoverd").remove();
-   },10000);
+  }).bind("click.jstree", function (event) {
+    $.pjax({url: $(event.target).parent().attr('href'), container: '.data-pjax-container'});
   }).bind("remove.jstree", function (e, data) {
     var node = data.rslt.obj;
     if(node.attr('resources')){

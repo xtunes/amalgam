@@ -7,6 +7,7 @@
 //= require jquery.ui.nestedSortable
 //= require jquery.scrollto
 //= require jquery_ujs
+//= require jquery.pjax
 //= require twitter/bootstrap/dropdown
 //= require twitter/bootstrap/alert
 //= require twitter/bootstrap/tooltip

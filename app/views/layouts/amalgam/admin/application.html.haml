@@ -16,11 +16,11 @@
         - if @resource_class && @resource_class.included_modules.include?(Amalgam::Types::Hierachical)
           .span5.sidebar
             .tree-container
-          .span7.main
+          .span7.main.data-pjax-container
             %br
             = yield
         - else
-          .span12.main
-            .span8
+          .span12
+            .span8.main.data-pjax-container
               = yield
     .footer

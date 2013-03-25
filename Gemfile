@@ -25,6 +25,7 @@ gem 'kaminari'
 gem 'rack-cache', :require => 'rack/cache'
 gem 'dragonfly', '~>0.9.14'
 gem 'anjlab-widgets'
+gem 'pjax_rails'
 
 gem "quiet_assets", ">= 1.0.1", :group => :development
 gem "better_errors", ">= 0.3.2", :group => :development

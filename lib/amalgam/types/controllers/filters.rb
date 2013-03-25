@@ -9,6 +9,7 @@ module Amalgam
           before_filter :find_model_class
           before_filter :get_resource, :except => [:index]
           before_filter :get_collection, :only => [:index]
+          layout :resources_layout
         end
 
         protected
@@ -52,6 +53,11 @@ module Amalgam
           else
             @collection = @resource_class.page(params[:page])
           end
+        end
+
+        def resources_layout
+          Rails.logger.info request.headers
+          layout = request.headers['X-PJAX'] ? false : "amalgam/admin/application"
         end
       end
     end
