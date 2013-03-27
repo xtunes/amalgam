@@ -3,6 +3,11 @@
   - @resource.class.admin_attrs.each do |attr|
     = f.label attr
     = f.attr_input attr
+  - if @resource.class.taggable?
+    - @resource.class.tag_types.each do |type|
+      = f.label "#{type.to_s.singularize}_list"
+      = f.tag_input "#{type.to_s.singularize}_list"
+  %br
   %p
     = f.submit :class => "btn-primary btn"
     = link_to t("admin.a.back"), @back_path, :class => "btn"

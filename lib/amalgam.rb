@@ -79,6 +79,7 @@ module Amalgam
     require 'amalgam/types/attachable'
     require 'amalgam/types/controllers/actions'
     require 'amalgam/types/controllers/filters'
+    require 'amalgam/types/taggable'
     require 'amalgam/uploaders/attachment_uploader'
     require 'amalgam/validators/slug'
     require 'amalgam/utils/delegate_array'

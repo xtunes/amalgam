@@ -8,6 +8,7 @@
 //= require jquery.scrollto
 //= require jquery_ujs
 //= require jquery.pjax
+//= require jquery.tagsinput.js
 //= require twitter/bootstrap/dropdown
 //= require twitter/bootstrap/alert
 //= require twitter/bootstrap/tooltip
