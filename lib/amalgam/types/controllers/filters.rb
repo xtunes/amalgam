@@ -40,11 +40,7 @@ module Amalgam
           else
             @resource ||= @resource_class.new(params[model_name], :as => Amalgam.admin_access_attr_as)
           end
-          if @resource_class.included_modules.include?(Amalgam::Types::Seo)
-            @resource.define_singleton_method(:to_param) do
-              self.id
-            end
-          end
+          @resource = Amalgam::Admin::ResourceDecorator.decorate(@resource)
         end
 
         def get_collection
@@ -53,10 +49,10 @@ module Amalgam
           else
             @collection = @resource_class.page(params[:page])
           end
+          @collection = Amalgam::Admin::ResourceDecorator.decorate_collection(@collection)
         end
 
         def resources_layout
-          Rails.logger.info request.headers
           layout = request.headers['X-PJAX'] ? false : "amalgam/admin/application"
         end
       end

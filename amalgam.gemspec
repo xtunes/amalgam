@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'nokogiri', '~> 1.3'
   s.add_dependency 'anjlab-widgets'
   s.add_dependency 'acts-as-taggable-on', '~> 2.3.1'
+  s.add_dependency 'draper', '~> 1.0'
 
   s.add_dependency 'jquery-rails'
   s.add_dependency 'pjax_rails'

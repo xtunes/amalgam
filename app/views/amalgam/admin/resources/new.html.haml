@@ -1,6 +1,6 @@
-= form_for @resource, :url => admin_create_resource_path(params[:resources]) ,:html => {:class => 'basic'}, :builder => Amalgam::Admin::AttrInputFormBuilder do |f|
+= form_for @resource.source, :url => admin_create_resource_path(params[:resources]) ,:html => {:class => 'basic'}, :builder => Amalgam::Admin::AttrInputFormBuilder do |f|
   %legend
-  - @resource.class.admin_attrs.each do |attr|
+  - @resource.source.class.admin_attrs.each do |attr|
     = f.label attr
     = f.attr_input attr
   %p
