@@ -20,6 +20,10 @@ module Amalgam
         model.attachment_settings[:store_dir]
       end
 
+      version :thumb , :if => :image? do
+        process :resize_to_fill => [32, 32]
+      end
+
       def cache_dir
         model.attachment_settings[:temp_dir]
       end
@@ -33,6 +37,11 @@ module Amalgam
       def secure_token(length = 16)
         var = :"@#{mounted_as}_secure_token"
         model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.hex(length/2))
+      end
+
+      # see https://github.com/jnicklas/carrierwave/wiki/How-to%3A-Do-conditional-processing
+      def image?(new_file)
+        (new_file.content_type || model.content_type || []).include? 'image'
       end
     end
   end

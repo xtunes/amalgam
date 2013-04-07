@@ -36,15 +36,17 @@ module Amalgam
         obj = object.attachments[name]
         @buffer = label("#{I18n.t('amalgam.attachment')} : #{name}",options.delete(:lable_options)||{:style => 'font-weight:bold;'})
         @buffer.concat '<div style = "border-bottom: solid #cccccc 1px;padding:5px; margin-bottom:3px;">'.html_safe
-        @buffer.concat label(I18n.t("amalgam.description")+':',:style => "display:inline;margin-right:35px;")
-        @buffer.concat attachment_field(:text_field, :description, obj.try(:description), options)
-        @buffer.concat '<br>'.html_safe
+        obj.attachment_settings[:store_accessors].each do |accessor|
+          @buffer.concat label(I18n.t("activerecord.attributes.#{obj.first.class.to_s.underscore}.#{accessor}")+':',:style => "display:inline;margin-right:35px;")
+          @buffer.concat attachment_field(:text_field, accessor, obj.send(accessor), options)
+          @buffer.concat '<br>'.html_safe
+        end
         @buffer.concat label(I18n.t("amalgam.file_upload")+':',:style => "display:inline;margin-right:10px;")
         @buffer.concat attachment_field(:file_field, :file)
         @buffer.concat '<br>'.html_safe
         if obj.try(:content_type).to_s =~ /image/
           @buffer.concat label(I18n.t("amalgam.file_pre")+':',:style => "display:inline;margin-right:10px;")
-          @buffer.concat @template.image_tag(obj.file.thumb.url)
+          @buffer.concat @template.image_tag("/attachments/#{obj.id}?thumb=true")
         else
           @buffer.concat "<a href= '#{obj.file.try(:url)}'>#{I18n.t("amalgam.file_download")}</a>".html_safe if obj
         end
@@ -75,18 +77,20 @@ module Amalgam
 
       def attachment_item(attachment)
         index_create
-        @template.content_tag(:div,options) do
+        @template.content_tag(:div) do
           buffer = '<div style = "border-bottom: solid #cccccc 1px;padding:5px; margin-bottom:3px;">'.html_safe
-          buffer.concat label(I18n.t("amalgam.description")+':',:style => "display:inline;margin-right:35px;")
-          buffer.concat attachment_field(:text_field, :description, attachment.try(:description), :class => 'input-xlarge')
-          buffer.concat '<br>'.html_safe
+          attachment.attachment_settings[:store_accessors].each do |accessor|
+            buffer.concat label(I18n.t("activerecord.attributes.#{attachment.class.to_s.underscore}.#{accessor}")+':',:style => "display:inline;margin-right:35px;")
+            buffer.concat attachment_field(:text_field, accessor, attachment.send(accessor), {})
+            buffer.concat '<br>'.html_safe
+          end
           buffer.concat label(I18n.t("amalgam.file_upload")+':',:style => "display:inline;margin-right:10px;")
           buffer.concat attachment_field(:file_field, :file)
           buffer.concat destroy_field(attachment)
           buffer.concat '<br>'.html_safe
           if attachment.try(:content_type).to_s =~ /image/
             buffer.concat label(I18n.t("amalgam.file_pre")+':',:style => "display:inline;margin-right:10px;")
-            buffer.concat @template.image_tag(attachment.file.thumb.url)
+            buffer.concat @template.image_tag("/attachments/#{attachment.id}?thumb=true")
           else
             buffer.concat "<a href= '#{attachment.file.try(:url)}'>#{I18n.t("amalgam.file_download")}</a>".html_safe if attachment
           end
@@ -115,8 +119,8 @@ module Amalgam
       end
 
       def attachment_field(type,field,value = nil,options={})
-        options[:name] ||= name_for_attribute('attachments_attributes') + "[#{@index}][#{field.to_s}]"
-        options[:value] ||= value
+        options[:name] = name_for_attribute('attachments_attributes') + "[#{@index}][#{field.to_s}]"
+        options[:value] = value
         self.send(type,"attachment.#{field}",options)
       end
 

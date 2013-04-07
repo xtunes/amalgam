@@ -1,20 +1,20 @@
 module Amalgam
   module AttachmentsHelper
-    def link_to_attachment(attachment,url=nil,version=nil,options={},&block)
-      return unless attachment
+    def link_to_attachment(attachment,options={},&block)
+      options[:if] = true if options[:if].nil?
+      return content_tag :div, &block unless attachment
+      content = options[:content]
       if attachment.content_type.include?("image")
-        file = version.present? ? attachment.file.send(version) : attachment.file
-        content = image_tag(file)
+        content ||= image_tag amalgam.attachment_url(attachment)
       else
-        content = attachment.original_filename
+        content ||= attachment.original_filename
       end
-      link = case url
-             when nil then attachment.file.to_s
-             when Symbol then attachment.send(url)
-             when String then url
+      link = case options[:url]
+             when nil then options[:download] ? amalgam.attachment_download_url(attachment) : amalgam.attachment_url(attachment)
+             when Symbol then attachment.send(options[:url])
+             when String then options[:url]
              end
-
-      link_to_if link.present? , content ,link
+      link_to_if options[:if] , content ,link, &block
     end
   end
 end

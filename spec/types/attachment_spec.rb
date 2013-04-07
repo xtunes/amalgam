@@ -27,6 +27,8 @@ describe Amalgam::Types::Attachment do
     class Attachment < ActiveRecord::Base
       include Amalgam::Types::Attachment
       acts_as_attachment :allow_types => /jpg|txt/
+      include Amalgam::Types::Sortable
+      sortable :scope => [:attachable_id, :attachable_type]
     end
 
     class AttachmentPage < ActiveRecord::Base

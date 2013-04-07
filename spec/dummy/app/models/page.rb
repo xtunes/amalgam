@@ -1,5 +1,6 @@
 class Page < ActiveRecord::Base
 	include Amalgam::Types::Page
+  include Amalgam::Types::Attachable
   include Amalgam::Types::Taggable
   cattr_accessor :admin_attrs
   attr_accessible :created_at, :as => :admin

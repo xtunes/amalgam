@@ -23,17 +23,16 @@ ActiveRecord::Schema.define(:version => 20130325063148) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
-    t.string   "attachable_type",   :default => "Page"
+    t.string   "attachable_type"
     t.string   "name"
     t.string   "file"
     t.string   "content_type"
     t.string   "original_filename"
-    t.string   "description"
-    t.string   "secure_token"
+    t.text     "meta"
     t.integer  "file_size"
     t.integer  "position"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "base_groups", :force => true do |t|

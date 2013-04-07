@@ -57,10 +57,20 @@ $ ->
     event.preventDefault
     target = $(event.target)
     type = target.data().type
-    $('.attachment_list_' + target.attr('name')).append("<label for='page_描述'>描述</label><div><input id='"+type+"_attachment.description' name='[content]["+type+"s/" + target.data().modelId + ".attachments_attributes][value][" + attachments_count + "][description]' size='30' type='text'><br>
-<input id='"+type+"_attachment.file' name='[content]["+type+"s/" + target.data().modelId + ".attachments_attributes][value][" + attachments_count + "][file]' type='file'>
-<input id='"+type+"_attachment.name' name='[content]["+type+"s/"+ target.data().modelId + ".attachments_attributes][value][" + attachments_count + "][name]' type='hidden' value='" + $(event.target).attr('name') + "'></div>")
-    attachments_count++
+    attrs = null
+    $.ajax {
+      url: '/attachments/attributes.json'
+      dataType: 'json'
+      beforeSend: (xhr)->
+        xhr.setRequestHeader('Accept', 'text/javascript');
+      success: (data)->
+        new_attachment = '<div style="border-bottom: solid #cccccc 1px;padding:5px; margin-bottom:3px;">'
+        for acc of data
+          new_attachment = new_attachment + '<label for="'+type+ '_' +data[acc]+':" style="display:inline;margin-right:35px;">'+data[acc]+':</label><input id="'+type+'_attachment.'+acc+'"   name="[content]['+type+'s/'+target.data().modelId+'.attachments_attributes][value]['+attachments_count+']['+acc+']" size="30" type="text" value=""><br>'
+        new_attachment = new_attachment + "<label for='"+type+"_文件上传:' style='display:inline;margin-right:10px;'>文件上传:</label><input id='"+type+"_attachment.file' name='[content]["+type+"s/" + target.data().modelId + ".attachments_attributes][value][" + attachments_count + "][file]' type='file'><input id='"+type+"_attachment.name' name='[content]["+type+"s/"+ target.data().modelId + ".attachments_attributes][value][" + attachments_count + "][name]' type='hidden' value='" + $(event.target).attr('name') + "'></div>"
+        $('.attachment_list_' + target.attr('name')).append(new_attachment)
+        attachments_count++
+    }
     return false
 
   $(".nav .edit").click (e) ->

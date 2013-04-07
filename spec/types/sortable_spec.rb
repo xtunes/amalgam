@@ -31,6 +31,7 @@ describe Amalgam::Types::Sortable do
         t.integer :parent_id
         t.integer :position
         t.integer :project_id
+        t.text     :info
       end
     end
     ActiveRecord::Migration.verbose = true
@@ -58,8 +59,9 @@ describe Amalgam::Types::Sortable do
     end
 
     class ModelCheck < ActiveRecord::Base
+      store :info
       include Amalgam::Types::Sortable
-      attr_accessible :title
+      attr_accessible :title,:info
       sortable :scope => :project_id
     end
   end
@@ -336,6 +338,11 @@ describe Amalgam::Types::Sortable do
     @user_2.topuser = true
     @user_2.save
     @user_2.topuser_position.should eq 1
+  end
+
+  it "test should work with store" do
+    @model = ModelCheck.create(:title=> 'test')
+    @model.info.should eq({})
   end
 
   it "test3" do

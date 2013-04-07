@@ -15,6 +15,9 @@ module Amalgam
   mattr_accessor :admin_menus
   @@admin_menus = {}
 
+  mattr_accessor :attachment_class_name
+  @@attachment_class_name = "Attachment"
+
   mattr_accessor :type_whitelist
   @@type_whitelist = []
 

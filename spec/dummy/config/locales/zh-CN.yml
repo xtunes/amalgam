@@ -16,3 +16,6 @@ zh-CN:
         password: '密码'
         password_confirmation: '密码确认'
         current_password: '当前密码'
+      attachment:
+        url: '链接'
+        description: '描述'

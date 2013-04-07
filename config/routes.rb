@@ -31,6 +31,10 @@ Amalgam::Engine.routes.draw do
     self
   end
 
+  get '/attachments/attributes' => "attachments#attributes"
+  get '/attachments/:id' => "attachments#show", :as => :attachment
+  get '/attachments/:id/download' => "attachments#show", :as => :attachment_download, :defaults => {:download => true}
+
   instance_eval &Amalgam.routes
 
   match '/editor(/*requested_uri)' => "admin/editor#edit", :as => :mercury_editor
