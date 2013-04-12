@@ -6,11 +6,12 @@ module Amalgam
 
       module ClassMethods
         def foregin_key
-          if self.reflections.present?
-            if self.reflections.first[1].options[:foreign_key]
-              return self.reflections.first[1].options[:foreign_key]
+          belongs_to_assocs = self.reflections.select{|name,assoc| assoc.macro == :belongs_to}
+          if belongs_to_assocs.present?
+            if belongs_to_assocs.values.first.options[:foreign_key]
+              return belongs_to_assocs.values.first.options[:foreign_key]
             else
-              return "#{self.reflections.first[0].to_s}_id".to_sym
+              return "#{belongs_to_assocs.keys.first.to_s}_id".to_sym
             end
           else
             return nil
@@ -18,11 +19,12 @@ module Amalgam
         end
 
         def parent_class_name
-          if self.reflections.present? && self.reflections.first[1].macro == :belongs_to
-            if self.reflections.first[1].options[:class_name]
-              return self.reflections.first[1].options[:class_name].to_s
+          belongs_to_assocs = self.reflections.select{|name,assoc| assoc.macro == :belongs_to}
+          if belongs_to_assocs.present?
+            if belongs_to_assocs.values.first.options[:class_name]
+              return belongs_to_assocs.values.first.options[:class_name].to_s
             else
-              return self.reflections.first[0].to_s.classify
+              return self.reflections.keys.first.to_s.classify
             end
           else
             return nil
