@@ -35,20 +35,6 @@ ActiveRecord::Schema.define(:version => 20130325063148) do
     t.datetime "updated_at",        :null => false
   end
 
-  create_table "base_groups", :force => true do |t|
-    t.integer  "group_id"
-    t.string   "groupable_type"
-    t.integer  "groupable_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  create_table "groups", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "images", :force => true do |t|
     t.string   "file_uid"
     t.datetime "created_at", :null => false

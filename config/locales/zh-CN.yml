@@ -4,9 +4,6 @@ zh-CN:
       page:
         create: "添加%{model}"
         update: "更新%{model}"
-      group:
-        create: "添加%{model}"
-        update: "更新%{model}"
     label:
       page:
         slug: '路径:'
@@ -20,15 +17,11 @@ zh-CN:
           blank: "%{attribute}不能为空"
     models:
       page: "页面"
-      amalgam/models/group: '页面分组'
     attributes:
-      amalgam/models/group:
-        name: "名称"
       page:
         slug: '路径'
         path: '完整路径'
         parent_id: '父页面'
-        group_ids: "分组"
   amalgam:
     file_download: '文件下载'
     file_pre: '文件预览'

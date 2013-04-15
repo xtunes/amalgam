@@ -4,31 +4,19 @@ en:
       page:
         create: "Add %{model}"
         update: "Update %{model}"
-      group:
-        create: "Add %{model}"
-        update: "Update %{model}"
     label:
       page:
         slug: 'Slug:'
         path: 'Path:'
         parent_id: 'Parent Page:'
   activerecord:
-    errors:
-      models:
-        amalgam/models/group:
-          taken: "%{attribute} has been taken"
-          blank: "%{attribute} can not be blank"
     models:
       page: "Page"
-      amalgam/models/group: 'Group'
     attributes:
-      amalgam/models/group:
-        name: 'Name'
       page:
         slug: 'Slug'
         path: 'Path'
         parent_id: 'Parent Page'
-        group_ids: "Groups"
   amalgam:
     file_download: 'File Download'
     file_pre: 'File Preview'

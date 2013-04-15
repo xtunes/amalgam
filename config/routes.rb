@@ -1,7 +1,6 @@
 Amalgam::Engine.routes.draw do
 
 	namespace :admin do
-    resources :groups
     root :to => 'resources#index', :defaults => { :resources => "pages" }
     post 'editor/upload_image' => 'editor#upload_image'
     put 'editor' => 'editor#update' , :as => 'editor'
