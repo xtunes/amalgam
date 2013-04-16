@@ -12,6 +12,8 @@
 .tree-container .jstree-open > ins { background-position:-72px 0; }
 .tree-container .jstree-closed > ins { background-position:-54px 0; }
 .tree-container .jstree-leaf > ins { background-position:-36px 0; }
+.tree-container .jstree-leaf a .jstree-icon { background-position:-56px -38px; }
+.tree-container .redirect > a .jstree-icon { background-position:-72px -38px; }
 
 .tree-container a { border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px; text-shadow:1px 1px 1px white; }
 .tree-container .jstree-hovered { background:#e7f4f9; border:1px solid #d8f0fa; padding:0 3px 0 1px; text-shadow:1px 1px 1px silver; }
