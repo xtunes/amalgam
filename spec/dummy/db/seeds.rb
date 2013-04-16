@@ -1,0 +1,1 @@
+AdminUser.create(:username => 'admin', :email => 'admin@example.com',:password => 'admin1234', :password_confirmation => 'admin1234')
