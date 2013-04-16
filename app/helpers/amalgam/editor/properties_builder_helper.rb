@@ -33,10 +33,10 @@ module Amalgam
       def attachment(name, options={})
         options[:class] ||= 'input-xlarge'
         index_create
-        obj = object.attachments[name]
+        obj = object.attachments[name] || (Amalgam::Utils::DelegateArray.new << object.attachments.new({:name => name}, :as => Amalgam.edit_access_attr_as))
         @buffer = label("#{I18n.t('amalgam.attachment')} : #{name}",options.delete(:lable_options)||{:style => 'font-weight:bold;'})
         @buffer.concat '<div style = "border-bottom: solid #cccccc 1px;padding:5px; margin-bottom:3px;">'.html_safe
-        obj.attachment_settings[:store_accessors].each do |accessor|
+        obj.first.class.attachment_settings[:store_accessors].each do |accessor|
           @buffer.concat label(I18n.t("activerecord.attributes.#{obj.first.class.to_s.underscore}.#{accessor}")+':',:style => "display:inline;margin-right:35px;")
           @buffer.concat attachment_field(:text_field, accessor, obj.send(accessor), options)
           @buffer.concat '<br>'.html_safe
