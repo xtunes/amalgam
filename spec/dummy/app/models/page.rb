@@ -19,7 +19,7 @@ class Page < ActiveRecord::Base
 
   def to_nodes(fields=[])
     hash = old_to_nodes(fields)
-    hash['attr']['class'] = "redirect" if self.redirect
+    hash['attr']['class'] = "redirect" if self.redirect.present?
     hash
   end
 end
