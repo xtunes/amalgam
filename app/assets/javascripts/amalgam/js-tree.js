@@ -26,7 +26,7 @@ $(function(){
           complete : function (r) {
             var errors = $.parseJSON(r.responseText).errors;
             if($.isEmptyObject(errors)) {
-              $(data.rslt.obj).attr("id", "node_" + r.id);
+              $(data.rslt.obj).attr("id", "unit-" + r.id);
             }else {
               $.jstree.rollback(data.rlbk);
             }
@@ -50,7 +50,7 @@ $(function(){
       complete: function (r) {
         var errors = $.parseJSON(r.responseText).errors;
         if($.isEmptyObject(errors)) {
-          $(data.rslt.obj).attr("id", "node_" + r.id);
+          $(data.rslt.obj).attr("id", "unit-" + r.id);
         }else {
           $.jstree.rollback(data.rlbk);
         }
@@ -81,7 +81,7 @@ $(function(){
       complete: function (r) {
         var errors = $.parseJSON(r.responseText).errors;
         if($.isEmptyObject(errors)) {
-          $(data.rslt.obj).attr("id", "node_" + r.id);
+          $(data.rslt.obj).attr("id", "unit-" + r.id);
         }else {
           $.jstree.rollback(data.rlbk);
         }
@@ -100,9 +100,12 @@ $(function(){
       dataType: "json",
       data: content,
       complete: function(r){
-        var errors = $.parseJSON(r.responseText).errors;
-        if($.isEmptyObject(errors)) {
-          $(data.rslt.obj).attr("id", "node_" + r.id);
+        var content = $.parseJSON(r.responseText);
+        if($.isEmptyObject(content.errors)) {
+          $(data.rslt.obj).attr("id", "unit-" + content.id);
+          $(data.rslt.obj).attr("resources", node.attr('resources'));
+          $(data.rslt.obj).attr("model", node.attr('model'));
+          $(data.rslt.obj).attr("href", "/admin/"+node.attr('resources')+'/'+content.id+'/edit');
         }else {
           $.jstree.rollback(data.rlbk);
         }

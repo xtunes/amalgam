@@ -31,7 +31,7 @@ module Amalgam
         def create
           flash[:notice] = "#{model_name} was successfully created." if resource.save
           respond_with(resource, :location => admin_resources_path(params[:resources],:anchor => "node-#{resource.id}")) do |formate|
-            formate.json{ render :json => { :errors => resource.errors } }
+            formate.json{ render :json => { :errors => resource.errors, :id => resource.id } }
           end
         end
 
