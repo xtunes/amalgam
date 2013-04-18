@@ -3,9 +3,15 @@
 var test_data;
 $(function(){
   $(".tree-container").jstree({
-    "plugins" : ["json_data", "ui", "crrm", "contextmenu", "cookies", "dnd", "search"],
+    "plugins" : ["json_data", "ui", "cookies", "crrm", "contextmenu", "dnd", "search"],
     "json_data" : {
       "data" : UNITS
+    },
+    "ui" : {
+      "initially_select" : INIT_SELECT
+    },
+    "cookies" : {
+      'save_selected' : false
     }
   }).bind("click.jstree", function (event) {
     $.pjax({url: $(event.target).parent().attr('href'), container: '.data-pjax-container'});
