@@ -9,10 +9,10 @@
     - belonged_by = @resource_class.reflect_on_all_associations(:belongs_to)
     %thaed
       %tr
-        %th Title
+        %th= @resource_class.human_attribute_name("title")
         - belonged_by.each do |item|
           - if !!item.klass && (item.klass != @resource_class)
-            %th Belongs to
+            %th= item.klass.model_name.human
         %th
     %tbody
       - @collection.each do |resource|
@@ -26,7 +26,8 @@
                   - content = parent.respond_to?(:title) ? parent.send(:title) : "#{parent.class.model_name.human}_#{parent.id}"
                   = link_to content, admin_edit_resource_path(item.instance_variable_get(:@plural_name),parent.id)
           %td.right
-            = link_to t('admin.actions.edit'), admin_edit_resource_path(params[:resources],resource.id)
-            = link_to t('admin.actions.destroy'), admin_resource_path(params[:resources],resource.id), :confirm => 'alert', :method => :delete
+            = link_to t("amalgam.admin.actions.edit_content"), amalgam.mercury_editor_path("#{resource.source.class.to_s.tableize}/#{resource.source.to_param}")
+            = link_to t('amalgam.admin.actions.edit'), admin_edit_resource_path(params[:resources],resource.id)
+            = link_to t('amalgam.admin.actions.destroy'), admin_resource_path(params[:resources],resource.id), :confirm => 'alert', :method => :delete
       - unless @resource_class.included_modules.include?(Amalgam::Types::Hierachical)
         = paginate @collection

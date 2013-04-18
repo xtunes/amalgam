@@ -1,14 +1,36 @@
 zh-CN:
   helpers:
+    submit:
+      page:
+        create: "添加%{model}"
+        update: "更新%{model}"
+      post:
+        create: "添加%{model}"
+        update: "更新%{model}"
     label:
       page:
-        title: '标题'
+        slug: '路径:'
+        tag_list: '标签:'
+        parent_id: '父页面:'
+        identity: '标识:'
+        redirect: '跳转:'
+        created_at: '创建时间:'
+        title: '标题:'
   activerecord:
     models:
       page: "页面"
-      admin_user: '管理员'
+      post: "文章"
     attributes:
+      post:
+        title: '标题'
+        page_id: '页面'
       page:
+        slug: '路径'
+        tag_list: '标签'
+        parent_id: '父页面'
+        identity: '标识'
+        redirect: '跳转'
+        created_at: '创建时间'
         title: '标题'
       admin_user:
         username: '用户名'
