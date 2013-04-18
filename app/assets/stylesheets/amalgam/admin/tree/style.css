@@ -9,6 +9,7 @@
   -moz-border-radius: 6px;
   border-radius: 6px;
   padding: 10px;
+  height: 620px;
 }
 .tree-container > ul { background:url("/assets/amalgam/admin/tree/bg.jpg") left top repeat; }
 .tree-container li, 

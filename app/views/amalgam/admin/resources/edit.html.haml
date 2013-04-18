@@ -1,14 +1,16 @@
-= form_for @resource.source, :url => admin_update_resource_path(params[:resources]) ,:html => {:class => 'basic'}, :builder => Amalgam::Admin::AttrInputFormBuilder do |f|
-  %legend
-  - @resource.source.class.admin_attrs.each do |attr|
-    = f.label attr
-    = f.attr_input attr
-  - if @resource.source.class.taggable?
-    - @resource.source.class.tag_types.each do |type|
-      = f.label "#{type.to_s.singularize}_list"
-      = f.tag_input "#{type.to_s.singularize}_list"
-  %br
-  %p
-    = f.submit :class => "btn-primary btn"
-    = link_to t("admin.a.back"), @back_path, :class => "btn"
-    = link_to t("admin.a.edit"), amalgam.mercury_editor_path("#{@resource.source.class.to_s.tableize}/#{@resource.source.to_param}"), :class => "btn"
+%article
+  = form_for @resource.source, :url => admin_update_resource_path(params[:resources]) ,:html => {:class => 'basic'}, :builder => Amalgam::Admin::AttrInputFormBuilder do |f|
+    %legend
+      = "#{t('amalgam.admin.actions.edit')}#{@resource_class.model_name.human}"
+    - @resource.source.class.admin_attrs.each do |attr|
+      = f.label attr
+      = f.attr_input attr
+    - if @resource.source.class.taggable?
+      - @resource.source.class.tag_types.each do |type|
+        = f.label "#{type.to_s.singularize}_list"
+        = f.tag_input "#{type.to_s.singularize}_list"
+    %br
+    %p
+      = f.submit :class => "btn-primary btn"
+      = link_to t("amalgam.admin.a.back"), @back_path, :class => "btn"
+      = link_to t("amalgam.admin.actions.edit_content"), amalgam.mercury_editor_path("#{@resource.source.class.to_s.tableize}/#{@resource.source.to_param}"), :class => "btn"

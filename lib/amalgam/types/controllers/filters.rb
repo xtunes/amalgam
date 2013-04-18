@@ -40,6 +40,7 @@ module Amalgam
           else
             @resource ||= @resource_class.new(params[model_name], :as => Amalgam.admin_access_attr_as)
           end
+          @back_path = admin_resources_path(params[:resources])
           @resource = Amalgam::Admin::ResourceDecorator.decorate(@resource)
         end
 

@@ -10,18 +10,16 @@ zh-CN:
         path: '完整路径:'
         parent_id: '父页面:'
   activerecord:
-    errors:
-      models:
-        amalgam/models/group:
-          taken: "%{attribute}已经被占用"
-          blank: "%{attribute}不能为空"
     models:
       page: "页面"
     attributes:
       page:
         slug: '路径'
-        path: '完整路径'
+        tag_list: '标签'
         parent_id: '父页面'
+        identity: '标识'
+        redirect: '跳转'
+        created_at: '创建时间'
   amalgam:
     file_download: '文件下载'
     file_pre: '文件预览'

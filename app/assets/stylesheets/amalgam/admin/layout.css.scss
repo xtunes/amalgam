@@ -12,6 +12,11 @@ $tree-line-color: #c2c2c2;
   height: 0;
 }
 
+.right_content{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .clearfix {
   display: inline-block;
 }
@@ -61,6 +66,7 @@ article{
   @include box-shadow;
   padding: 20px;
   background: #fff;
+  min-height: 600px;
   form{
     input{
       width:400px;
@@ -157,5 +163,6 @@ body{
   margin-top:50px;
 }
 .sidebar{
-  padding: 10px;
+  padding: 20px;
+  min-height: 560px;
 }
