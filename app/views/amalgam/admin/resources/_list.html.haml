@@ -22,8 +22,9 @@
             - if !!item.klass && (item.klass != @resource_class)
               %td
                 - parent = resource.source.send(item.instance_variable_get(:@name))
-                - content = parent.respond_to?(:title) ? parent.send(:title) : "#{parent.class.model_name.human}_#{parent.id}"
-                = link_to content, admin_edit_resource_path(item.instance_variable_get(:@plural_name),parent.id)
+                -if !!parent
+                  - content = parent.respond_to?(:title) ? parent.send(:title) : "#{parent.class.model_name.human}_#{parent.id}"
+                  = link_to content, admin_edit_resource_path(item.instance_variable_get(:@plural_name),parent.id)
           %td.right
             = link_to t('admin.actions.edit'), admin_edit_resource_path(params[:resources],resource.id)
             = link_to t('admin.actions.destroy'), admin_resource_path(params[:resources],resource.id), :confirm => 'alert', :method => :delete
