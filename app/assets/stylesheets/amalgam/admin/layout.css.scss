@@ -103,6 +103,12 @@ article{
     }
     border-left:1px solid #DDD;
   }
+  .buttons{
+    line-height: 40px;
+    .btn-group{
+      margin-left:0px;
+    }
+  }
 }
 
 .tree-container{
