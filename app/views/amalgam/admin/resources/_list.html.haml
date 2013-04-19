@@ -11,7 +11,7 @@
       %thaed
         %tr
           - @resource_class.admin_attrs.each do |attr|
-            - if attr.to_s != @resource_class.foregin_key.to_s
+            - if attr.to_s != @resource_class.foreign_key.to_s
               %th= @resource_class.human_attribute_name(attr)
           - belonged_by.each do |item|
             - if !!item.klass && (item.klass != @resource_class)
@@ -21,7 +21,7 @@
         - @collection.each do |resource|
           %tr
             - @resource_class.admin_attrs.each do |attr|
-              - if attr.to_s != @resource_class.foregin_key.to_s
+              - if attr.to_s != @resource_class.foreign_key.to_s
                 %td= resource.send(attr)
             - belonged_by.each do |item|
               - if !!item.klass && (item.klass != @resource_class)

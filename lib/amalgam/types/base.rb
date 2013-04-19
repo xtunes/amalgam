@@ -5,7 +5,7 @@ module Amalgam
       extend ActiveSupport::Concern
 
       module ClassMethods
-        def foregin_key
+        def foreign_key
           belongs_to_assocs = self.reflections.select{|name,assoc| assoc.macro == :belongs_to}
           if belongs_to_assocs.present?
             if belongs_to_assocs.values.first.options[:foreign_key]

@@ -5,7 +5,7 @@ module Amalgam
       include ActionView::Helpers::TagHelper
       include ActionView::Helpers::JavaScriptHelper
       def attr_input(attribute, options={})
-        if !object.class.included_modules.include?(Amalgam::Types::Hierachical) && attribute.to_s == object.class.foregin_key.to_s
+        if !object.class.included_modules.include?(Amalgam::Types::Hierachical) && attribute.to_s == object.class.foreign_key.to_s
           return select attribute, nested_set_options(object.class.parent_class_name.safe_constantize) {|i, level| "#{'-' * level} #{i.title}" },{:required => true}
         end
         column = object.class.columns.select{|m| m.name == attribute.to_s}.first
