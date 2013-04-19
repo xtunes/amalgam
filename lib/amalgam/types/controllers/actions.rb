@@ -15,6 +15,7 @@ module Amalgam
 
         def search
           @collection = @resource_class.search(params[:content],params[:page])
+          @collection = Amalgam::Admin::ResourceDecorator.decorate_collection(@collection)
         end
 
         def show
