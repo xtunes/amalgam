@@ -38,7 +38,11 @@ module Amalgam
           if params[:id]
             @resource ||= @resource_class.find(params[:id])
           else
-            @resource ||= @resource_class.new(params[model_name], :as => Amalgam.admin_access_attr_as)
+            unless params[:parent_class]
+              @resource ||= @resource_class.new(params[model_name], :as => Amalgam.admin_access_attr_as)
+            else
+              @resource ||= params[:parent_class].safe_constantize.find(params[:parent_id]).send(params[:resources].to_s.tableize).new(params[model_name], :as => Amalgam.admin_access_attr_as)
+            end
           end
           @back_path = admin_resources_path(params[:resources])
           @resource = Amalgam::Admin::ResourceDecorator.decorate(@resource)
@@ -48,7 +52,11 @@ module Amalgam
           if @resource_class.included_modules.include?(Amalgam::Types::Hierachical)
             @collection = @resource_class.all
           else
-            @collection = @resource_class.page(params[:page])
+            if params[:parent_class]
+              @collection = params[:parent_class].safe_constantize.find(params[:parent_id]).send(@resource_class.to_s.tableize).page(params[:page])
+            else
+              @collection = @resource_class.page(params[:page])
+            end
           end
           @collection = Amalgam::Admin::ResourceDecorator.decorate_collection(@collection)
         end

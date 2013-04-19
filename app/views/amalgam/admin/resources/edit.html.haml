@@ -13,4 +13,7 @@
     %p
       = f.submit :class => "btn-primary btn"
       = link_to t("amalgam.admin.a.back"), @back_path, :class => "btn"
-      = link_to t("amalgam.admin.actions.edit_content"), amalgam.mercury_editor_path("#{@resource.source.class.to_s.tableize}/#{@resource.source.to_param}"), :class => "btn"
+      - if (@resource.source.is_a?(Amalgam::Types::Page) && !@resource.source.redirect.present?) || !@resource.source.is_a?(Amalgam::Types::Page)
+        = link_to t("amalgam.admin.actions.edit_content"), amalgam.mercury_editor_path("#{@resource.source.class.to_s.tableize}/#{@resource.source.to_param}"), :class => "btn"
+      - @resource_class.reflect_on_all_associations(:has_many).select{|x| Amalgam.admin_menus.keys.include?(x.plural_name)}.each do |assoc|
+        = link_to "#{assoc.klass.model_name.human}:#{@resource.send(assoc.plural_name).count}", amalgam.admin_resources_path(assoc.plural_name, :parent_class => @resource_class.to_s, :parent_id => @resource.id), :class => "btn btn-info"

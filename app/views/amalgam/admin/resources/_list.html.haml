@@ -1,10 +1,17 @@
 %article
   %legend
-    %span.right
-      =link_to admin_new_resource_path(params[:resources]) ,:class => 'btn btn-primary' do
-        %i.icon-plus.icon-white
-        = "#{t('amalgam.admin.actions.new')}#{@resource_class.model_name.human}"
-    = link_to "#{@resource_class.model_name.human}#{t('amalgam.admin.actions.index')}", admin_resources_path(params[:resources])
+    - if params[:parent_class]
+      %span.right
+        =link_to admin_new_resource_path(params[:resources],:parent_class => params[:parent_class],:parent_id =>params[:parent_id]) ,:class => 'btn btn-primary' do
+          %i.icon-plus.icon-white
+          = "#{t('amalgam.admin.actions.new')}#{@resource_class.model_name.human}"
+      = link_to t("amalgam.admin.a.back"), admin_edit_resource_path(params[:parent_class].tableize,params[:parent_id])
+    - else
+      %span.right
+        =link_to admin_new_resource_path(params[:resources]) ,:class => 'btn btn-primary' do
+          %i.icon-plus.icon-white
+          = "#{t('amalgam.admin.actions.new')}#{@resource_class.model_name.human}"
+      = link_to "#{@resource_class.model_name.human}#{t('amalgam.admin.actions.index')}", admin_resources_path(params[:resources])
   - unless @resource_class.included_modules.include?(Amalgam::Types::Hierachical)
     %table.table.table-striped.table-bordered.table-hover
       - belonged_by = @resource_class.reflect_on_all_associations(:belongs_to)
@@ -14,7 +21,7 @@
             - if attr.to_s != @resource_class.foreign_key.to_s
               %th= @resource_class.human_attribute_name(attr)
           - belonged_by.each do |item|
-            - if !!item.klass && (item.klass != @resource_class)
+            - if !item.options[:polymorphic] && !!item.klass && (item.klass != @resource_class)
               %th= item.klass.model_name.human
           %th
       %tbody
@@ -24,7 +31,7 @@
               - if attr.to_s != @resource_class.foreign_key.to_s
                 %td= resource.send(attr)
             - belonged_by.each do |item|
-              - if !!item.klass && (item.klass != @resource_class)
+              - if !item.options[:polymorphic] && !!item.klass && (item.klass != @resource_class)
                 %td
                   - parent = resource.source.send(item.instance_variable_get(:@name))
                   -if !!parent
