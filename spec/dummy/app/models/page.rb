@@ -7,6 +7,8 @@ class Page < ActiveRecord::Base
   self.admin_attrs = [:slug, :title, :identity,:created_at, :redirect]
   has_many :posts
 
+  has_content
+
   taggable
 
   def template_keys

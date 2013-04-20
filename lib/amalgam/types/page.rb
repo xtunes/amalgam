@@ -9,7 +9,6 @@ module Amalgam
       included do
         attr_accessible :identity, :redirect, :as => Amalgam.admin_access_attr_as
         auto_generate_slug_with :title
-        has_content
 
         validates :title, :presence => true
         validates_uniqueness_of :identity, :allow_nil => true, :allow_blank => true

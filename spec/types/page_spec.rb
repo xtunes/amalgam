@@ -3,6 +3,7 @@ require 'spec_helper'
 Amalgam.i18n = false
 class PagePage < ActiveRecord::Base
   include Amalgam::Types::Page
+  has_content
 end
 
 describe Amalgam::Types::Page do
