@@ -97,5 +97,6 @@ module Amalgam
     require 'amalgam/globalize'
     require 'amalgam/tree/exportable'
     require 'amalgam/tree/importable'
+    require 'amalgam/controller/page'
   end
 end
