@@ -9,16 +9,22 @@ module Amalgam
           return select attribute, nested_set_options(object.class.parent_class_name.safe_constantize) {|i, level| "#{'-' * level} #{i.title}" },{:required => true}
         end
         column = object.class.columns.select{|m| m.name == attribute.to_s}.first
-        case column.type
-        when :integer
-          options[:type] ||= 'number'
-          return text_field(attribute,options)
-        when :string
-          return text_field(attribute,options)
-        when :text
-          return text_area(attribute,options)
-        when :datetime
-          return text_field attribute, value: object.send(attribute).nil? ? '' : object.send(attribute).strftime("%Y-%m-%d"), "data-widget"=>"datepicker"
+        unless column.respond_to?(:type)
+          if Amalgam.i18n
+            return text_field(attribute,options)
+          end
+        else
+          case column.type
+          when :integer
+            options[:type] ||= 'number'
+            return text_field(attribute,options)
+          when :string
+            return text_field(attribute,options)
+          when :text
+            return text_area(attribute,options)
+          when :datetime
+            return text_field attribute, value: object.send(attribute).nil? ? '' : object.send(attribute).strftime("%Y-%m-%d"), "data-widget"=>"datepicker"
+          end
         end
       end
 
