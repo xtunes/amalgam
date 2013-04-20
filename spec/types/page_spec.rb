@@ -29,6 +29,14 @@ describe Amalgam::Types::Page do
     @page_page = PagePage.create({:title => 'this is a test'}, :as => Amalgam.admin_access_attr_as)
   end
 
+  it "identity应该和slug一起初始化，默认值是slug的值,但是不随着slug的修改而修改" do
+    @page_page.identity.should eq('this-is-a-test')
+    @page_page.slug = "test2"
+    @page_page.save
+    @page_page.slug.should eq('test2')
+    @page_page.identity.should eq('this-is-a-test')
+  end
+
   it "在没有手动设置identity时候,unique_name应当返回slug" do
     @page_page.unique_name.should eq('this-is-a-test')
   end
