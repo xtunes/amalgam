@@ -3,7 +3,7 @@ module Amalgam
     isolate_namespace Amalgam
 
     initializer :assets do |config|
-      Rails.application.config.assets.precompile += %w( amalgam/admin.js amalgam/admin.css amalgam/editor.css amalgam/editor.js )
+      Rails.application.config.assets.precompile += %w( amalgam/admin.js amalgam/admin.css amalgam/editor.css amalgam/editor.js amalgam/js-tree.js )
     end
 
     initializer "amalgam.params.filter" do |app|
