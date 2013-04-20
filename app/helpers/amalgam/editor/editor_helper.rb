@@ -22,8 +22,17 @@ module Amalgam
         options[:data][:id] = "#{obj.class.to_s.tableize}/#{obj.id.to_s}.#{field.to_s}"
         options[:data][:thumb] = options[:thumb]
       end
+      options[:default_bg_color] ||= '456'
+      options[:default_front_color] ||= 'fff'
+      options[:default] ||= :dummyimage
       value = fetch_field(obj,field)
-      image_url = options.delete(:default) || '#'
+      image_url = case options[:default]
+      when String
+        then options[:default].match(/^(http:\/\/)|^(https:\/\/)/) ? options[:default] : image_path(options[:default])
+      when Symbol
+        then "http://dummyimage.com/#{options[:thumb].match(/\d*(X|x)\d*/).to_s}/#{options[:default_bg_color]}/#{options[:default_front_color]}.gif"
+      end
+      options.delete(:default)
       if value
         if options[:thumb]
           image_url = Amalgam::Models::Image.find(value.to_i).file.thumb(options[:thumb]).url
