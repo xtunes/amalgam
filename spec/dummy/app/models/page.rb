@@ -14,12 +14,4 @@ class Page < ActiveRecord::Base
     keys << self.slug
     keys
   end
-
-  alias_method :old_to_nodes, :to_nodes
-
-  def to_nodes(fields=[])
-    hash = old_to_nodes(fields)
-    hash['attr']['class'] = "redirect" if self.redirect.present?
-    hash
-  end
 end

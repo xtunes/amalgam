@@ -14,6 +14,14 @@ module Amalgam
         validates :title, :presence => true
         validates_uniqueness_of :identity, :allow_nil => true, :allow_blank => true
         validates :identity, :format => { :with => /\A[0-9a-z\-_]+\z/}, :allow_nil => true, :allow_blank => true
+
+        alias_method :old_to_nodes, :to_nodes
+
+        def to_nodes(fields=[])
+          hash = old_to_nodes(fields)
+          hash['attr']['class'] = "redirect" if self.redirect.present?
+          hash
+        end
       end
 
       def unique_name
