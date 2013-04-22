@@ -36,10 +36,21 @@ module Amalgam
           self.columns.select{|x|x.type == :string || x.type == :text}.each do |column|
             list << "#{column.name} like '%#{content}%'"
           end
-          if list.present?
-            return self.where(list.join(' or ')).page(page)
+          if Amalgam.i18n
+            self.translates.each do |translate|
+              list << "#{translate} like '%#{content}%'"
+            end
+            if list.present?
+              return self.with_translations(I18n.locale).where(list.join(' or ')).page(page)
+            else
+              return self.with_translations(I18n.locale).page(page)
+            end
           else
-            return self.page(page)
+            if list.present?
+              return self.where(list.join(' or ')).page(page)
+            else
+              return self.page(page)
+            end
           end
         end
       end
