@@ -33,7 +33,7 @@ module Amalgam
 	      # convert form 'field.sub1.sub2 = value' to '{field:{sub1:{sub2:value}}'
 	      attribute ||= {}
 	      if content_value['type'] == 'image'
-	      	attribute = (field.split('.') << content_value['attributes']['uid']).reverse.reduce{|value,key| {key => value} }
+	      	attribute = (field.split('.') << content_value['attributes']['image_id']).reverse.reduce{|value,key| {key => value} }
 	      else
 		      attribute = (field.split('.') << content_value['value']).reverse.reduce{|value,key| {key => value} }
 		    end
