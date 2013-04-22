@@ -53,7 +53,7 @@ module Amalgam
     I18n::available_locales.each do |language|
       fallback_options[language] = I18n::available_locales
     end
-    Globalize.fallbacks= fallback_options
+    ::Globalize.fallbacks= fallback_options
   end
 
   def self.load_templates
