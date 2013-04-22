@@ -36,7 +36,7 @@ module Amalgam
   @@attachment_class_name = 'Attachment'
 
   #params or subdomain or nil
-  mattr_accessor :i18n
+  mattr_reader :i18n
   @@i18n = nil
 
   mattr_accessor :models_with_templates
@@ -45,6 +45,15 @@ module Amalgam
   mattr_reader :routes
   @@routes = Proc.new do
     resources :pages, :except => [:show]
+  end
+
+  def self.i18n=(type,options={})
+    @@i18n = type
+    fallback_options = {}
+    I18n::available_locales.each do |language|
+      fallback_options[language] = I18n::available_locales
+    end
+    Globalize.fallbacks= fallback_options
   end
 
   def self.load_templates
