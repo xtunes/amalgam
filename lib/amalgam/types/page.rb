@@ -30,6 +30,12 @@ module Amalgam
         end
       end
 
+      def template_keys
+        keys = []
+        keys << self.slug
+        keys
+      end
+
       def unique_name
         if identity
           return identity

@@ -4,6 +4,7 @@ module Amalgam
       extend ActiveSupport::Concern
 
       included do
+        include Amalgam::TemplateFinder
         before_filter :load_page_model, :only => :show
 
         protected
@@ -12,7 +13,7 @@ module Amalgam
           model_class = controller_name.classify.safe_constantize
           @page = model_class.where(:slug => params[:id]).first
           raise ActiveRecord::RecordNotFound , "Couldn't find page with slug=#{params[:id]}" if @page.blank?
-          if @page.redirect
+          if @page.redirect.present?
             if @page.redirect.match(/^(http)|^(\/)/)
               redirect_to @page.redirect
             else
