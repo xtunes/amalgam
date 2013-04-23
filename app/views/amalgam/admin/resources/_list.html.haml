@@ -50,5 +50,5 @@
                 = link_to t("amalgam.admin.actions.edit_content"), amalgam.mercury_editor_path("#{resource.source.class.to_s.tableize}/#{resource.source.to_param}")
               - if Amalgam.admin_menus[@resource_class.to_s.tableize].include?('edit')
                 = link_to t('amalgam.admin.actions.edit'), admin_edit_resource_path(params[:resources],resource.id)
-              = link_to t('amalgam.admin.actions.destroy'), admin_resource_path(params[:resources],resource.id), :confirm => 'alert', :method => :delete
+              = link_to t('amalgam.admin.actions.destroy'), admin_resource_path(params[:resources],resource.id), confirm => t('amalgam.admin.confirmation.delete', :model => @resource_class.model_name.human), :method => :delete
         = paginate @collection
