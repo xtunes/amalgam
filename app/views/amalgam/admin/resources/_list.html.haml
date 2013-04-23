@@ -32,9 +32,11 @@
       %tbody
         - @collection.each do |resource|
           %tr
+            - var = 0
             - list_attrs(@resource_class).each do |attr|
-              - if attr.to_s != @resource_class.foreign_key.to_s
+              - if attr.to_s != @resource_class.foreign_key.to_s && var < 2
                 %td= resource.send(attr)
+              - var += 1
             - belonged_by.each do |item|
               - if !item.options[:polymorphic] && !!item.klass && (item.klass != @resource_class)
                 %td
