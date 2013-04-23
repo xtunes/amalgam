@@ -27,7 +27,11 @@ module Amalgam
         end
 
         def update_resource
-          resource.update_attributes(params[model_name], :as => Amalgam.admin_access_attr_as)
+          unless resource.class.attr_accessible[Amalgam.admin_access_attr_as].empty?
+            resource.update_attributes(params[model_name], :as => Amalgam.admin_access_attr_as)
+          else
+            resource.update_attributes(params[model_name])
+          end
         end
 
         def find_model_class
@@ -39,9 +43,17 @@ module Amalgam
             @resource ||= @resource_class.find(params[:id])
           else
             unless params[:parent_class]
-              @resource ||= @resource_class.new(params[model_name], :as => Amalgam.admin_access_attr_as)
+              if @resource_class.attr_accessible[Amalgam.admin_access_attr_as].empty?
+                @resource ||= @resource_class.new(params[model_name])
+              else
+                @resource ||= @resource_class.new(params[model_name], :as => Amalgam.admin_access_attr_as)
+              end
             else
-              @resource ||= params[:parent_class].safe_constantize.find(params[:parent_id]).send(params[:resources].to_s.tableize).new(params[model_name], :as => Amalgam.admin_access_attr_as)
+              if @resource_class.attr_accessible[Amalgam.admin_access_attr_as].empty?
+                 @resource ||= params[:parent_class].safe_constantize.find(params[:parent_id]).send(params[:resources].to_s.tableize).new(params[model_name])
+              else
+                 @resource ||= params[:parent_class].safe_constantize.find(params[:parent_id]).send(params[:resources].to_s.tableize).new(params[model_name], :as => Amalgam.admin_access_attr_as)
+              end
             end
           end
           @back_path = admin_resources_path(params[:resources])

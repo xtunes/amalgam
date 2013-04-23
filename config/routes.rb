@@ -8,7 +8,7 @@ Amalgam::Engine.routes.draw do
 
   def amalgam_resources(*resources, &block)
     options = resources.extract_options!.dup
-    options[:only] ||= ['index','new','edit','create','update','destroy','search']
+    options[:only] ||= ['index','new','edit','create','update','destroy','search','show']
     options[:except] ||= []
     options[:only] = options[:only].map!{|x| x.to_s } - options[:except].map!{|x| x.to_s }
     resources.map!{|x| x.to_s}
@@ -25,6 +25,7 @@ Amalgam::Engine.routes.draw do
       post '/create' => 'resources#create', :as => :create_resource if options[:only].include?('create')
       put '/:id' => 'resources#update', :as => :update_resource if options[:only].include?('update')
       delete '/:id' => 'resources#destroy', :as => :resource if options[:only].include?('destroy')
+      get '/:id' => 'resources#show', :as => :resource if options[:only].include?('show')
     end
 
     self
