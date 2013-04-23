@@ -20,9 +20,11 @@
       - belonged_by = @resource_class.reflect_on_all_associations(:belongs_to)
       %thaed
         %tr
+          - var = 0
           - list_attrs(@resource_class).each do |attr|
-            - if attr.to_s != @resource_class.foreign_key.to_s
+            - if attr.to_s != @resource_class.foreign_key.to_s && var < 2
               %th= @resource_class.human_attribute_name(attr)
+            - var += 1
           - belonged_by.each do |item|
             - if !item.options[:polymorphic] && !!item.klass && (item.klass != @resource_class)
               %th= item.klass.model_name.human
@@ -44,6 +46,7 @@
               = link_to t("amalgam.admin.actions.show"), amalgam.admin_resource_path("#{resource.source.class.to_s.tableize}", resource.id)
               - if @resource_class.included_modules.include?(Amalgam::Types::Contentable)
                 = link_to t("amalgam.admin.actions.edit_content"), amalgam.mercury_editor_path("#{resource.source.class.to_s.tableize}/#{resource.source.to_param}")
-              = link_to t('amalgam.admin.actions.edit'), admin_edit_resource_path(params[:resources],resource.id)
+              - if Amalgam.admin_menus[@resource_class.to_s.tableize].include?('edit')
+                = link_to t('amalgam.admin.actions.edit'), admin_edit_resource_path(params[:resources],resource.id)
               = link_to t('amalgam.admin.actions.destroy'), admin_resource_path(params[:resources],resource.id), :confirm => 'alert', :method => :delete
         = paginate @collection
