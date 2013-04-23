@@ -1,4 +1,16 @@
 %article
+  - if params[:parent_class]
+    - if Amalgam.admin_menus[@resource_class.to_s.tableize].include?('new')
+      %span.right
+        =link_to admin_new_resource_path(params[:resources],:parent_class => params[:parent_class],:parent_id =>params[:parent_id]) ,:class => 'btn btn-primary' do
+          %i.icon-plus.icon-white
+          = "#{t('amalgam.admin.actions.new')}#{@resource_class.model_name.human}"
+  - else
+    - if Amalgam.admin_menus[@resource_class.to_s.tableize].include?('new')
+      %span.right
+        =link_to admin_new_resource_path(params[:resources]) ,:class => 'btn btn-primary' do
+          %i.icon-plus.icon-white
+          = "#{t('amalgam.admin.actions.new')}#{@resource_class.model_name.human}"
   = form_for @resource.source, :url => admin_update_resource_path(params[:resources]) ,:html => {:class => 'basic'}, :builder => Amalgam::Admin::AttrInputFormBuilder do |f|
     %legend
       = "#{t('amalgam.admin.actions.edit')}#{@resource_class.model_name.human}"
@@ -15,7 +27,7 @@
         = f.submit :class => "btn-primary btn"
         = link_to t("amalgam.admin.a.back"), @back_path, :class => "btn btn-info"
         - if (@resource.source.is_a?(Amalgam::Types::Page) && !@resource.source.redirect.present?) || !@resource.source.is_a?(Amalgam::Types::Page)
-          = link_to t("amalgam.admin.actions.edit_content"), amalgam.mercury_editor_path("#{@resource.source.class.to_s.tableize}/#{@resource.source.to_param}"), :class => "btn btn-success"
+          = link_to t("amalgam.admin.actions.edit_content"), amalgam.mercury_editor_path("#{@resource.source.class.to_s.tableize}/#{@resource.source.to_param}")+"#edit", :target => "_blank", :class => "btn btn-success"
         = link_to t('amalgam.admin.actions.destroy'), admin_resource_path(params[:resources],@resource.id), :confirm => t('amalgam.admin.confirmation.delete_child', :model => @resource_class.model_name.human), :method => :delete, :class => "btn btn-danger"
       - @resource_class.reflect_on_all_associations(:has_many).select{|x| Amalgam.admin_menus.keys.include?(x.plural_name)}.each do |assoc|
         .btn-group
