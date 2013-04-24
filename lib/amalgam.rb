@@ -107,5 +107,9 @@ module Amalgam
     require 'amalgam/tree/exportable'
     require 'amalgam/tree/importable'
     require 'amalgam/controller/page'
+    require 'amalgam/types/attachable/decorator'
+    require 'amalgam/types/contentable/decorator'
+    require 'amalgam/types/hierachical/decorator'
+    require 'amalgam/types/page/decorator'
   end
 end

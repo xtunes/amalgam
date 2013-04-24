@@ -2,7 +2,7 @@
   = form_for @resource.source, :url => admin_create_resource_path(params[:resources]) ,:html => {:class => 'basic'}, :builder => Amalgam::Admin::AttrInputFormBuilder do |f|
     %legend
       = "#{t('amalgam.admin.actions.new')}#{@resource_class.model_name.human}"
-    - list_attrs(@resource.source.class).each do |attr|
+    - @resource.admin_attrs.each do |attr|
       = f.label attr
       = f.attr_input attr
     %p
