@@ -8,7 +8,7 @@ module Amalgam
 
       def set_locale
         extracted_locale = ''
-        if can_edit?
+        if self.class.name.split("::").first=="Admin"
           extracted_locale = params[:locale] ||
               extract_locale_from_subdomain ||
               session[:locale]
@@ -22,7 +22,7 @@ module Amalgam
         ::I18n.locale = (available_locales.include? extracted_locale.to_s) ?
             extracted_locale : ::I18n.default_locale
 
-        session[:locale] = extracted_locale if params[:locale] && can_edit?
+        session[:locale] = extracted_locale if params[:locale] && self.class.name.split("::").first=="Admin"
       end
 
       def default_url_options(options={})
