@@ -27,7 +27,7 @@ module Amalgam
         end
 
         def update_resource
-          unless resource.class.attr_accessible[Amalgam.admin_access_attr_as].empty?
+          unless resource.source.class.attr_accessible[Amalgam.admin_access_attr_as].empty?
             resource.update_attributes(params[model_name], :as => Amalgam.admin_access_attr_as)
           else
             resource.update_attributes(params[model_name])
