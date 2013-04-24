@@ -14,8 +14,6 @@ module Amalgam
           options[:slug_field] ||= :slug
           self.slug_field = options[:slug_field]
           self.source_field = field
-          attr_accessible options[:slug_field], field, :as => Amalgam.admin_access_attr_as
-          attr_accessible field, :as => Amalgam.edit_access_attr_as
           if options[:sync]
             before_validation :ensure_unique_url
           else

@@ -10,6 +10,7 @@ describe Amalgam::Types::Contentable do
     class ContentablePage < ActiveRecord::Base
       include Amalgam::Types::Contentable
       has_content :content
+      attr_accessible :content
     end
 
     Amalgam.i18n = true
@@ -17,6 +18,7 @@ describe Amalgam::Types::Contentable do
     class Contentablei18nPage < ActiveRecord::Base
       include Amalgam::Types::Contentable
       has_content
+      attr_accessible :content
     end
 
     ActiveRecord::Migration.verbose = false

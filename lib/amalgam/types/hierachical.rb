@@ -11,8 +11,6 @@ module Amalgam
 
         acts_as_nested_set :dependent => :destroy
 
-        attr_accessible :parent_id, :left_id,:right_id, :as => Amalgam.admin_access_attr_as
-
         attr_accessor :left_id,:right_id
         cattr_accessor :node_name
         @@node_name = 'title'

@@ -33,7 +33,7 @@ describe Amalgam::Types::Attachment do
 
     class AttachmentPage < ActiveRecord::Base
       include Amalgam::Types::Attachable
-      attr_accessible :title
+      attr_accessible :title, :attachments_attributes
     end
   end
 

@@ -3,6 +3,7 @@ require 'spec_helper'
 
 class TaggablePage < ActiveRecord::Base
   include Amalgam::Types::Taggable
+  attr_accessible :tag_list, :skill_list, :test_list, :as => Amalgam.admin_access_attr_as
   taggable
   taggable_as :skills
   taggable_as :tests, :order => true

@@ -1,8 +1,6 @@
 class Post < ActiveRecord::Base
   include Amalgam::Types::Base
-  cattr_accessor :admin_attrs
-  self.admin_attrs = [:title, :page_id]
-  attr_accessible :title, :page_id, :as => :admin
-  attr_accessible :title, :page_id, :as => :edit
+  attr_accessible :title, :page_id
   belongs_to :page
+  translates :title
 end

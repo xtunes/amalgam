@@ -20,9 +20,6 @@ module Amalgam
           else
             store *fields_and_options
           end
-          attrs = fields_and_options.clone
-          attrs << {:as => Amalgam.edit_access_attr_as}
-          attr_accessible *attrs
         end
       end
     end

@@ -3,6 +3,7 @@ require 'spec_helper'
 
 class HierachicalPage < ActiveRecord::Base
   include Amalgam::Types::Hierachical
+  attr_accessible :parent_id, :left_id,:right_id, :as => Amalgam.admin_access_attr_as
   attr_accessible :title, :as => Amalgam.admin_access_attr_as
 end
 
@@ -10,7 +11,8 @@ class HierachicalseoPage < ActiveRecord::Base
   include Amalgam::Types::Hierachical
   include Amalgam::Types::Seo
   auto_generate_slug_with :title
-  attr_accessible :title, :as => Amalgam.admin_access_attr_as
+  attr_accessible :parent_id, :left_id,:right_id, :as => Amalgam.admin_access_attr_as
+  attr_accessible :title, :slug, :as => Amalgam.admin_access_attr_as
 end
 
 describe Amalgam::Types::Hierachical do

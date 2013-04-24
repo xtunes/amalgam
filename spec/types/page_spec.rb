@@ -4,6 +4,8 @@ Amalgam.i18n = false
 class PagePage < ActiveRecord::Base
   include Amalgam::Types::Page
   has_content
+
+  attr_accessible :identity, :redirect, :slug, :title, :as => Amalgam.admin_access_attr_as
 end
 
 describe Amalgam::Types::Page do
