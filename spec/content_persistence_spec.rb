@@ -8,14 +8,14 @@ class TestPage < ActiveRecord::Base
     columns << ActiveRecord::ConnectionAdapters::Column.new(name.to_s, default, sql_type.to_s, null)
   end
 
-  has_content :body
+  store :body
 
   column :title, :string
   column :body, :string
   column :subtitle, :string
   column :protected_field, :string
 
-  attr_accessible :title,:subtitle, :as => :edit
+  attr_accessible :title,:subtitle, :body, :as => Amalgam.edit_access_attr_as
   attr_accessible :title,:subtitle
 end
 
