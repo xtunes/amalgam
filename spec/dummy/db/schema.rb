@@ -41,12 +41,22 @@ ActiveRecord::Schema.define(:version => 20130325063148) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "pages", :force => true do |t|
+  create_table "page_translations", :force => true do |t|
+    t.integer  "page_id"
+    t.string   "locale"
     t.string   "title"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "page_translations", ["locale"], :name => "index_page_translations_on_locale"
+  add_index "page_translations", ["page_id"], :name => "index_page_translations_on_page_id"
+
+  create_table "pages", :force => true do |t|
     t.string   "slug"
     t.string   "identity"
     t.string   "redirect"
-    t.text     "content"
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "parent_id"
@@ -54,8 +64,18 @@ ActiveRecord::Schema.define(:version => 20130325063148) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "posts", :force => true do |t|
+  create_table "post_translations", :force => true do |t|
+    t.integer  "post_id"
+    t.string   "locale"
     t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "post_translations", ["locale"], :name => "index_post_translations_on_locale"
+  add_index "post_translations", ["post_id"], :name => "index_post_translations_on_post_id"
+
+  create_table "posts", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "page_id"
