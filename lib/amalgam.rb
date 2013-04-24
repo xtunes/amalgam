@@ -111,5 +111,6 @@ module Amalgam
     require 'amalgam/types/contentable/decorator'
     require 'amalgam/types/hierachical/decorator'
     require 'amalgam/types/page/decorator'
+    require 'amalgam/types/taggable/decorator'
   end
 end
