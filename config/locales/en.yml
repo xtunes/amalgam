@@ -1,22 +1,4 @@
 en:
-  helpers:
-    submit:
-      page:
-        create: "Add %{model}"
-        update: "Update %{model}"
-    label:
-      page:
-        slug: 'Slug:'
-        path: 'Path:'
-        parent_id: 'Parent Page:'
-  activerecord:
-    models:
-      page: "Page"
-    attributes:
-      page:
-        slug: 'Slug'
-        path: 'Path'
-        parent_id: 'Parent Page'
   amalgam:
     file_download: 'File Download'
     file_pre: 'File Preview'
