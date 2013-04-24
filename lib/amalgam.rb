@@ -22,10 +22,10 @@ module Amalgam
   @@type_whitelist = []
 
   mattr_accessor :admin_access_attr_as
-  @@admin_access_attr_as = :admin
+  @@admin_access_attr_as = :default
 
   mattr_accessor :edit_access_attr_as
-  @@edit_access_attr_as = :edit
+  @@edit_access_attr_as = @@admin_access_attr_as
 
   mattr_accessor :controllers
   @@controllers = []
