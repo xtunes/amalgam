@@ -51,7 +51,10 @@ module Amalgam
     @@i18n = type
     fallback_options = {}
     I18n::available_locales.each do |language|
-      fallback_options[language] = I18n::available_locales
+      locales = I18n::available_locales.clone
+      locales.delete(language)
+      locales.insert(0,language)
+      fallback_options[language] = locales
     end
     ::Globalize.fallbacks= fallback_options
   end
