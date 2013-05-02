@@ -30,6 +30,9 @@ module Amalgam
   mattr_accessor :controllers
   @@controllers = []
 
+  mattr_accessor :mercury_link_whitelist
+  @@mercury_link_whitelist = "^\/$"
+
   mattr_accessor :user_model
 
   mattr_accessor :attachment_class_name

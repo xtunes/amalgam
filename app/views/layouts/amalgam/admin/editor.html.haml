@@ -6,6 +6,8 @@
       %title= 'Amalgam'
       %script{ :type => "text/javascript"}
       = stylesheet_link_tag    'amalgam/editor'
+      :javascript
+        var MERCURY_LINK_WHITELIST = '#{Amalgam.mercury_link_whitelist}'
       = javascript_include_tag 'amalgam/editor'
   %body
     = render :partial => 'amalgam/admin/nav_bar', :locals => {:editor => true}

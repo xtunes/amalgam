@@ -3,6 +3,7 @@
 #= require amalgam/mercury/regions/image
 #= require amalgam/mercury/image_uploader
 #= require twitter/bootstrap/dropdown
+#= require modernizr
 #= require jquery.remotipart
 #= require_self
 
@@ -35,7 +36,6 @@ Msg =
     $loader.html(content);
     $loader.fadeIn();
 
-$ = jQuery
 attachments_count = 0
 $ ->
   @nav = $('.nav')
@@ -89,12 +89,8 @@ $ ->
     @element.css(top: topMargin, display: 'block')
 
   Mercury.on "saved", =>
-    window.location.hash = ''
-    window.location.href = "#{sanitize_url(window.location.href)}#edit"
-    location.reload()
-    # => TODO 只使iframe内部刷新
-    # Msg.success('保存成功!')
-    # @editor.loadIframeSrc(null)
+    Msg.success('保存成功!')
+    @editor.loadIframeSrc(null)
 
   Mercury.on "resize", =>
     if typeof(@editor.toolbar.height()) == "number"
@@ -110,16 +106,17 @@ $ ->
     $('.mercury-panel-close').css("opacity", '1')
     @editor.iframe.contents().find("button.properties").click () ->
       loadform($('iframe').contents().find('#property-form-'+$(this).data().id).html())
-    # TODO 使加载的页面
-    # $(@editor.iframe.get(0).contentWindow.document).on 'click','a', (e)->
-    #   $target = $(e.target)
-    #   if($target.attr('target') == '_parent' || $target.attr('target') == '_top')
-    #     href = sanitize_url($target.attr('href'))
-    #     if href != ''
-    #       e.preventDefault()
-    #       window.mercuryInstance.loadIframeSrc(href)
-    #       if (Modernizr.history)
-    #         history.pushState(null,null,href);
+    $(@editor.iframe.get(0).contentWindow.document).on 'click','a', (e)->
+      $target = $(e.target)
+      if($target.attr('target') == '_parent' || $target.attr('target') == '_top')
+        href = sanitize_url($target.attr('href'))
+        if href != '' && href.match(MERCURY_LINK_WHITELIST)
+          e.preventDefault()
+          window.mercuryInstance.loadIframeSrc(href)
+          unless(window.mercuryInstance.visible)
+            Mercury.trigger('mode', {mode: 'preview'})
+          if (Modernizr.history)
+            history.pushState(null,null,'/editor' + href);
 
   $('.mercury-editproperties-button').click (event,state) ->
     if state != "button"
