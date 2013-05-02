@@ -47,8 +47,10 @@ class TestGroup < ActiveRecord::Base
 end
 
 describe Amalgam::TemplateFinder::Rule do
-  before do
+  before :all do
     @rules = Amalgam::TemplateFinder::Rule.load(File.dirname(__FILE__),"test_pages")
+  end
+  before do
     @rule = Amalgam::TemplateFinder::Rule.new(['slug2@group2'])
 
     @page = TestPage.new(:slug => 'slug2')
@@ -60,8 +62,8 @@ describe Amalgam::TemplateFinder::Rule do
     @page_group2 = @page1.test_groups.new(:name => 'group3')
 
     @page2 = TestPage.new(:slug => 'slug4')
-    @page_group1 = @page2.test_groups.new(:name => 'group1')
-    @page_group2 = @page2.test_groups.new(:name => 'group2')
+    @page_group3 = @page2.test_groups.new(:name => 'group1')
+    @page_group4 = @page2.test_groups.new(:name => 'group2')
 
     @page4 = TestPage.new(:slug => 'slug5')
 
@@ -85,6 +87,8 @@ describe Amalgam::TemplateFinder::Rule do
 
     @page11 = @page6.children.new(:slug => 'slug12')
     @page12 = @page6.children.new(:slug => 'slug13')
+    @page14 = @page12.children.new(:slug => 'slug14')
+    @page15 = @page14.children.new(:slug => 'slug15')
   end
 
   it 'only accept templates' do
@@ -137,6 +141,7 @@ describe Amalgam::TemplateFinder::Rule do
 
   it "如果存在并列的父节点和子节点的level模板，优先使用子节点的模板" do
     Amalgam::TemplateFinder::Rule.look_up([@page9,@page12,@page6]).should eq ["slug13","&1"]
+    Amalgam::TemplateFinder::Rule.look_up([@page15,@page14,@page12,@page6]).should eq ["slug13","&1"]
   end
 end
 

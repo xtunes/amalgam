@@ -38,18 +38,49 @@ module Amalgam
         list = []
         @@rules[options[:path] || pages.first.class.model_name.tableize].clone.each{|rule| list << rule.look_up_single(pages.clone)}
         result1 = list.max{|x,y| x[1] <=> y[1]}
+        if result1[0].last.match(/^&?(\d+)/)
+          result1 = list.select{|x| x[1] == result1[1] && x[0].last.match(/^&?(\d+)/)}.sort{|b,a| a[0].last.match(/^&?(\d+)/)[1].to_i <=> b[0].last.match(/^&?(\d+)/)[1].to_i}.first
+        end
         result2 = list.select{|x| x[0].first != 'default' && x[0].first != 'show'}.max{|x,y| x[1] <=> y[1]}
+        if result2[0].last.match(/^&?(\d+)/)
+          result2 = list.select{|x| x[0].first != 'default' && x[0].first != 'show'}.select{|x| x[1] == result2[1] && x[0].last.match(/^&?(\d+)/)}.sort{|b,a| a[0].last.match(/^&?(\d+)/)[1].to_i <=> b[0].last.match(/^&?(\d+)/)[1].to_i}.first
+        end
         return result1[0] unless result2
         result = result1[1]>result2[1] ? result1[0] : result2[0]
       end
 
       def look_up_single(pages)
+        if @list.clone.reverse.first.match(/^&?(\d+)/)
+          look_up_single_started_with_level(pages)
+        else
+          look_up_single_normal(pages)
+        end
+      end
+
+      def look_up_single_started_with_level(pages)
+        deepth = @list.clone.last.match(/^&?(\d+)/)[1].to_i
+        if pages.count < deepth+1
+          return [@list,0]
+        else
+          pages.count.times do |i|
+            pages_with_level = pages.clone
+            i.times{pages_with_level.shift}
+            result = look_up_single_normal(pages_with_level,i+1)
+            if result[1] > 0
+              return result
+            end
+          end
+          return [@list,0]
+        end
+      end
+
+      def look_up_single_normal(pages, parent_level = 0)
         result = 0
-        is_self = true
         list = @list.clone.reverse<<nil
         pages<<nil
         level = nil
         rule = list.shift
+        is_self = true
         while list.present? && pages.present?
           page = pages.shift
           break unless page
@@ -57,7 +88,7 @@ module Amalgam
           is_self = false if is_self
           #puts check_result.to_s + ':'+rule+":"+page.template_keys.to_s
           if check_result>0 || rule.match(/^&?(\d+)/)
-            result += check_result*(level&&rule!='default' ? 10*(1.0/level) : 1) unless rule=='default'&&pages.length>1&&list.length<=1
+            result += check_result*(level&&rule!='default' ? 50*(1.0/parent_level)/level : 1) unless rule=='default'&&pages.length>1&&list.length<=1
             level = nil
             rule = list.shift unless rule.match(/^&?(\d+)/)
             if rule && rule.match(/^&?(\d+)/)
