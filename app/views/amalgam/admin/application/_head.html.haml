@@ -3,4 +3,5 @@
     var UNITS = jQuery.parseJSON('#{j(@resource_class.tree_json)}')
     var NODE_NAME = '#{@resource_class.node_name}'
     var INIT_SELECT = [#{@resource ? '\'unit-'+@resource.id.to_s+'\'' : ''}]
+    var LOCALE = '#{I18n.locale}'
   = javascript_include_tag "amalgam/js-tree"

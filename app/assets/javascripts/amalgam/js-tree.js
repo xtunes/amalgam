@@ -14,7 +14,7 @@ $(function(){
       'save_selected' : false
     }
   }).bind("click.jstree", function (event) {
-    $.pjax({url: $(event.target).parent().attr('href'), container: '.data-pjax-container'});
+    $.pjax({url: $(event.target).parent().attr('href')+'?locale='+LOCALE, container: '.data-pjax-container'});
   }).bind("remove.jstree", function (e, data) {
     var node = data.rslt.obj;
     if(node.attr('resources')){
