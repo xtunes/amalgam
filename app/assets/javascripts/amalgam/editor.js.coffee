@@ -13,6 +13,19 @@ Mercury.uploader.MultiPartPost::buildBody = ->
     @body += "" + boundary + "\r\nContent-Disposition: form-data; name=\"" + name + "\"\r\n\r\n" + (unescape(encodeURIComponent(value))) + "\r\n"
   @body += "" + boundary + "\r\nContent-Disposition: form-data; name=\"" + @inputName + "\"; filename=\"" + (unescape(encodeURIComponent(@file.name))) + "\"\r\nContent-Type: " + @file.type + "\r\nContent-Transfer-Encoding: binary\r\n\r\n" + @contents + "\r\n" + boundary + "--"
 
+Mercury.PageEditor::hijackLinksAndForms = ->
+  for element in jQuery('a', @document)
+    ignored = false
+    for classname in Mercury.config.nonHijackableClasses || []
+      if jQuery(element).hasClass(classname)
+        ignored = true
+        continue
+    if !ignored && (element.target == '' || element.target == '_self') && !jQuery(element).closest("[#{Mercury.config.regions.attribute}]").length
+      jQuery(element).attr('target', '_parent')
+      href = jQuery(element).attr('href')
+      if href != '' && href.match(MERCURY_LINK_WHITELIST)
+        jQuery(element).attr('href', '/editor' + href + '#edit')
+
 $ = window.jQuery
 
 findOrCreate = (selector,content)->
@@ -89,8 +102,12 @@ $ ->
     @element.css(top: topMargin, display: 'block')
 
   Mercury.on "saved", =>
-    Msg.success('保存成功!')
-    @editor.loadIframeSrc(null)
+    window.location.hash = ''
+    window.location.href = "/editor#{sanitize_url(window.location.href)}#edit"
+    location.reload()
+    # => TODO 只使iframe内部刷新
+    # Msg.success('保存成功!')
+    # @editor.loadIframeSrc(null)
 
   Mercury.on "resize", =>
     if typeof(@editor.toolbar.height()) == "number"
@@ -106,17 +123,17 @@ $ ->
     $('.mercury-panel-close').css("opacity", '1')
     @editor.iframe.contents().find("button.properties").click () ->
       loadform($('iframe').contents().find('#property-form-'+$(this).data().id).html())
-    $(@editor.iframe.get(0).contentWindow.document).on 'click','a', (e)->
-      $target = $(e.target)
-      if($target.attr('target') == '_parent' || $target.attr('target') == '_top')
-        href = sanitize_url($target.attr('href'))
-        if href != '' && href.match(MERCURY_LINK_WHITELIST)
-          e.preventDefault()
-          window.mercuryInstance.loadIframeSrc(href)
-          unless(window.mercuryInstance.visible)
-            Mercury.trigger('mode', {mode: 'preview'})
-          if (Modernizr.history)
-            history.pushState(null,null,'/editor' + href);
+    #$(@editor.iframe.get(0).contentWindow.document).on 'click','a', (e)->
+    #  $target = $(e.target)
+    #  if($target.attr('target') == '_parent' || $target.attr('target') == '_top')
+    #   href = sanitize_url($target.attr('href'))
+    #    if href != '' && href.match(MERCURY_LINK_WHITELIST)
+    #      e.preventDefault()
+    #      window.mercuryInstance.loadIframeSrc(href)
+    #      unless(window.mercuryInstance.visible)
+    #        Mercury.trigger('mode', {mode: 'preview'})
+    #      if (Modernizr.history)
+    #        history.pushState(null,null,'/editor' + href);
 
   $('.mercury-editproperties-button').click (event,state) ->
     if state != "button"
