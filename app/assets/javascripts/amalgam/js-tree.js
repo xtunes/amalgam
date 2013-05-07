@@ -14,7 +14,9 @@ $(function(){
       'save_selected' : false
     }
   }).bind("click.jstree", function (event) {
-    $.pjax({url: $(event.target).parent().attr('href')+'?locale='+LOCALE, container: '.data-pjax-container'});
+    if($(event.target).parent().attr('href') !== undefined){
+      $.pjax({url: $(event.target).parent().attr('href')+'?locale='+LOCALE, container: '.data-pjax-container'});
+    }
   }).bind("remove.jstree", function (e, data) {
     var node = data.rslt.obj;
     if(node.attr('resources')){
