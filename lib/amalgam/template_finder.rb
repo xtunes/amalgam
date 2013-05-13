@@ -42,7 +42,7 @@ module Amalgam
           result1 = list.select{|x| x[1] == result1[1] && x[0].last.match(/^&?(\d+)/)}.sort{|b,a| a[0].last.match(/^&?(\d+)/)[1].to_i <=> b[0].last.match(/^&?(\d+)/)[1].to_i}.first
         end
         result2 = list.select{|x| x[0].first != 'default' && x[0].first != 'show'}.max{|x,y| x[1] <=> y[1]}
-        if result2[0].last.match(/^&?(\d+)/)
+        if result2 && result2[0].last.match(/^&?(\d+)/)
           result2 = list.select{|x| x[0].first != 'default' && x[0].first != 'show'}.select{|x| x[1] == result2[1] && x[0].last.match(/^&?(\d+)/)}.sort{|b,a| a[0].last.match(/^&?(\d+)/)[1].to_i <=> b[0].last.match(/^&?(\d+)/)[1].to_i}.first
         end
         return result1[0] unless result2
