@@ -24,7 +24,7 @@ module Amalgam
             if belongs_to_assocs.values.first.options[:class_name]
               return belongs_to_assocs.values.first.options[:class_name].to_s
             else
-              return self.reflections.keys.first.to_s.classify
+              return belongs_to_assocs.keys.first.to_s.classify
             end
           else
             return nil
