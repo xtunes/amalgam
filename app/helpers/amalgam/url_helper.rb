@@ -1,12 +1,12 @@
 module Amalgam
   module UrlHelper
     def locale_url(locale)
-      available_locales = ::I18n::available_locales.collect{|m| m.to_s.downcase}
+      available_locales = ::I18n::available_locales.collect{|m| m.to_s}
 
       path_list = request.fullpath.split('/')
       if path_list.present?
-        if available_locales.include?(path_list[1].downcase)
-          path_list[1] = locale
+        if available_locales.include?(path_list[2])
+          path_list[2] = locale
           return "#{request.protocol}#{request.host_with_port}#{path_list.join('/')}"
         end
       else
