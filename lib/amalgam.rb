@@ -53,13 +53,6 @@ module Amalgam
   def self.i18n=(type,options={})
     @@i18n = type
     fallback_options = {}
-    I18n::available_locales.each do |language|
-      locales = I18n::available_locales.clone
-      locales.delete(language)
-      locales.insert(0,language)
-      fallback_options[language] = locales
-    end
-    ::Globalize.fallbacks= fallback_options
   end
 
   def self.load_templates

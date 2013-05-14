@@ -53,7 +53,7 @@ attachments_count = 0
 $ ->
   @nav = $('.nav')
   topMargin = @nav.height()
-  @editor = new Mercury.PageEditor mercury_prefix()+"/admin/editor",
+  @editor = new Mercury.PageEditor mercury_prefix()+"/admin/editor?locale="+I18N_LOCALE,
                                     saveStyle:  "form"
                                     saveMethod: "PUT"
                                     visible:    false

@@ -3,10 +3,17 @@ module Amalgam
     layout false
 
     def edit
+      lang = params[:requested_uri].split('/').first
+      if ::I18n::available_locales.collect{|m| m.to_s}.include?(lang) || params[:locale]
+        ::I18n.locale = params[:locale] || lang.to_sym
+      else
+        ::I18n.locale = I18n.default_locale
+      end
       render :text => '', :layout => 'amalgam/admin/editor'
     end
 
     def update
+      ::I18n.locale = params[:locale] if params[:locale]
       ContentPersistence.save(params[:content]) if params[:content]
       respond_to do |format|
         format.json {render :text => '{}'}
