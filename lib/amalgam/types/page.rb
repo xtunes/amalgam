@@ -16,8 +16,8 @@ module Amalgam
 
         alias_method :old_to_nodes, :to_nodes
 
-        def to_nodes(fields=[])
-          hash = old_to_nodes(fields)
+        def to_nodes(fields=[],options={})
+          hash = old_to_nodes(fields,options)
           hash['attr']['class'] = "redirect" if self.redirect.present?
           hash
         end

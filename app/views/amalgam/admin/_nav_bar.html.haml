@@ -5,7 +5,7 @@
       %ul.nav
         = controller_links
         - if Amalgam.i18n
-          = drop_down t("amalgam.locales.#{I18n.locale.to_s}"), '#' do
+          = drop_down t("amalgam.locales.#{params[:locale] || I18n.locale.to_s}"), '#' do
             - I18n::available_locales.each do |locale|
               = dropdown_item(t("amalgam.locales.#{locale.to_s}"), locale_url(locale.to_s))
       %ul.nav.pull-right

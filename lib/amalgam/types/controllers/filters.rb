@@ -27,11 +27,14 @@ module Amalgam
         end
 
         def update_resource
+          lang = I18n.locale
+          I18n.locale = params[:locale] if Amalgam.i18n && params[:locale]
           unless resource.source.class.attr_accessible[Amalgam.admin_access_attr_as].empty?
             resource.update_attributes(params[model_name], :as => Amalgam.admin_access_attr_as)
           else
             resource.update_attributes(params[model_name])
           end
+          I18n.locale = lang
         end
 
         def find_model_class
@@ -39,6 +42,8 @@ module Amalgam
         end
 
         def get_resource
+          lang = I18n.locale
+          I18n.locale = params[:locale] if Amalgam.i18n && params[:locale]
           if params[:id]
             @resource ||= @resource_class.find(params[:id])
           else
@@ -58,6 +63,7 @@ module Amalgam
           end
           @back_path = admin_resources_path(params[:resources])
           @resource = Amalgam::Admin::ResourceDecorator.decorate(@resource)
+          I18n.locale = lang
         end
 
         def get_collection

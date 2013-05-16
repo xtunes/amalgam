@@ -12,6 +12,29 @@ $(function(){
     },
     "cookies" : {
       'save_selected' : false
+    },
+    "contextmenu" : {
+      items : { // Could be a function that should return an object like this one
+        "create" : {
+          "separator_before"  : false,
+          "separator_after" : true,
+          "label"       : "创建",
+          "action"      : function (obj) { this.create(obj); }
+        },
+        "rename" : {
+          "separator_before"  : false,
+          "separator_after" : false,
+          "label"       : "编辑",
+          "action"      : function (obj) { this.rename(obj); }
+        },
+        "remove" : {
+          "separator_before"  : false,
+          "icon"        : false,
+          "separator_after" : false,
+          "label"       : "删除",
+          "action"      : function (obj) { if(this.is_selected(obj)) { this.remove(); } else { this.remove(obj); } }
+        }
+      }
     }
   }).bind("click.jstree", function (event) {
     if($(event.target).parent().attr('href') !== undefined){
@@ -46,7 +69,7 @@ $(function(){
     $.ajax({
       async : false,
       type: 'PUT',
-      url: "/admin/"+node.attr('resources')+'/'+node.data('id')+'.json',
+      url: "/admin/"+node.attr('resources')+'/'+node.data('id')+'.json'+'?locale='+LOCALE,
       dataType: "json",
       data: content,
       complete: function (r) {

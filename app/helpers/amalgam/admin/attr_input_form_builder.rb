@@ -6,7 +6,11 @@ module Amalgam
       include ActionView::Helpers::JavaScriptHelper
       def attr_input(attribute, options={})
         if !object.class.included_modules.include?(Amalgam::Types::Hierachical) && attribute.to_s == object.class.foreign_key.to_s
-          return select attribute, nested_set_options(object.class.parent_class_name.safe_constantize) {|i, level| "#{'-' * level} #{i.title}" },{:required => true}
+          if !Amalgam.i18n
+            return select attribute, nested_set_options(object.class.parent_class_name.safe_constantize) {|i, level| "#{'-' * level} #{i.title}" },{:required => true}
+          else
+            return select attribute, nested_set_options(object.class.parent_class_name.safe_constantize) {|i, level| "#{'-' * level} #{i.read_attribute(:title,{:locale => options[:locale]||I18n.locale})}" },{:required => true}
+          end
         end
         column = object.class.columns.select{|m| m.name == attribute.to_s}.first
         unless column.respond_to?(:type)

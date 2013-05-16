@@ -31,21 +31,24 @@ module Amalgam
 
         def create
           flash[:notice] = "#{model_name} was successfully created." if resource.save
-          respond_with(resource, :location => admin_resources_path(params[:resources],:anchor => "node-#{resource.id}")) do |formate|
+          url = params[:locale] ? admin_resources_path(params[:resources],:anchor => "node-#{resource.id}", :locale => params[:locale]) : admin_resources_path(params[:resources],:anchor => "node-#{resource.id}")
+          respond_with(resource, :location => url) do |formate|
             formate.json{ render :json => { :errors => resource.errors, :id => resource.id } }
           end
         end
 
         def update
           flash[:notice] = "#{model_name} was successfully updated." if update_resource
-          respond_with(resource, :location => admin_resources_path(params[:resources])) do |formate|
+          url = params[:locale] ? admin_resources_path(params[:resources],:anchor => "node-#{resource.id}", :locale => params[:locale]) : admin_resources_path(params[:resources],:anchor => "node-#{resource.id}")
+          respond_with(resource, :location => url) do |formate|
             formate.json{ render :json => { :errors => resource.errors } }
           end
         end
 
         def destroy
           resource.destroy
-          respond_with(resource, :location => admin_resources_path(params[:resources])) do |formate|
+          url = params[:locale] ? admin_resources_path(params[:resources], :locale => params[:locale]) : admin_resources_path(params[:resources])
+          respond_with(resource, :location => url) do |formate|
             formate.json{ render :json => { :errors => resource.errors } }
           end
         end

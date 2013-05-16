@@ -1,7 +1,7 @@
 - if @resource_class && @resource_class.included_modules.include?(Amalgam::Types::Hierachical)
   :javascript
-    var UNITS = jQuery.parseJSON('#{j(@resource_class.tree_json)}')
+    var UNITS = jQuery.parseJSON('#{j(@resource_class.tree_json([],{:locale => params[:locale] || I18n.locale}))}')
     var NODE_NAME = '#{@resource_class.node_name}'
     var INIT_SELECT = [#{@resource ? '\'unit-'+@resource.id.to_s+'\'' : ''}]
-    var LOCALE = '#{I18n.locale}'
+    var LOCALE = '#{params[:locale] || I18n.locale}'
   = javascript_include_tag "amalgam/js-tree"

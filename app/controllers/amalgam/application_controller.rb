@@ -1,6 +1,6 @@
 module Amalgam
   class ApplicationController < ActionController::Base
-    include Amalgam::Globalize::Helpers if Amalgam.i18n
+#    include Amalgam::Globalize::Helpers if Amalgam.i18n
     protect_from_forgery
 
     protected

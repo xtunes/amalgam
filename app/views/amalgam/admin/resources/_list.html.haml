@@ -3,16 +3,21 @@
     - if params[:parent_class]
       - if Amalgam.admin_menus[@resource_class.to_s.tableize].include?('new')
         %span.right
-          =link_to admin_new_resource_path(params[:resources],:parent_class => params[:parent_class],:parent_id =>params[:parent_id]) ,:class => 'btn btn-primary' do
+          =link_to admin_new_resource_path(params[:resources],:parent_class => params[:parent_class],:parent_id =>params[:parent_id], :locale => params[:locale] || I18n.locale) ,:class => 'btn btn-primary' do
             %i.icon-plus.icon-white
             = "#{t('amalgam.admin.actions.new')}#{@resource_class.model_name.human}"
       = link_to t("amalgam.admin.a.back"), admin_edit_resource_path(params[:parent_class].tableize,params[:parent_id])
     - else
       - if Amalgam.admin_menus[@resource_class.to_s.tableize].include?('new')
         %span.right
-          =link_to admin_new_resource_path(params[:resources]) ,:class => 'btn btn-primary' do
-            %i.icon-plus.icon-white
-            = "#{t('amalgam.admin.actions.new')}#{@resource_class.model_name.human}"
+          - if Amalgam.i18n
+            =link_to admin_new_resource_path(params[:resources], :locale => params[:locale] || I18n.locale) ,:class => 'btn btn-primary' do
+              %i.icon-plus.icon-white
+              = "#{t('amalgam.admin.actions.new')}#{@resource_class.model_name.human}"
+          - else
+            =link_to admin_new_resource_path(params[:resources]) ,:class => 'btn btn-primary' do
+              %i.icon-plus.icon-white
+              = "#{t('amalgam.admin.actions.new')}#{@resource_class.model_name.human}"
   - unless @resource_class.included_modules.include?(Amalgam::Types::Hierachical)
     %table.table.table-striped.table-bordered.table-hover
       - belonged_by = @resource_class.reflect_on_all_associations(:belongs_to)
@@ -33,20 +38,23 @@
             - var = 0
             - Amalgam::Admin::ResourceDecorator.decorate(@resource_class.new).admin_attrs.each do |attr|
               - if attr.to_s != @resource_class.foreign_key.to_s && var < 2
-                %td= resource.send(attr)
+                - if Amalgam.i18n && resource.source.translated?(attr)
+                  %td= resource.send(:read_attribute,attr,{:locale => params[:locale]||I18n.locale})
+                - else
+                  %td= resource.send(attr)
               - var += 1
             - belonged_by.each do |item|
               - if !item.options[:polymorphic] && !!item.klass && (item.klass != @resource_class)
                 %td
                   - parent = resource.source.send(item.instance_variable_get(:@name))
                   -if !!parent
-                    - content = parent.respond_to?(:title) ? parent.send(:title) : "#{parent.class.model_name.human}_#{parent.id}"
+                    - content = parent.respond_to?(:title) ? parent.send(:read_attribute,:title,{:locale => params[:locale]||I18n.locale}) : "#{parent.class.model_name.human}_#{parent.id}"
                     = link_to content, admin_edit_resource_path(item.instance_variable_get(:@plural_name),parent.id)
             %td.right
               = link_to t("amalgam.admin.actions.show"), amalgam.admin_resource_path("#{resource.source.class.to_s.tableize}", resource.id)
               - if @resource_class.included_modules.include?(Amalgam::Types::Contentable)
                 = link_to t("amalgam.admin.actions.edit_content"), "/editor#{Amalgam.i18n ? '/'+I18n.locale.to_s+'/' : '/'}#{@resource.source.class.to_s.tableize}/#{@resource.source.to_param}#edit", :target => "_blank"
               - if Amalgam.admin_menus[@resource_class.to_s.tableize].include?('edit')
-                = link_to t('amalgam.admin.actions.edit'), admin_edit_resource_path(params[:resources],resource.id)
+                = link_to t('amalgam.admin.actions.edit'), admin_edit_resource_path(params[:resources],resource.id)+"?locale=#{params[:locale]||I18n.locale}"
               = link_to t('amalgam.admin.actions.destroy'), admin_resource_path(params[:resources],resource.id), :confirm => t('amalgam.admin.confirmation.delete', :model => @resource_class.model_name.human), :method => :delete
         = paginate @collection

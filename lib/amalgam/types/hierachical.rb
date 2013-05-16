@@ -26,15 +26,15 @@ module Amalgam
         def assert_not_work_with_sortable
           raise ::Amalgam::Types::Hierachical::NotWorkWithSortableError.new("this module can not work with sortable type") if included_modules.include?(Amalgam::Types::Sortable)
         end
-        def tree_json(fields=[])
+        def tree_json(fields=[],options={})
           fields = self.admin_attrs if self.respond_to?(:admin_attrs) && fields.empty?
           fields.map!{|x| x.to_sym} << self.node_name.to_sym
           fields.uniq!
-          self.includes(:children).roots.collect{|p| p.to_nodes(fields)}.to_json
+          self.includes(:children).roots.collect{|p| p.to_nodes(fields,options)}.to_json
         end
       end
 
-      def to_nodes(fields=[])
+      def to_nodes(fields=[],options={})
         hash = {"metadata" => {},"data" => {}, "attr" => {}}
         hash['attr']['id'] = "unit-#{self.id}"
         hash['attr']['resources'] = self.class.to_s.tableize
@@ -42,9 +42,13 @@ module Amalgam
         hash['metadata']['id'] = self.id
         hash['attr']['href'] = "/admin/#{self.class.to_s.tableize}/#{self.id}/edit"
         fields.each do |field|
-          hash['data'][field.to_s] = self.send(field)
+          if Amalgam.i18n && self.translated?(field)
+            hash['data'][field.to_s] = self.send(:read_attribute,field,{:locale => options[:locale] || I18n.locale})
+          else
+            hash['data'][field.to_s] = self.send(field)
+          end
         end
-        hash["children"] = self.children.map { |c| c.to_nodes(fields) } if self.children.present?
+        hash["children"] = self.children.map { |c| c.to_nodes(fields,options) } if self.children.present?
         hash
       end
 

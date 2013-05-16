@@ -2,21 +2,27 @@
   - if params[:parent_class]
     - if Amalgam.admin_menus[@resource_class.to_s.tableize].include?('new')
       %span.right
-        =link_to admin_new_resource_path(params[:resources],:parent_class => params[:parent_class],:parent_id =>params[:parent_id]) ,:class => 'btn btn-primary' do
+        - url = params[:locale] ? admin_new_resource_path(params[:resources],:parent_class => params[:parent_class],:parent_id =>params[:parent_id], :locale => params[:locale]) : admin_new_resource_path(params[:resources],:parent_class => params[:parent_class],:parent_id =>params[:parent_id])
+        =link_to url ,:class => 'btn btn-primary' do
           %i.icon-plus.icon-white
           = "#{t('amalgam.admin.actions.new')}#{@resource_class.model_name.human}"
   - else
     - if Amalgam.admin_menus[@resource_class.to_s.tableize].include?('new')
       %span.right
-        =link_to admin_new_resource_path(params[:resources]) ,:class => 'btn btn-primary' do
+        - url = params[:locale] ? admin_new_resource_path(params[:resources], :locale => params[:locale]) : admin_new_resource_path(params[:resources])
+        =link_to url ,:class => 'btn btn-primary' do
           %i.icon-plus.icon-white
           = "#{t('amalgam.admin.actions.new')}#{@resource_class.model_name.human}"
-  = form_for @resource.source, :url => admin_update_resource_path(params[:resources]) ,:html => {:class => 'basic'}, :builder => Amalgam::Admin::AttrInputFormBuilder do |f|
+  - url = params[:locale] ? admin_update_resource_path(params[:resources], :locale => params[:locale]) : admin_update_resource_path(params[:resources])
+  = form_for @resource.source, :url => url ,:html => {:class => 'basic'}, :builder => Amalgam::Admin::AttrInputFormBuilder do |f|
     %legend
       = "#{t('amalgam.admin.actions.edit')}#{@resource_class.model_name.human}"
     - @resource.admin_attrs.each do |attr|
       = f.label attr
-      = f.attr_input attr
+      - if Amalgam.i18n && @resource.translated?(attr)
+        = f.attr_input attr, :value => @resource.read_attribute(attr, :locale => params[:locale])
+      - else
+        = f.attr_input attr, :locale => params[:locale]
     - if @resource.source.class.taggable?
       - @resource.source.class.tag_types.each do |type|
         = f.label "#{type.to_s.singularize}_list"
