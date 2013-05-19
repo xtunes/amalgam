@@ -53,7 +53,7 @@
             %td.right
               = link_to t("amalgam.admin.actions.show"), amalgam.admin_resource_path("#{resource.source.class.to_s.tableize}", resource.id)
               - if @resource_class.included_modules.include?(Amalgam::Types::Contentable)
-                = link_to t("amalgam.admin.actions.edit_content"), "/editor#{Amalgam.i18n ? '/'+I18n.locale.to_s+'/' : '/'}#{@resource.source.class.to_s.tableize}/#{@resource.source.to_param}#edit", :target => "_blank"
+                = link_to t("amalgam.admin.actions.edit_content"), "/editor#{Amalgam.i18n ? '/'+I18n.locale.to_s+'/' : '/'}#{resource.source.class.to_s.tableize}/#{resource.source.to_param}#edit", :target => "_blank"
               - if Amalgam.admin_menus[@resource_class.to_s.tableize].include?('edit')
                 = link_to t('amalgam.admin.actions.edit'), admin_edit_resource_path(params[:resources],resource.id)+"?locale=#{params[:locale]||I18n.locale}"
               = link_to t('amalgam.admin.actions.destroy'), admin_resource_path(params[:resources],resource.id), :confirm => t('amalgam.admin.confirmation.delete', :model => @resource_class.model_name.human), :method => :delete
