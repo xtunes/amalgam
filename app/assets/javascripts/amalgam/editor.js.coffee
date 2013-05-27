@@ -23,7 +23,7 @@ Mercury.PageEditor::hijackLinksAndForms = ->
     if !ignored && (element.target == '' || element.target == '_self') && !jQuery(element).closest("[#{Mercury.config.regions.attribute}]").length
       jQuery(element).attr('target', '_parent')
       href = jQuery(element).attr('href')
-      if href != '' && href.match(MERCURY_LINK_WHITELIST)
+      if href && href != '' && href.match(MERCURY_LINK_WHITELIST)
         jQuery(element).attr('href', '/editor' + href + '#edit')
 
 $ = window.jQuery
@@ -127,7 +127,7 @@ $ ->
     #  $target = $(e.target)
     #  if($target.attr('target') == '_parent' || $target.attr('target') == '_top')
     #   href = sanitize_url($target.attr('href'))
-    #    if href != '' && href.match(MERCURY_LINK_WHITELIST)
+    #    if href && href != '' && href.match(MERCURY_LINK_WHITELIST)
     #      e.preventDefault()
     #      window.mercuryInstance.loadIframeSrc(href)
     #      unless(window.mercuryInstance.visible)
