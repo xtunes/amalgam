@@ -70,6 +70,8 @@ describe Amalgam::Types::Attachment do
     @test_attachment1.position.should eq 2
     @test_attachment2.position.should eq 3
     @test_attachment3.position.should eq 1
+    @attachment_page.attachment_list('test').size.should eq 3
+    @attachment_page.attachment('test').name.should eq 'test'
   end
 
   it "attachment should not accept not allowed file type" do

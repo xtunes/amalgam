@@ -12,6 +12,18 @@ module Amalgam
           :reject_if => proc {|attachment| attachment[:id].blank? && attachment[:file].blank?}
       end
 
+      def attachment(name)
+        attachments[name]
+      end
+
+      def attachment_list(name)
+        if attachments[name].present?
+          attachments[name]
+        else
+          []
+        end
+      end
+
       module AttachmentExtension
         # 返回一个 <tt>#HashWithIndifferentAccess</tt>
         # 包含所有的附件,key为附件的name或者索引, value 为集合, 可直接作为第一个元素调用
