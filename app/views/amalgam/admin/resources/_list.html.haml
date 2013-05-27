@@ -38,7 +38,7 @@
             - var = 0
             - Amalgam::Admin::ResourceDecorator.decorate(@resource_class.new).admin_attrs.each do |attr|
               - if attr.to_s != @resource_class.foreign_key.to_s && var < 2
-                - if Amalgam.i18n && resource.source.translated?(attr)
+                - if Amalgam.i18n && resource.source.respond_to?(:translated?) && resource.source.translated?(attr)
                   %td= resource.send(:read_attribute,attr,{:locale => params[:locale]||I18n.locale})
                 - else
                   %td= resource.send(attr)
