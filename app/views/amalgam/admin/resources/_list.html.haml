@@ -51,7 +51,7 @@
                     - content = parent.respond_to?(:title) ? parent.send(:read_attribute,:title,{:locale => params[:locale]||I18n.locale}) : "#{parent.class.model_name.human}_#{parent.id}"
                     = link_to content, admin_edit_resource_path(item.instance_variable_get(:@plural_name),parent.id)
             %td.right
-              = link_to t("amalgam.admin.actions.show"), amalgam.admin_resource_path("#{resource.source.class.to_s.tableize}", resource.id)
+              = link_to t("amalgam.admin.actions.show"), admin_resource_path("#{resource.source.class.to_s.tableize}", resource.id)
               - if @resource_class.included_modules.include?(Amalgam::Types::Contentable)
                 = link_to t("amalgam.admin.actions.edit_content"), "/editor#{Amalgam.i18n ? '/'+I18n.locale.to_s+'/' : '/'}#{resource.source.class.to_s.tableize}/#{resource.source.to_param}#edit", :target => "_blank"
               - if Amalgam.admin_menus[@resource_class.to_s.tableize].include?('edit')

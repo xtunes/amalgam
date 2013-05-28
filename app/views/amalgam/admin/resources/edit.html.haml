@@ -13,7 +13,7 @@
         =link_to url ,:class => 'btn btn-primary' do
           %i.icon-plus.icon-white
           = "#{t('amalgam.admin.actions.new')}#{@resource_class.model_name.human}"
-  - url = params[:locale] ? admin_update_resource_path(params[:resources], :locale => params[:locale]) : admin_update_resource_path(params[:resources])
+  - url = params[:locale] ? admin_update_resource_path(params[:resources], @resource.source.id, :locale => params[:locale]) : admin_update_resource_path(params[:resources], @resource.source.id)
   = form_for @resource.source, :url => url ,:html => {:class => 'basic'}, :builder => Amalgam::Admin::AttrInputFormBuilder do |f|
     %legend
       = "#{t('amalgam.admin.actions.edit')}#{@resource_class.model_name.human}"

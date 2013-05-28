@@ -7,15 +7,15 @@
     = link_to t('amalgam.admin.actions.destroy'), admin_resource_path(params[:resources],@resource.id), :confirm => t('amalgam.admin.confirmation.delete_child', :model => @resource_class.model_name.human), :method => :delete, :class => "btn btn-danger"
   - @resource_class.reflect_on_all_associations(:has_many).select{|x| Amalgam.admin_menus.keys.include?(x.plural_name)}.each do |assoc|
     .btn-group
-      = link_to "#{assoc.klass.model_name.human}:#{@resource.send(assoc.plural_name).count}", amalgam.admin_resources_path(assoc.plural_name, :parent_class => @resource_class.to_s, :parent_id => @resource.id), :class => "btn btn-info"
+      = link_to "#{assoc.klass.model_name.human}:#{@resource.send(assoc.plural_name).count}", admin_resources_path(assoc.plural_name, :parent_class => @resource_class.to_s, :parent_id => @resource.id), :class => "btn btn-info"
       %a.btn.btn-info.dropdown-toggle{'data-toggle' => "dropdown", :href => "#"}
         %span.caret
       %ul.dropdown-menu
         %li
-          = link_to amalgam.admin_resources_path(assoc.plural_name, :parent_class => @resource_class.to_s, :parent_id => @resource.id) do
+          = link_to admin_resources_path(assoc.plural_name, :parent_class => @resource_class.to_s, :parent_id => @resource.id) do
             %i.icon-th-list
             =t('amalgam.admin.actions.show')
         %li
-          = link_to amalgam.admin_new_resource_path(assoc.plural_name, :parent_class => @resource_class.to_s, :parent_id => @resource.id) do
+          = link_to admin_new_resource_path(assoc.plural_name, :parent_class => @resource_class.to_s, :parent_id => @resource.id) do
             %i.icon-plus
             =t('amalgam.admin.actions.new')

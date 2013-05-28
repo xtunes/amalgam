@@ -36,13 +36,13 @@ module Amalgam
           links += drop_down name.classify.constantize.model_name.human,'#', :controller => "amalgam/admin/#{name}" do
             dropdown = ""
             actions.each do |action|
-              dropdown += dropdown_item(I18n.t("amalgam.admin.actions.#{action}"), amalgam.admin_resources_path(:resources => name)) if action == 'index' || action == :index
-              dropdown += dropdown_item(I18n.t('amalgam.admin.actions.new'), amalgam.admin_new_resource_path(:resources => name)) if action == 'new' || action == :new
+              dropdown += dropdown_item(I18n.t("amalgam.admin.actions.#{action}"), admin_resources_path(name)) if action == 'index' || action == :index
+              dropdown += dropdown_item(I18n.t('amalgam.admin.actions.new'), admin_new_resource_path(name)) if action == 'new' || action == :new
             end
             dropdown.html_safe
           end
         else
-          links += menu_item I18n.t("amalgam.admin.menus.#{name}"), amalgam.send("admin_#{name}_path"), :controller => "amalgam/admin/#{actions.first[:controller]}"
+          links += menu_item I18n.t("amalgam.admin.menus.#{name}"), send("admin_#{name}_path"), :controller => "amalgam/admin/#{actions.first[:controller]}"
         end
       end
       links.html_safe

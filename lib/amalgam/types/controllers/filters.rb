@@ -19,7 +19,7 @@ module Amalgam
         end
 
         def model_name
-          params[:resources].singularize.to_sym
+          request.env[:resources].singularize.to_sym
         end
 
         def resource
@@ -38,6 +38,7 @@ module Amalgam
         end
 
         def find_model_class
+          params[:resources] ||= request.env[:resources]
           @resource_class = params[:resources].classify.constantize
         end
 
@@ -55,13 +56,13 @@ module Amalgam
               end
             else
               if @resource_class.attr_accessible[Amalgam.admin_access_attr_as].empty?
-                 @resource ||= params[:parent_class].safe_constantize.find(params[:parent_id]).send(params[:resources].to_s.tableize).new(params[model_name])
+                 @resource ||= params[:parent_class].safe_constantize.find(params[:parent_id]).send(request.env[:resources].to_s.tableize).new(params[model_name])
               else
-                 @resource ||= params[:parent_class].safe_constantize.find(params[:parent_id]).send(params[:resources].to_s.tableize).new(params[model_name], :as => Amalgam.admin_access_attr_as)
+                 @resource ||= params[:parent_class].safe_constantize.find(params[:parent_id]).send(request.env[:resources].to_s.tableize).new(params[model_name], :as => Amalgam.admin_access_attr_as)
               end
             end
           end
-          @back_path = admin_resources_path(params[:resources])
+          @back_path = admin_resources_path(request.env[:resources])
           @resource = Amalgam::Admin::ResourceDecorator.decorate(@resource)
           I18n.locale = lang
         end
