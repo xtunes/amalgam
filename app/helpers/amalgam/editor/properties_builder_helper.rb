@@ -48,7 +48,7 @@ module Amalgam
           @buffer.concat label(I18n.t("amalgam.file_pre")+':',:style => "display:inline;margin-right:10px;")
           @buffer.concat @template.image_tag("/attachments/#{obj.id}?thumb=true")
         else
-          @buffer.concat "<a href= '#{obj.file.try(:url)}'>#{I18n.t("amalgam.file_download")}</a>".html_safe if obj
+          @buffer.concat "<a href= '/attachments/#{attachment.id}/download?download=true'>#{I18n.t("amalgam.file_download")}</a>".html_safe if obj
         end
         @buffer.concat attachment_field(:hidden_field, :name, name)
         @buffer.concat attachment_field(:hidden_field, :id, obj.id) if obj.try(:persisted?)
