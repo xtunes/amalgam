@@ -121,7 +121,8 @@ $ ->
   Mercury.on 'ready', =>
     $($(".mercury-panel .mercury-panel-pane")[0]).css("visibility","visible")
     $('.mercury-panel-close').css("opacity", '1')
-    @editor.iframe.contents().find("button.properties").click () ->
+    @editor.iframe.contents().find("button.properties").click (event) ->
+      event.preventDefault
       loadform($('iframe').contents().find('#property-form-'+$(this).data().id).html())
     #$(@editor.iframe.get(0).contentWindow.document).on 'click','a', (e)->
     #  $target = $(e.target)
