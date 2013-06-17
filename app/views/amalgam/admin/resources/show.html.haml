@@ -1,7 +1,8 @@
 %article
-  = form_for @resource.source, :url => admin_update_resource_path(params[:resources]) ,:html => {:class => 'basic'}, :builder => Amalgam::Admin::AttrInputFormBuilder do |f|
+  - url = params[:locale] ? admin_update_resource_path(params[:resources], @resource.source.id, :locale => params[:locale]) : admin_update_resource_path(params[:resources], @resource.source.id)
+  = form_for @resource.source, :url => url ,:html => {:class => 'basic'}, :builder => Amalgam::Admin::AttrInputFormBuilder do |f|
     %legend
-      = "#{t('amalgam.admin.actions.edit')}#{@resource_class.model_name.human}"
+      = "#{@resource_class.model_name.human}"
     - @resource.admin_attrs.each do |attr|
       = f.label attr
       - if Amalgam.i18n && @resource.source.respond_to?(:translated?) && @resource.translated?(attr)
