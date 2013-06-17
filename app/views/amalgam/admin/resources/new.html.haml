@@ -5,7 +5,7 @@
       = "#{t('amalgam.admin.actions.new')}#{@resource_class.model_name.human}"
     - @resource.admin_attrs.each do |attr|
       = f.label attr
-      - if Amalgam.i18n && @resource.translated?(attr)
+      - if Amalgam.i18n && @resource.source.respond_to?(:translated?) && @resource.translated?(attr)
         = f.attr_input attr, :value => @resource.read_attribute(attr, :locale => params[:locale])
       - else
         = f.attr_input attr, :locale => params[:locale]
