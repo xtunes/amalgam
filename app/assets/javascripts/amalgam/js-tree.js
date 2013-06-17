@@ -121,7 +121,7 @@ $(function(){
     $.ajax({
       async : false,
       type: 'POST',
-      url: "/admin/"+node.attr('resources')+'/create'+'.json',
+      url: "/admin/"+node.attr('resources')+'.json',
       dataType: "json",
       data: content,
       complete: function(r){
