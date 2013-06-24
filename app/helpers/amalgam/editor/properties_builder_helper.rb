@@ -8,16 +8,18 @@ module Amalgam
         :url => amalgam.admin_editor_path,
         :method => :put,
         :remote => true,
+        :default => true,
         :html => { :style => 'width:450px;padding-bottom:30px;' }
       }
 
       options.reverse_merge!(defaults)
+      default = options.delete(:default)
       form = form_for(record,options) do |f|
         yield(f)
         concat('<hr/>'.html_safe)
         concat(f.submit(:class => 'btn btn-primary'))
       end
-      content_tag(:script, form , :type => "text/html" ,:id => "property-form-#{record.class.to_s.downcase}-#{record.id}", :class => params[:type] || 'default' )
+      content_tag(:script, form , :type => "text/html" ,:id => "property-form-#{record.class.to_s.downcase}-#{record.id}", :class => !default ? record.class.to_s : 'default' )
     end
 
     class PropertyFormBuilder < ActionView::Helpers::FormBuilder
